@@ -76,7 +76,7 @@ config :novy_site, NovySite.Endpoint,
 # Then you can assemble a release by calling `mix release`.
 # See `mix help release` for more information.
 
-config :novy_admin, NovyAdmin.Endpoint,
+config :novy_api, NovyApi.Endpoint,
   # http: [
   #   port: 4000,
   #   transport_options: [socket_opts: [:inet6]]
