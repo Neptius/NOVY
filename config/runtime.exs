@@ -11,7 +11,7 @@ secret_key_base =
     You can generate one by calling: mix phx.gen.secret
     """
 
-# config :gen_tcp_accept_and_close, port: 4000
+config :gen_tcp_accept_and_close, port: 4000
 
 config :master_proxy,
   http: [port: 80],
