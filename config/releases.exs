@@ -12,10 +12,10 @@ import Config
 #     """
 
 config :master_proxy,
-  http: [port: 80],
+  http: [port: 4000],
   backends: [
     %{
-      host: ~r{^app-name\.gigalixirapp\.com$},
+      host: ~r{^novy\.gigalixirapp\.com$},
       phoenix_endpoint: NovySite.Endpoint
     },
     %{
