@@ -12,7 +12,6 @@ import Config
 #     """
 
 config :master_proxy,
-  server: true
   http: [port: String.to_integer(System.get_env("PORT", "4000"))],
   # url: [
   #   port: System.get_env("PORT") || "4000"
