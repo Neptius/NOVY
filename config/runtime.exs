@@ -14,7 +14,7 @@ secret_key_base =
 # config :gen_tcp_accept_and_close, port: 4000
 
 config :master_proxy,
-  http: [port: 4000],
+  http: [port: 80],
   # url: [
   #   port: String.to_integer(System.get_env("PORT", "4000"))
   # ],
