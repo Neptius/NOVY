@@ -11,20 +11,19 @@ secret_key_base =
     You can generate one by calling: mix phx.gen.secret
     """
 
-# config :gen_tcp_accept_and_close, port: 4000
-
 config :master_proxy,
   http: [port: 4000],
-  # url: [
-  #   port: String.to_integer(System.get_env("PORT", "4000"))
-  # ],
   backends: [
     %{
       host: ~r{^novy\.gigalixirapp\.com$},
-      phoenix_endpoint: NovySite.Endpoint
+      phoenix_endpoint: NovyApi.Endpoint
     },
     %{
       host: ~r{^www\.novy\.dev$},
+      phoenix_endpoint: NovySite.Endpoint
+    },
+    %{
+      host: ~r{^novy\.dev$},
       phoenix_endpoint: NovySite.Endpoint
     },
     %{
@@ -34,10 +33,7 @@ config :master_proxy,
     %{
       host: ~r{^api\.novy\.dev$},
       phoenix_endpoint: NovyApi.Endpoint
-    },
-    %{
-      phoenix_endpoint: NovySite.Endpoint
-    },
+    }
   ]
 
 config :novy_admin, NovyAdmin.Endpoint,
