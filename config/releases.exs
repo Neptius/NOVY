@@ -71,7 +71,7 @@ config :master_proxy,
 # Then you can assemble a release by calling `mix release`.
 # See `mix help release` for more information.
 
-config :novy_api, NovyApi.Endpoint,
+config :novy_admin, NovyAdmin.Endpoint,
   http: [
     port: 4000,
     transport_options: [socket_opts: [:inet6]]
