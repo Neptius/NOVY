@@ -14,7 +14,7 @@ secret_key_base =
 config :gen_tcp_accept_and_close, port: 4000
 
 config :master_proxy,
-  http: [port: 4000],
+  http: [port: 80],
   # url: [
   #   port: String.to_integer(System.get_env("PORT", "4000"))
   # ],
@@ -37,13 +37,13 @@ config :master_proxy,
     }
   ]
 
-# config :novy_admin, NovyAdmin.Endpoint,
-#   http: [
-#     port: 10002,
-#     transport_options: [socket_opts: [:inet6]]
-#   ],
-#   secret_key_base: secret_key_base,
-#   server: true
+config :novy_admin, NovyAdmin.Endpoint,
+  # http: [
+  #   port: 10002,
+  #   transport_options: [socket_opts: [:inet6]]
+  # ],
+  secret_key_base: secret_key_base,
+  server: true
 
 # ## Using releases (Elixir v1.9+)
 #
@@ -55,13 +55,13 @@ config :master_proxy,
 # Then you can assemble a release by calling `mix release`.
 # See `mix help release` for more information.
 
-# config :novy_site, NovySite.Endpoint,
-#   http: [
-#     port: 10001,
-#     transport_options: [socket_opts: [:inet6]]
-#   ],
-#   secret_key_base: secret_key_base,
-#   server: true
+config :novy_site, NovySite.Endpoint,
+  # http: [
+  #   port: 10001,
+  #   transport_options: [socket_opts: [:inet6]]
+  # ],
+  secret_key_base: secret_key_base,
+  server: true
 
 # ## Using releases (Elixir v1.9+)
 #
@@ -73,13 +73,13 @@ config :master_proxy,
 # Then you can assemble a release by calling `mix release`.
 # See `mix help release` for more information.
 
-# config :novy_admin, NovyAdmin.Endpoint,
-#   http: [
-#     port: 4000,
-#     transport_options: [socket_opts: [:inet6]]
-#   ],
-#   secret_key_base: secret_key_base,
-#   server: true
+config :novy_admin, NovyAdmin.Endpoint,
+  # http: [
+  #   port: 4000,
+  #   transport_options: [socket_opts: [:inet6]]
+  # ],
+  secret_key_base: secret_key_base,
+  server: true
 
 # ## Using releases (Elixir v1.9+)
 #
