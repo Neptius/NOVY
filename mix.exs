@@ -42,7 +42,8 @@ defmodule Novy.Umbrella.MixProject do
   # and cannot be accessed from applications inside the apps/ folder.
   defp deps do
     [
-      {:excoveralls, "~> 0.10", only: :test}
+      {:excoveralls, "~> 0.10", only: :test},
+      {:master_proxy, "~> 0.1"}
     ]
   end
 
