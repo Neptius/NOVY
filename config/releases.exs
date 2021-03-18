@@ -12,9 +12,9 @@ import Config
 #     """
 
 config :master_proxy,
-  http: [port: String.to_integer(System.get_env("PORT", "4000"))],
+  http: [port: 80],
   # url: [
-  #   port: System.get_env("PORT") || "4000"
+  #   port: String.to_integer(System.get_env("PORT", "4000"))
   # ],
   backends: [
     %{
