@@ -1,0 +1,39 @@
+<h1>Listing Auth providers</h1>
+
+<%= if @live_action in [:new, :edit] do %>
+  <%= live_modal @socket, NovySite.AuthProviderLive.FormComponent,
+    id: @auth_provider.id || :new,
+    title: @page_title,
+    action: @live_action,
+    auth_provider: @auth_provider,
+    return_to: Routes.auth_provider_index_path(@socket, :index) %>
+<% end %>
+
+<table>
+  <thead>
+    <tr>
+      <th>Label</th>
+      <th>Method</th>
+      <th>Active</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody id="auth_providers">
+    <%= for auth_provider <- @auth_providers do %>
+      <tr id="auth_provider-<%= auth_provider.id %>">
+        <td><%= auth_provider.label %></td>
+        <td><%= auth_provider.method %></td>
+        <td><%= auth_provider.active %></td>
+
+        <td>
+          <span><%= live_redirect "Show", to: Routes.auth_provider_show_path(@socket, :show, auth_provider) %></span>
+          <span><%= live_patch "Edit", to: Routes.auth_provider_index_path(@socket, :edit, auth_provider) %></span>
+          <span><%= link "Delete", to: "#", phx_click: "delete", phx_value_id: auth_provider.id, data: [confirm: "Are you sure?"] %></span>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<span><%= live_patch "New Auth provider", to: Routes.auth_provider_index_path(@socket, :new) %></span>

@@ -1,0 +1,7 @@
+_build/
+node_modules/
+deps/
+doc/
+priv/static/
+test/
+tmp/

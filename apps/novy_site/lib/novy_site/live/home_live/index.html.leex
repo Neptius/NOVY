@@ -1,0 +1,23 @@
+<div>
+  <div class="login-background">
+    <div class="flex flex-row">
+      <div class="min-h-screen flex content-center justify-center items-center">
+        <div class="w-96 h-96 mx-24 shadow-lg flex flex-col justify-center text-center">
+          <div class="w-full flex flex-col rounded-t-xl bg-gray-700 justify-center h-60">
+            <h1 class="orbitron text-4xl text-white font-bold">
+              Novy
+            </h1>
+          </div>
+          <div class="p-3 h-full rounded-b-xl bg-gray-800 text-white">
+            <%= live_patch "Connexion", to: Routes.login_index_path(@socket, :index) %>
+            <%= if @current_user do %>
+              <li><%= @current_user.pseudo %></li>
+              <li><%= link "Log out", to: Routes.auth_path(@socket, :delete), method: :delete %></li>
+              <li><%= link "Users", to: Routes.auth_provider_index_path(@socket, :index) %></li>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

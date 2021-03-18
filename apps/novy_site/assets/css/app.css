@@ -1,0 +1,44 @@
+/* This file is for your main application css. */
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+iframe[hidden=""] {
+  display: none
+}
+
+.orbitron {
+  font-family: 'Orbitron', sans-serif;
+}
+
+.michroma {
+  font-family: 'Michroma', sans-serif;
+}
+
+.nv-login-card {
+  min-width: 250px;
+  max-width: 450px;
+}
+
+@layer components {
+  .login-background {
+    @apply bg-center bg-no-repeat bg-cover;
+    background-image: url("https://i.ibb.co/b2kNnRZ/ember.jpg");
+  }
+
+  .nv-alert {
+    @apply fixed md:top-2 w-full md:w-auto md:left-1/2 md:transform md:-translate-x-1/2
+  }
+
+  .nv-alert > .nv-alert-content {
+    @apply p-2 bg-indigo-800 items-center text-indigo-100 leading-none md:rounded-full flex md:inline-flex
+  }
+
+  .nv-alert > .nv-alert-content > .nv-alert-badge {
+    @apply flex rounded-full bg-indigo-500 uppercase px-2 py-1 text-xs font-bold mr-3
+  }
+
+  .nv-alert > .nv-alert-content > .nv-alert-text {
+    @apply font-semibold mr-2 text-left flex-auto
+  }
+}

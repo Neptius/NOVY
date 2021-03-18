@@ -1,0 +1,32 @@
+<h1>Show Auth provider</h1>
+
+<%= if @live_action in [:edit] do %>
+  <%= live_modal @socket, NovySite.AuthProviderLive.FormComponent,
+    id: @auth_provider.id,
+    title: @page_title,
+    action: @live_action,
+    auth_provider: @auth_provider,
+    return_to: Routes.auth_provider_show_path(@socket, :show, @auth_provider) %>
+<% end %>
+
+<ul>
+
+  <li>
+    <strong>Label:</strong>
+    <%= @auth_provider.label %>
+  </li>
+
+  <li>
+    <strong>Method:</strong>
+    <%= @auth_provider.method %>
+  </li>
+
+  <li>
+    <strong>Active:</strong>
+    <%= @auth_provider.active %>
+  </li>
+
+</ul>
+
+<span><%= live_patch "Edit", to: Routes.auth_provider_show_path(@socket, :edit, @auth_provider), class: "button" %></span>
+<span><%= live_redirect "Back", to: Routes.auth_provider_index_path(@socket, :index) %></span>

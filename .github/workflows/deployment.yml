@@ -1,0 +1,92 @@
+name: CI/CD
+
+# on: ['push']
+on:
+  push:
+    branches-ignore:
+      - "**"
+  # push:
+  #   # Publish `main` as Docker `latest` image.
+  #   branches:
+  #     - main
+  #   # Publish `v1.2.3` tags as releases.
+  #   tags:
+  #     - v*
+  # # Run tests for any PRs.
+  # # pull_request:
+# env:
+#   IMAGE_NAME: novy
+
+jobs:
+  # test:
+  #   name: Test
+  #   runs-on: ubuntu-latest
+
+  #   services:
+  #     # Label used to access the service container
+  #     postgres:
+  #       # Docker Hub image
+  #       image: postgres:12
+  #       # Provide the password for postgres
+  #       env:
+  #         POSTGRES_USER: postgres
+  #         POSTGRES_PASSWORD: pass
+  #         POSTGRES_DB: novy_db_test
+  #       ports:
+  #         - 5432:5432
+  #       # Set health checks to wait until postgres has started
+  #       options: >-
+  #         --health-cmd pg_isready
+  #         --health-interval 10s
+  #         --health-timeout 5s
+  #         --health-retries 5
+
+  #   env:
+  #     MIX_ENV: test
+  #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  #   steps:
+  #     - uses: actions/checkout@v2
+  #     - name: Set up Elixir
+  #       uses: actions/setup-elixir@v1
+  #       with:
+  #         experimental-otp: true
+  #         elixir-version: "1.11.1" # Define the elixir version [required]
+  #         otp-version: "23.0" # Define the OTP version [required]
+
+  #     - name: Restore dependencies cache
+  #       uses: actions/cache@v2
+  #       with:
+  #         path: deps
+  #         key: ${{ runner.os }}-mix-${{ hashFiles('**/mix.lock') }}
+  #         restore-keys: ${{ runner.os }}-mix-
+
+  #     - name: Install dependencies
+  #       run: mix deps.get
+
+  #     - name: Run tests
+  #       run: mix coveralls.github --umbrella
+
+  deploy:
+    # needs: test # Will only run if the test job succeeds
+    if: github.ref == 'refs/heads/main' # Only run this job if it is on the main branch
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: main # Check out main instead of the latest commit
+          fetch-depth: 0 # Checkout the whole branch
+
+      - uses: actions/setup-python@v2
+        with:
+          python-version: 3.8.1
+
+      - uses: mhanberg/gigalixir-action@v0.4.3
+        with:
+          GIGALIXIR_USERNAME: ${{ secrets.GIGALIXIR_USERNAME }}
+          GIGALIXIR_PASSWORD: ${{ secrets.GIGALIXIR_PASSWORD }}
+          GIGALIXIR_APP: ${{ secrets.GIGALIXIR_APP_NAME }}
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          MIGRATIONS: true # defaults to true
