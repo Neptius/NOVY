@@ -18,6 +18,9 @@ config :master_proxy,
   # ],
   backends: [
     %{
+      phoenix_endpoint: NovyApi.Endpoint
+    },
+    %{
       host: ~r{^novy\.gigalixirapp\.com$},
       phoenix_endpoint: NovySite.Endpoint
     },
