@@ -4,12 +4,12 @@
 # remember to add this file to your .gitignore.
 import Config
 
-# secret_key_base =
-#   System.get_env("SECRET_KEY_BASE") ||
-#     raise """
-#     environment variable SECRET_KEY_BASE is missing.
-#     You can generate one by calling: mix phx.gen.secret
-#     """
+secret_key_base =
+  System.get_env("SECRET_KEY_BASE") ||
+    raise """
+    environment variable SECRET_KEY_BASE is missing.
+    You can generate one by calling: mix phx.gen.secret
+    """
 
 config :master_proxy,
   http: [port: 80],
@@ -71,13 +71,13 @@ config :master_proxy,
 # Then you can assemble a release by calling `mix release`.
 # See `mix help release` for more information.
 
-# config :novy_api, NovyApi.Endpoint,
-#   http: [
-#     port: 10000,
-#     transport_options: [socket_opts: [:inet6]]
-#   ],
-#   secret_key_base: secret_key_base,
-#   server: true
+config :novy_api, NovyApi.Endpoint,
+  http: [
+    port: 4000,
+    transport_options: [socket_opts: [:inet6]]
+  ],
+  secret_key_base: secret_key_base,
+  server: true
 
 # ## Using releases (Elixir v1.9+)
 #
