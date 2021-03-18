@@ -12,7 +12,7 @@ import Config
 #     """
 
 config :master_proxy,
-  http: [port: {:system, "PORT"}],
+  url: [port: {:system, "PORT"}],
   backends: [
     %{
       host: ~r{^novy\.gigalixirapp\.com$},
