@@ -1,7 +1,7 @@
 FROM elixir:1.11.4-alpine AS build
 
 # install build dependencies
-RUN apk add --no-cache build-base git python yarn
+RUN apk add --no-cache build-base git python3 yarn
 
 # prepare build dir
 WORKDIR /app
@@ -22,6 +22,7 @@ COPY apps/novy_data/mix.exs /app/apps/novy_data/
 COPY apps/novy_api/mix.exs /app/apps/novy_api/
 COPY apps/novy_site/mix.exs /app/apps/novy_site/
 COPY apps/novy_admin/mix.exs /app/apps/novy_admin/
+COPY apps/novy_proxy/mix.exs /app/apps/novy_proxy/
 
 RUN mix do deps.get, deps.compile
 
@@ -50,7 +51,7 @@ RUN mix do compile, release
 ########################################################################
 
 # prepare release image
-FROM nginx:alpine AS app
+FROM alpine AS app
 RUN apk add --no-cache openssl ncurses-libs
 
 WORKDIR /app
@@ -66,9 +67,4 @@ ENV HOME=/app
 
 EXPOSE 8080
 
-# COPY start.sh /docker-entrypoint.d/30-start.sh
-
-COPY nginx/nginx.conf /etc/nginx/nginx.conf
-# COPY nginx/templates/default.conf.template /etc/nginx/templates/default.conf.template
-# CMD nginx -g "daemon on;" && /app/bin/novy eval "NovyData.Release.migrate" && /app/bin/novy start
 ENTRYPOINT ["./entrypoint.sh"]

@@ -1,92 +1,52 @@
-name: CI/CD
+name: Build and deploy Docker app to Lightsail
 
-# on: ['push']
 on:
   push:
-    branches-ignore:
-      - "**"
-  # push:
-  #   # Publish `main` as Docker `latest` image.
-  #   branches:
-  #     - main
-  #   # Publish `v1.2.3` tags as releases.
-  #   tags:
-  #     - v*
-  # # Run tests for any PRs.
-  # # pull_request:
-# env:
-#   IMAGE_NAME: novy
+    branches:
+      - main
 
 jobs:
-  # test:
-  #   name: Test
-  #   runs-on: ubuntu-latest
-
-  #   services:
-  #     # Label used to access the service container
-  #     postgres:
-  #       # Docker Hub image
-  #       image: postgres:12
-  #       # Provide the password for postgres
-  #       env:
-  #         POSTGRES_USER: postgres
-  #         POSTGRES_PASSWORD: pass
-  #         POSTGRES_DB: novy_db_test
-  #       ports:
-  #         - 5432:5432
-  #       # Set health checks to wait until postgres has started
-  #       options: >-
-  #         --health-cmd pg_isready
-  #         --health-interval 10s
-  #         --health-timeout 5s
-  #         --health-retries 5
-
-  #   env:
-  #     MIX_ENV: test
-  #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-  #   steps:
-  #     - uses: actions/checkout@v2
-  #     - name: Set up Elixir
-  #       uses: actions/setup-elixir@v1
-  #       with:
-  #         experimental-otp: true
-  #         elixir-version: "1.11.1" # Define the elixir version [required]
-  #         otp-version: "23.0" # Define the OTP version [required]
-
-  #     - name: Restore dependencies cache
-  #       uses: actions/cache@v2
-  #       with:
-  #         path: deps
-  #         key: ${{ runner.os }}-mix-${{ hashFiles('**/mix.lock') }}
-  #         restore-keys: ${{ runner.os }}-mix-
-
-  #     - name: Install dependencies
-  #       run: mix deps.get
-
-  #     - name: Run tests
-  #       run: mix coveralls.github --umbrella
-
   deploy:
-    # needs: test # Will only run if the test job succeeds
-    if: github.ref == 'refs/heads/main' # Only run this job if it is on the main branch
-
+    name: Build and deploy
     runs-on: ubuntu-latest
-
     steps:
-      - uses: actions/checkout@v2
-        with:
-          ref: main # Check out main instead of the latest commit
-          fetch-depth: 0 # Checkout the whole branch
+      - name: Checkout
+        uses: actions/checkout@v2
 
-      - uses: actions/setup-python@v2
-        with:
-          python-version: 3.8.1
+      - name: Install Utilities
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y jq unzip
 
-      - uses: mhanberg/gigalixir-action@v0.4.3
+      - name: Install AWS Client
+        run: |
+          curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+          unzip awscliv2.zip
+          sudo ./aws/install || true
+          aws --version
+          curl "https://s3.us-west-2.amazonaws.com/lightsailctl/latest/linux-amd64/lightsailctl" -o "lightsailctl"
+          sudo mv "lightsailctl" "/usr/local/bin/lightsailctl"
+          sudo chmod +x /usr/local/bin/lightsailctl
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
         with:
-          GIGALIXIR_USERNAME: ${{ secrets.GIGALIXIR_USERNAME }}
-          GIGALIXIR_PASSWORD: ${{ secrets.GIGALIXIR_PASSWORD }}
-          GIGALIXIR_APP: ${{ secrets.GIGALIXIR_APP_NAME }}
-          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-          MIGRATIONS: true # defaults to true
+          aws-region: ${{ secrets.AWS_REGION }}
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
+      - name: Build Docker Image
+        run: docker build -t ${{ secrets.AWS_LIGHTSAIL_SERVICE_NAME }}:release .
+
+      - name: Push and Deploy
+        run: |
+          service_name=${{ secrets.AWS_LIGHTSAIL_SERVICE_NAME }}
+          region=${{ secrets.AWS_REGION }}
+          aws lightsail push-container-image \
+            --region ${region} \
+            --service-name ${service_name} \
+            --label ${service_name} \
+            --image ${service_name}:release
+          aws lightsail get-container-images --service-name ${service_name} | jq --raw-output ".containerImages[0].image" > image.txt
+          jq --arg image $(cat image.txt) '.containers.app.image = $image' container.template.json > container.json
+          aws lightsail create-container-service-deployment --service-name ${service_name} --cli-input-json file://$(pwd)/container.json
