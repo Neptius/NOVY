@@ -1,8 +1,4 @@
-# Je ne me sers plus de ce dockerfile
-# Au moment ou je commit ce si, le ficher est utilisable
-# mais ne le sera certainement plus à l'avenir
-
-FROM elixir:1.11.3-alpine AS build
+FROM elixir:1.11.4-alpine AS build
 
 # install build dependencies
 RUN apk add --no-cache build-base git python2 yarn

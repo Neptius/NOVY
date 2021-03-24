@@ -14,34 +14,8 @@ if config_env() == :prod do
       You can generate one by calling: mix phx.gen.secret
       """
 
-<<<<<<< HEAD
-config :master_proxy,
-  http: [port: 8080],
-  backends: [
-    %{
-      host: ~r{^novy\.gigalixirapp\.com$},
-      phoenix_endpoint: NovyApi.Endpoint
-    },
-    %{
-      host: ~r{^www\.novy\.dev$},
-      phoenix_endpoint: NovySite.Endpoint
-    },
-    %{
-      host: ~r{^novy\.dev$},
-      phoenix_endpoint: NovySite.Endpoint
-    },
-    %{
-      host: ~r{^admin\.novy\.dev$},
-      phoenix_endpoint: NovyAdmin.Endpoint
-    },
-    %{
-      host: ~r{^api\.novy\.dev$},
-      phoenix_endpoint: NovyApi.Endpoint
-    }
-  ]
-=======
   config :master_proxy,
-    http: [port: 4000],
+    http: [port: 8080],
     backends: [
       %{
         host: ~r{^novy\.gigalixirapp\.com$},
@@ -64,7 +38,6 @@ config :master_proxy,
         phoenix_endpoint: NovyApi.Endpoint
       }
     ]
->>>>>>> 0b5ed29ac01d5e28728847de11c95b779427bec0
 
   config :novy_admin, NovyAdmin.Endpoint,
     # http: [
