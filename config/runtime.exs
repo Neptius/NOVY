@@ -12,7 +12,7 @@ secret_key_base =
     """
 
 config :master_proxy,
-  http: [port: 4000],
+  http: [port: 8080],
   backends: [
     %{
       host: ~r{^novy\.gigalixirapp\.com$},
