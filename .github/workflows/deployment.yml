@@ -45,7 +45,7 @@ jobs:
       - name: Build Docker Image
         run: docker build -t ${{ secrets.AWS_LIGHTSAIL_SERVICE_NAME }}:release .
 
-      - name: Push
+      - name: Push Docker Image on Lightsail
         run: |
           aws lightsail push-container-image \
             --region $AWS_REGION \
@@ -53,7 +53,7 @@ jobs:
             --label $AWS_LIGHTSAIL_SERVICE_NAME \
             --image $AWS_LIGHTSAIL_SERVICE_NAME:release
 
-      - name: Deploy
+      - name: Deploy on container Lightsail 
         run: |
           aws lightsail get-container-images --service-name $AWS_LIGHTSAIL_SERVICE_NAME | jq --raw-output ".containerImages[0].image" > image.txt
           

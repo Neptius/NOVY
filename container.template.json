@@ -2,6 +2,7 @@
     "containers": {
       "app": {
         "image": "image",
+        "command": [],
         "environment": {},
         "ports": {
           "8080": "HTTP"
