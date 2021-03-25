@@ -62,8 +62,7 @@ jobs:
             --arg containerName $AWS_LIGHTSAIL_SERVICE_NAME \
             --arg secretKeyBase $SECRET_KEY_BASE \
             --arg databaseUrl $DATABASE_URL \
-            '.serviceName = $serviceName | .publicEndpoint.containerName = $containerName | .containers.app.image = $image | (.containers.app.environment |= ( .SECRET_KEY_BASE = $secretKeyBase | .DATABASE_URL = $databaseUrl ))' \
+            '.serviceName = $serviceName | .publicEndpoint.containerName = $containerName | .containers.app.image = $image | (.containers.app.environment |= ( .SECRET_KEY_BASE = $secretKeyBase | .DATABASE_URL = $databaseUrl )) | .containers[$containerName] = .containers.app | del(.containers.app)' \
             container.template.json > container.json
 
           aws lightsail create-container-service-deployment --cli-input-json file://$(pwd)/container.json
-          
