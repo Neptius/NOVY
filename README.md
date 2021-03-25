@@ -18,6 +18,6 @@ mix phx.gen.cert
 cd apps/novy_admin
 mix phx.gen.cert
 
-# Start Phoenix
+# Start Project
 mix phx.server
 ```
