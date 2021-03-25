@@ -18,10 +18,6 @@ if config_env() == :prod do
     http: [port: 8080],
     backends: [
       %{
-        host: ~r{^novy\.gigalixirapp\.com$},
-        phoenix_endpoint: NovyApi.Endpoint
-      },
-      %{
         host: ~r{^www\.novy\.dev$},
         phoenix_endpoint: NovySite.Endpoint
       },
@@ -35,6 +31,9 @@ if config_env() == :prod do
       },
       %{
         host: ~r{^api\.novy\.dev$},
+        phoenix_endpoint: NovyApi.Endpoint
+      },
+      %{
         phoenix_endpoint: NovyApi.Endpoint
       }
     ]
