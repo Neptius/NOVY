@@ -19,5 +19,6 @@
         "path": "/",
         "successCodes": "200-499"
       }
-    }
+    },
+    "serviceName": "service-name"
   }

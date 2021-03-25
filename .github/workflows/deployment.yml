@@ -58,10 +58,11 @@ jobs:
           aws lightsail get-container-images --service-name $AWS_LIGHTSAIL_SERVICE_NAME | jq --raw-output ".containerImages[0].image" > image.txt
           
           jq --arg image $(cat image.txt) \
+            --arg serviceName $AWS_LIGHTSAIL_SERVICE_NAME \
             --arg containerName $AWS_LIGHTSAIL_SERVICE_NAME \
             --arg secretKeyBase $SECRET_KEY_BASE \
             --arg databaseUrl $DATABASE_URL \
-            '.publicEndpoint.containerName = $containerName | .containers.app.image = $image | (.containers.app.environment |= ( .SECRET_KEY_BASE = $secretKeyBase | .DATABASE_URL = $databaseUrl ))' \
+            '.serviceName = $serviceName | .publicEndpoint.containerName = $containerName | .containers.app.image = $image | (.containers.app.environment |= ( .SECRET_KEY_BASE = $secretKeyBase | .DATABASE_URL = $databaseUrl ))' \
             container.template.json > container.json
 
           cat container.json
