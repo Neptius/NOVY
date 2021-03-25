@@ -14,6 +14,8 @@ if config_env() == :prod do
       You can generate one by calling: mix phx.gen.secret
       """
 
+  config :gen_tcp_accept_and_close, port: 8080
+
   config :master_proxy,
     http: [port: 8080],
     backends: [
@@ -31,10 +33,6 @@ if config_env() == :prod do
       },
       %{
         host: ~r{^api\.novy\.dev$},
-        phoenix_endpoint: NovyApi.Endpoint
-      },
-      %{
-        host: ~r/localhost/,
         phoenix_endpoint: NovyApi.Endpoint
       }
     ]
