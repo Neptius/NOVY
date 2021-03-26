@@ -32,6 +32,9 @@ if config_env() == :prod do
       %{
         host: ~r{^api\.novy\.dev$},
         phoenix_endpoint: NovyApi.Endpoint
+      },
+      %{
+        phoenix_endpoint: NovyApi.Endpoint
       }
     ]
 
