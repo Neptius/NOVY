@@ -66,7 +66,7 @@ COPY --from=build --chown=nobody:nobody /app/entrypoint.sh ./
 
 ENV HOME=/app
 
-# COPY nginx/nginx.conf /etc/nginx/nginx.conf
+COPY nginx/nginx.conf /etc/nginx/nginx.conf
 
 EXPOSE 8080
 
