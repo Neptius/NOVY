@@ -22,7 +22,6 @@ COPY apps/novy_data/mix.exs /app/apps/novy_data/
 COPY apps/novy_api/mix.exs /app/apps/novy_api/
 COPY apps/novy_site/mix.exs /app/apps/novy_site/
 COPY apps/novy_admin/mix.exs /app/apps/novy_admin/
-COPY apps/novy_proxy/mix.exs /app/apps/novy_proxy/
 
 RUN mix do deps.get, deps.compile
 
