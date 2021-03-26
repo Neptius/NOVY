@@ -77,7 +77,7 @@ if config_env() == :prod do
 
   config :novy_api, NovyApi.Endpoint,
     http: [
-      port: 4000,
+      port: 10000,
       transport_options: [socket_opts: [:inet6]]
     ],
     secret_key_base: secret_key_base,
