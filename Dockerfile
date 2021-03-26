@@ -51,7 +51,8 @@ RUN mix do compile, release
 ########################################################################
 
 # prepare release image
-FROM alpine AS app
+# FROM alpine AS app
+FROM nginx:alpine AS app
 RUN apk add --no-cache openssl ncurses-libs
 
 WORKDIR /app
@@ -64,6 +65,8 @@ COPY --from=build --chown=nobody:nobody /app/_build/prod/rel/novy ./
 COPY --from=build --chown=nobody:nobody /app/entrypoint.sh ./
 
 ENV HOME=/app
+
+# COPY nginx/nginx.conf /etc/nginx/nginx.conf
 
 EXPOSE 8080
 

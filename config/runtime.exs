@@ -14,36 +14,36 @@ if config_env() == :prod do
       You can generate one by calling: mix phx.gen.secret
       """
 
-  config :master_proxy,
-    http: [port: 8080],
-    backends: [
-      %{
-        host: ~r{^www\.novy\.dev$},
-        phoenix_endpoint: NovySite.Endpoint
-      },
-      %{
-        host: ~r{^novy\.dev$},
-        phoenix_endpoint: NovySite.Endpoint
-      },
-      %{
-        host: ~r{^admin\.novy\.dev$},
-        phoenix_endpoint: NovyAdmin.Endpoint
-      },
-      %{
-        host: ~r{^api\.novy\.dev$},
-        phoenix_endpoint: NovyApi.Endpoint
-      },
-      %{
-        host: ~r{^novy\.qt5rtdjevd9bg\.eu-west-3\.cs\.amazonlightsail\.com$},
-        phoenix_endpoint: NovyApi.Endpoint
-      }
-    ]
+  # config :master_proxy,
+  #   http: [port: 8080],
+  #   backends: [
+  #     %{
+  #       host: ~r{^www\.novy\.dev$},
+  #       phoenix_endpoint: NovySite.Endpoint
+  #     },
+  #     %{
+  #       host: ~r{^novy\.dev$},
+  #       phoenix_endpoint: NovySite.Endpoint
+  #     },
+  #     %{
+  #       host: ~r{^admin\.novy\.dev$},
+  #       phoenix_endpoint: NovyAdmin.Endpoint
+  #     },
+  #     %{
+  #       host: ~r{^api\.novy\.dev$},
+  #       phoenix_endpoint: NovyApi.Endpoint
+  #     },
+  #     %{
+  #       host: ~r{^novy\.qt5rtdjevd9bg\.eu-west-3\.cs\.amazonlightsail\.com$},
+  #       phoenix_endpoint: NovyApi.Endpoint
+  #     }
+  #   ]
 
   config :novy_admin, NovyAdmin.Endpoint,
-    # http: [
-    #   port: 10002,
-    #   transport_options: [socket_opts: [:inet6]]
-    # ],
+    http: [
+      port: 10002,
+      transport_options: [socket_opts: [:inet6]]
+    ],
     secret_key_base: secret_key_base,
     server: true
 
@@ -58,10 +58,10 @@ if config_env() == :prod do
   # See `mix help release` for more information.
 
   config :novy_site, NovySite.Endpoint,
-    # http: [
-    #   port: 10001,
-    #   transport_options: [socket_opts: [:inet6]]
-    # ],
+    http: [
+      port: 10001,
+      transport_options: [socket_opts: [:inet6]]
+    ],
     secret_key_base: secret_key_base,
     server: true
 
@@ -76,10 +76,10 @@ if config_env() == :prod do
   # See `mix help release` for more information.
 
   config :novy_api, NovyApi.Endpoint,
-    # http: [
-    #   port: 4000,
-    #   transport_options: [socket_opts: [:inet6]]
-    # ],
+    http: [
+      port: 4000,
+      transport_options: [socket_opts: [:inet6]]
+    ],
     secret_key_base: secret_key_base,
     server: true
 
