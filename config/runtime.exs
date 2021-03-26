@@ -34,6 +34,7 @@ if config_env() == :prod do
         phoenix_endpoint: NovyApi.Endpoint
       },
       %{
+        host: ~r{^novy\.qt5rtdjevd9bg\.eu-west-3\.cs\.amazonlightsail\.com$},
         phoenix_endpoint: NovyApi.Endpoint
       }
     ]
