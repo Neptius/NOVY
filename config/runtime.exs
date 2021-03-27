@@ -15,10 +15,7 @@ if config_env() == :prod do
       """
 
   config :novy_admin, NovyAdmin.Endpoint,
-    http: [
-      port: 10002,
-      transport_options: [socket_opts: [:inet6]]
-    ],
+    url: [host: "admin.novy.dev", port: 10002],
     secret_key_base: secret_key_base,
     server: true
 
@@ -33,10 +30,7 @@ if config_env() == :prod do
   # See `mix help release` for more information.
 
   config :novy_site, NovySite.Endpoint,
-    http: [
-      port: 10001,
-      transport_options: [socket_opts: [:inet6]]
-    ],
+    url: [host: "novy.dev", port: 10001],
     secret_key_base: secret_key_base,
     server: true
 
@@ -51,10 +45,7 @@ if config_env() == :prod do
   # See `mix help release` for more information.
 
   config :novy_api, NovyApi.Endpoint,
-    http: [
-      port: 10000,
-      transport_options: [socket_opts: [:inet6]]
-    ],
+    url: [host: "api.novy.dev", port: 10000],
     secret_key_base: secret_key_base,
     server: true
 
