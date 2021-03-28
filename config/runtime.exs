@@ -16,6 +16,7 @@ if config_env() == :prod do
 
   config :novy_admin, NovyAdmin.Endpoint,
     url: [host: "admin.novy.dev", port: 10002],
+    cache_static_manifest: "priv/static/cache_manifest.json",
     secret_key_base: secret_key_base,
     server: true
 
@@ -31,6 +32,7 @@ if config_env() == :prod do
 
   config :novy_site, NovySite.Endpoint,
     url: [host: "novy.dev", port: 10001],
+    cache_static_manifest: "priv/static/cache_manifest.json",
     secret_key_base: secret_key_base,
     server: true
 

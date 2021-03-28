@@ -9,6 +9,10 @@
 # move said applications out of the umbrella.
 import Config
 
+# Configure Mix tasks and generators
+config :novy_data,
+  ecto_repos: [NovyData.Repo]
+
 config :novy_data, NovyData.Accounts.User,
   database: "novy_data_user",
   username: "user",
@@ -47,10 +51,6 @@ config :novy_api, NovyApi.Endpoint,
   render_errors: [view: NovyApi.ErrorView, accepts: ~w(json), layout: false],
   pubsub_server: NovyApi.PubSub,
   live_view: [signing_salt: "FlA4bBB1"]
-
-# Configure Mix tasks and generators
-config :novy_data,
-  ecto_repos: [NovyData.Repo]
 
 # Configures Elixir's Logger
 config :logger, :console,
