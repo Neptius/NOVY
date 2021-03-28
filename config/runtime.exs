@@ -19,6 +19,7 @@ if config_env() == :prod do
       port: 10002,
       transport_options: [socket_opts: [:inet6]]
     ],
+    url: [host: "admin.novy.dev", port: 80],
     secret_key_base: secret_key_base,
     server: true
 
@@ -37,7 +38,7 @@ if config_env() == :prod do
       port: 10001,
       transport_options: [socket_opts: [:inet6]]
     ],
-    cache_static_manifest: "priv/static/cache_manifest.json",
+    url: [host: "novy.dev", port: 80],
     secret_key_base: secret_key_base,
     server: true
 
@@ -56,6 +57,7 @@ if config_env() == :prod do
       port: 10000,
       transport_options: [socket_opts: [:inet6]]
     ],
+    url: [host: "api.novy.dev", port: 80],
     secret_key_base: secret_key_base,
     server: true
 
