@@ -15,8 +15,10 @@ if config_env() == :prod do
       """
 
   config :novy_admin, NovyAdmin.Endpoint,
-    url: [host: "admin.novy.dev", port: 10002],
-    cache_static_manifest: "priv/static/cache_manifest.json",
+    http: [
+      port: 10002,
+      transport_options: [socket_opts: [:inet6]]
+    ],
     secret_key_base: secret_key_base,
     server: true
 
@@ -31,7 +33,10 @@ if config_env() == :prod do
   # See `mix help release` for more information.
 
   config :novy_site, NovySite.Endpoint,
-    url: [host: "novy.dev", port: 10001],
+    http: [
+      port: 10001,
+      transport_options: [socket_opts: [:inet6]]
+    ],
     cache_static_manifest: "priv/static/cache_manifest.json",
     secret_key_base: secret_key_base,
     server: true
@@ -47,7 +52,10 @@ if config_env() == :prod do
   # See `mix help release` for more information.
 
   config :novy_api, NovyApi.Endpoint,
-    url: [host: "api.novy.dev", port: 10000],
+    http: [
+      port: 10000,
+      transport_options: [socket_opts: [:inet6]]
+    ],
     secret_key_base: secret_key_base,
     server: true
 
@@ -69,7 +77,7 @@ if config_env() == :prod do
       """
 
   config :novy_data, NovyData.Repo,
-    ssl: true,
     url: database_url,
-    pool_size: String.to_integer(System.get_env("POOL_SIZE") || "10")
+    pool_size: String.to_integer(System.get_env("POOL_SIZE") || "10"),
+    ssl: true
 end
