@@ -1,4 +1,6 @@
 defmodule NovyData.TestHelpers do
+  @moduledoc false
+
   alias NovyData.Accounts.AuthProvider
 
   def auth_provider_fixture(attrs \\ %{}) do

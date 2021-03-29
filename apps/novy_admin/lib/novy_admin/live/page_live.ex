@@ -1,4 +1,6 @@
 defmodule NovyAdmin.PageLive do
+  @moduledoc false
+
   use NovyAdmin, :live_view
 
   @impl true

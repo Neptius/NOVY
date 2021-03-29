@@ -1,6 +1,8 @@
 defmodule NovyData.Accounts do
-  alias NovyData.Repo
+  @moduledoc false
+
   alias NovyData.Accounts.UserToken
+  alias NovyData.Repo
 
   @doc """
   Generates a session token.

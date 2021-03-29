@@ -1,4 +1,6 @@
 defmodule NovySite.Components.OnlineUsers do
+  @moduledoc false
+
   use Phoenix.LiveComponent
 
   @impl true

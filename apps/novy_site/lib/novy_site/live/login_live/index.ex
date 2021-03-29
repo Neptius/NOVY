@@ -1,4 +1,6 @@
 defmodule NovySite.LoginLive.Index do
+  @moduledoc false
+
   use NovySite, :live_view
 
   alias NovyData.Accounts.AuthProvider

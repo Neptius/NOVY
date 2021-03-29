@@ -1,4 +1,6 @@
 defmodule NovySite.HomeLive.Index do
+  @moduledoc false
+
   use NovySite, :live_view
 
   alias NovySite.Presence

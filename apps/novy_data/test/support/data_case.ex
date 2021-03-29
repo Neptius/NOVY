@@ -14,6 +14,8 @@ defmodule NovyData.DataCase do
   this option is not recommended for other databases.
   """
 
+  alias Ecto.Adapters.SQL.Sandbox
+
   use ExUnit.CaseTemplate
 
   using do
@@ -29,10 +31,10 @@ defmodule NovyData.DataCase do
   end
 
   setup tags do
-    :ok = Ecto.Adapters.SQL.Sandbox.checkout(NovyData.Repo)
+    :ok = Sandbox.checkout(NovyData.Repo)
 
     unless tags[:async] do
-      Ecto.Adapters.SQL.Sandbox.mode(NovyData.Repo, {:shared, self()})
+      Sandbox.mode(NovyData.Repo, {:shared, self()})
     end
 
     :ok

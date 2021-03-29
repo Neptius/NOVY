@@ -7,13 +7,61 @@ on:
 
 
 env:
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  
   SECRET_KEY_BASE: ${{ secrets.SECRET_KEY_BASE }}
   DATABASE_URL: ${{ secrets.DATABASE_URL }}
   AWS_LIGHTSAIL_SERVICE_NAME: ${{ secrets.AWS_LIGHTSAIL_SERVICE_NAME }}
   AWS_REGION: ${{ secrets.AWS_REGION }}
 
 jobs:
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+
+    services:
+      # Label used to access the service container
+      postgres:
+        # Docker Hub image
+        image: postgres:12
+        # Provide the password for postgres
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: pass
+          POSTGRES_DB: novy_db_test
+        ports:
+          - 5432:5432
+        # Set health checks to wait until postgres has started
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Elixir
+        uses: actions/setup-elixir@v1
+        with:
+          elixir-version: "1.11.4" # Define the elixir version [required]
+          otp-version: "23.0" # Define the OTP version [required]
+
+      - name: Restore dependencies cache
+        uses: actions/cache@v2
+        with:
+          path: deps
+          key: ${{ runner.os }}-mix-${{ hashFiles('**/mix.lock') }}
+          restore-keys: ${{ runner.os }}-mix-
+
+      - name: Install dependencies
+        run: MIX_ENV=test mix deps.get
+
+      - name: Run tests
+        run: MIX_ENV=test mix coveralls.github --umbrella
+
   deploy:
+    if: ${{ github.ref == 'refs/heads/main' }}
+    needs: test
     name: Build and deploy
     runs-on: ubuntu-latest
     steps:

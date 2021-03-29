@@ -1,4 +1,6 @@
 defmodule NovySite.ModalComponent do
+  @moduledoc false
+
   use NovySite, :live_component
 
   @impl true

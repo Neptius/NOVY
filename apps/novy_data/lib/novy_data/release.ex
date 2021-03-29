@@ -1,4 +1,6 @@
 defmodule NovyData.Release do
+  @moduledoc false
+
   @app :novy_data
 
   def migrate do

@@ -1,4 +1,6 @@
 defmodule NovySite.UserAuth do
+  @moduledoc false
+
   import Plug.Conn
   import Phoenix.Controller
 
@@ -82,7 +84,7 @@ defmodule NovySite.UserAuth do
 
     conn
     |> renew_session()
-    |> put_flash(:info, "Logged out successfully.")
+    |> put_flash(:info, "Déconnexion réussie.")
     |> redirect(to: "/login")
   end
 
@@ -97,7 +99,7 @@ defmodule NovySite.UserAuth do
       conn
     else
       conn
-      |> put_flash(:error, "You must log in to access this page.")
+      |> put_flash(:error, "Vous devez être connecté pour accéder à cette page.")
       |> maybe_store_return_to()
       |> redirect(to: "/login")
       |> halt()

@@ -1,4 +1,6 @@
 defmodule NovySite.LiveHelpers do
+  @moduledoc false
+
   import Phoenix.LiveView.Helpers
   import Phoenix.LiveView
 

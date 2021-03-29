@@ -1,12 +1,13 @@
 defmodule NovyData.Accounts.AuthProvider do
+  @moduledoc false
+
   use Ecto.Schema
 
   import Ecto.Changeset
   import Ecto.Query
 
   alias NovyData.Repo
-  alias NovyData.Accounts.AuthUser
-  alias NovyData.Accounts.AuthProvider
+  alias NovyData.Accounts.{AuthProvider, AuthUser}
 
   schema "auth_providers" do
     field :label, :string

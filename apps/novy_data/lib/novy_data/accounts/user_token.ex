@@ -1,8 +1,11 @@
 defmodule NovyData.Accounts.UserToken do
+  @moduledoc false
+
   use Ecto.Schema
+
   import Ecto.Query
 
-  alias NovyData.Accounts.{UserToken, User}
+  alias NovyData.Accounts.{User, UserToken}
 
   @rand_size 32
 

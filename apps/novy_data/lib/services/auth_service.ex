@@ -1,4 +1,6 @@
 defmodule NovyData.AuthService do
+  @moduledoc false
+
   use HTTPoison.Base
 
   alias NovyData.Randomizer
@@ -60,7 +62,6 @@ defmodule NovyData.AuthService do
   end
 
   def start_auth(%{"error" => _state}) do
-    IO.inspect("ERROR")
     {:error, "Erreur lors de l'authentification"}
   end
 
@@ -72,14 +73,12 @@ defmodule NovyData.AuthService do
          {:ok, authorization_params} <- verify_auth_user(auth_provider, params),
          {:ok, user_raw_data} <- fetch_user_data(auth_provider, authorization_params),
          {:ok, user_data} <- format_user_data(user_raw_data, auth_provider),
-         exist_auth_user =
+         exist_auth_user <-
            AuthUser.get_exist_auth_user(auth_provider.label, user_data["auth_provider_user_id"]),
-         {:ok, user_id} = create_or_update_auth_user(exist_auth_user, user_data, auth_provider) do
+         {:ok, user_id} <- create_or_update_auth_user(exist_auth_user, user_data, auth_provider) do
       {:ok, user_id}
     else
       {:error, error} ->
-        IO.inspect("-------ERROR: start_auth-------")
-        IO.inspect(error)
         {:error, error}
 
       _ ->

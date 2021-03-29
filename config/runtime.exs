@@ -7,6 +7,18 @@ import Config
 # remember to add this file to your .gitignore.
 
 if config_env() == :prod do
+  database_url =
+    System.get_env("DATABASE_URL") ||
+      raise """
+      environment variable DATABASE_URL is missing.
+      For example: ecto://USER:PASS@HOST/DATABASE
+      """
+
+  config :novy_data, NovyData.Repo,
+    url: database_url,
+    pool_size: String.to_integer(System.get_env("POOL_SIZE") || "10"),
+    ssl: true
+
   secret_key_base =
     System.get_env("SECRET_KEY_BASE") ||
       raise """
@@ -20,7 +32,7 @@ if config_env() == :prod do
       transport_options: [socket_opts: [:inet6]]
     ],
     url: [host: "admin.novy.dev", port: 80],
-    cache_static_manifest: "priv/static/cache_manifest.json"
+    cache_static_manifest: "priv/static/cache_manifest.json",
     secret_key_base: secret_key_base,
     server: true
 
@@ -40,7 +52,7 @@ if config_env() == :prod do
       transport_options: [socket_opts: [:inet6]]
     ],
     url: [host: "novy.dev", port: 80],
-    cache_static_manifest: "priv/static/cache_manifest.json"
+    cache_static_manifest: "priv/static/cache_manifest.json",
     secret_key_base: secret_key_base,
     server: true
 
@@ -72,16 +84,4 @@ if config_env() == :prod do
   #
   # Then you can assemble a release by calling `mix release`.
   # See `mix help release` for more information.
-
-  database_url =
-    System.get_env("DATABASE_URL") ||
-      raise """
-      environment variable DATABASE_URL is missing.
-      For example: ecto://USER:PASS@HOST/DATABASE
-      """
-
-  config :novy_data, NovyData.Repo,
-    url: database_url,
-    pool_size: String.to_integer(System.get_env("POOL_SIZE") || "10"),
-    ssl: true
 end
