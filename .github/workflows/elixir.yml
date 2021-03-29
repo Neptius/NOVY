@@ -1,4 +1,4 @@
-name: Build and deploy Docker app to Lightsail
+name: Test, Build and Deploy Docker app to Lightsail
 
 on:
   push:
@@ -46,7 +46,7 @@ jobs:
           elixir-version: "1.11.4" # Define the elixir version [required]
           otp-version: "23.0" # Define the OTP version [required]
           experimental-otp: true
-          
+
       - name: Restore dependencies cache
         uses: actions/cache@v2
         with:
@@ -63,7 +63,7 @@ jobs:
   deploy:
     if: ${{ github.ref == 'refs/heads/main' }}
     needs: test
-    name: Build and deploy
+    name: Build and Deploy
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
