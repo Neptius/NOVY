@@ -12,7 +12,7 @@ defmodule NovySite.Router do
 
     plug :put_secure_browser_headers,
          %{
-           "content-security-policy" => "default-src 'self'; img-src https://*; child-src 'none';",
+           "content-security-policy" => "default-src *",
            "referrer-policy" => "strict-origin-when-cross-origin",
            "strict-transport-security" => "max-age=31536000",
            "permissions-policy" => "fullscreen *"
