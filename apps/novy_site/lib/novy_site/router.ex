@@ -15,7 +15,7 @@ defmodule NovySite.Router do
            "content-security-policy" => "default-src 'self'; img-src https://*; child-src 'none';",
            "referrer-policy" => "strict-origin-when-cross-origin",
            "strict-transport-security" => "max-age=31536000",
-           "feature-policy" => "fullscreen *"
+           "permissions-policy" => "fullscreen *"
           }
 
     plug :fetch_current_user
