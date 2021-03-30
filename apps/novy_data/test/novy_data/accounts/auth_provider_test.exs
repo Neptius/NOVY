@@ -1,4 +1,6 @@
 defmodule NovyData.Accounts.AuthProviderTest do
+  @moduledoc false
+
   use NovyData.DataCase, async: true
 
   alias NovyData.Accounts.AuthProvider
