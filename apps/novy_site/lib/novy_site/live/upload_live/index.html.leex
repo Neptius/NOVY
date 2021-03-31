@@ -1,0 +1,25 @@
+<div>
+  <div class="login-background min-h-screen flex lg:justify-start justify-center items-center">
+      <div class="nv-login-card mx-3 lg:ml-32 w-full shadow-lg text-center">
+        <div class="h-32 flex flex-col rounded-t-xl bg-gray-700 justify-center">
+          <h1 class="orbitron text-4xl text-white font-bold">
+            Novy
+          </h1>
+        </div>
+        <div class="pt-3 px-10 pb-6 rounded-b-xl bg-gray-800">
+
+            <p class="login-text text-sm text-gray-500 mb-4">Upload</p>
+
+            <%= for entry <- @uploads.avatar.entries do %>
+                <%= entry.client_name %> - <%= entry.progress %>%
+            <% end %>
+
+            <form phx-submit="save" phx-change="validate">
+                <%= live_file_input @uploads.avatar %>
+                <button type="submit">Upload</button>
+            </form>
+
+        </div>
+      </div>
+  </div>
+</div>
