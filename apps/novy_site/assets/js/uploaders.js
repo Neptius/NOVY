@@ -1,5 +1,3 @@
-import * as UpChunk from "@mux/upchunk"
-
 let Uploaders = {}
 
 Uploaders.S3 = function(entries, onViewError){
