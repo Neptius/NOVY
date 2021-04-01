@@ -12,11 +12,11 @@ defmodule NovySite.Router do
 
     plug :put_secure_browser_headers,
          %{
-          #  "content-security-policy" => "default-src *",
-           "referrer-policy" => "strict-origin-when-cross-origin",
+           #  "content-security-policy" => "default-src *",
+           # "referrer-policy" => "strict-origin-when-cross-origin",
            "strict-transport-security" => "max-age=31536000",
            "permissions-policy" => "fullscreen *"
-          }
+         }
 
     plug :fetch_current_user
   end

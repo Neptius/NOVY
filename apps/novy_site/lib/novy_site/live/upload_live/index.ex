@@ -3,27 +3,28 @@ defmodule NovySite.UploadLive.Index do
 
   use NovySite, :live_view
 
-  alias NovyData.S3Upload.
-
+  alias NovyData.S3Upload
 
   @impl true
   def mount(_params, session, socket) do
     socket = assign_defaults(session, socket)
+
     {:ok,
      socket
      |> assign(:uploaded_files, [])
-     |> allow_upload(:avatar, accept: :any, max_entries: 3, external: &presign_upload/2)}
+     |> allow_upload(:avatar, accept: ~w(.png .jpeg .jpg .gif), max_entries: 3, external: &presign_upload/2)}
   end
 
   defp presign_upload(entry, socket) do
+    IO.inspect("presign_upload")
     uploads = socket.assigns.uploads
-    bucket = "novy-s3-upload"
+    bucket = Application.fetch_env!(:novy_data, :aws_s3_bucket)
     key = "public/#{entry.client_name}"
 
     config = %{
       region: "eu-west-3",
-      access_key_id: Application.get_env(:novy_site, :access_key_id),
-      secret_access_key: Application.get_env(:novy_site, :secret_access_key),
+      access_key_id: Application.fetch_env!(:novy_data, :aws_access_key_id),
+      secret_access_key: Application.fetch_env!(:novy_data, :aws_secret_access_key)
     }
 
     {:ok, fields} =
@@ -34,11 +35,24 @@ defmodule NovySite.UploadLive.Index do
         expires_in: :timer.hours(1)
       )
 
-    meta = %{uploader: "S3", key: key, url: "http://#{bucket}.s3.amazonaws.com", fields: fields}
+    meta = %{uploader: "S3", key: key, url: "https://#{bucket}.s3.amazonaws.com", fields: fields}
+    IO.inspect(meta)
     {:ok, meta, socket}
   end
 
+  @impl true
   def handle_event("validate", _params, socket) do
+    IO.inspect("validate")
     {:noreply, socket}
+  end
+
+  def handle_event("save", _params, socket) do
+    IO.inspect("save")
+    {:noreply, socket}
+  end
+
+  def handle_event("cancel", %{"ref" => ref}, socket) do
+    IO.inspect("cancel:#{ref}")
+    {:noreply, cancel_upload(socket, :avatar, ref)}
   end
 end

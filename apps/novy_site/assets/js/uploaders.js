@@ -2,20 +2,25 @@ import * as UpChunk from "@mux/upchunk"
 
 let Uploaders = {}
 
-Uploaders.UpChunk = function(entries, onViewError){
+Uploaders.S3 = function(entries, onViewError){
   entries.forEach(entry => {
-    // create the upload session with UpChunk
-    let { file, meta: { entrypoint } } = entry
-    let upload = UpChunk.createUpload({ entrypoint, file })
+    let formData = new FormData()
+    let {url, fields} = entry.meta
+    Object.entries(fields).forEach(([key, val]) => formData.append(key, val))
+    formData.append("file", entry.file)
+    let xhr = new XMLHttpRequest()
+    onViewError(() => xhr.abort())
+    xhr.onload = () => xhr.status === 204 || entry.error()
+    xhr.onerror = () => entry.error()
+    xhr.upload.addEventListener("progress", (event) => {
+      if(event.lengthComputable){
+        let percent = Math.round((event.loaded / event.total) * 100)
+        entry.progress(percent)
+      }
+    })
 
-    // stop uploading in the event of a view error
-    onViewError(() => upload.pause())
-
-    // upload error triggers LiveView error
-    upload.on("error", (e) => entry.error(e.detail.message))
-
-    // notify progress events to LiveView
-    upload.on("progress", (e) => entry.progress(e.detail))
+    xhr.open("POST", url, true)
+    xhr.send(formData)
   })
 }
 
