@@ -9,6 +9,7 @@ env:
   DATABASE_URL: ${{ secrets.DATABASE_URL }}
   AWS_LIGHTSAIL_SERVICE_NAME: ${{ secrets.AWS_LIGHTSAIL_SERVICE_NAME }}
   AWS_REGION: ${{ secrets.AWS_REGION }}
+  MIX_ENV: test
 
 jobs:
   test:
