@@ -12,7 +12,7 @@ defmodule NovySite.UploadLive.Index do
     {:ok,
      socket
      |> assign(:uploaded_files, [])
-     |> allow_upload(:avatar, accept: ~w(.png .jpeg .jpg .gif), max_entries: 3, external: &presign_upload/2)}
+     |> allow_upload(:avatar, accept: ~w(.png .jpeg .jpg .gif .mp4), max_entries: 3, external: &presign_upload/2)}
   end
 
   defp presign_upload(entry, socket) do

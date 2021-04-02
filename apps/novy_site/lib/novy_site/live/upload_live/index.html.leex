@@ -27,17 +27,32 @@
           </div>
 
 
-        <div class="text-white">
+        <div>
         <%= for entry <- @uploads.avatar.entries do %>
-          <div class="h-12 bg-gray-900 flex">
-            <span class="flex-1"><%= entry.client_name %></span>
-            <span class="flex-1"><%= entry.progress %>%</span>
-            <a class="flex-1" href="javascript:;" phx-click="cancel" phx-value-ref="<%= entry.ref %>">Cancel</a>
+          <div class="h-12 bg-gray-900 flex items-center relative">
+            <div class="absolute h-full bg-green-600" style="width: <%= entry.progress %>%"></div>
+            <div class="flex-1 w-20 z-10 pl-5 text-white">
+              <p class="overflow-hidden whitespace-nowrap overflow-ellipsis text-white"><%= entry.client_name %></p>
+             </div>
+            <div class="flex-1 z-10 text-white">
+              <span><%= entry.progress %>%</span>
+            </div>
+
+            <div class="z-10 mr-5 h-8 w-8">
+            <%= if entry.progress == 0 do %>
+              <a class="align-middle" phx-click="cancel" phx-value-ref="<%= entry.ref %>" href="javascript:;">
+                <svg class="text-red-600 hover:text-red-800" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </a>
+            <% end %>
+            </div>
+
           </div>
         <% end %>
         </div>
 
-          <button class="h-10 px-5 m-2 text-indigo-100 transition-colors duration-150 bg-indigo-700 rounded-lg focus:shadow-outline hover:bg-indigo-800" type="submit">Upload</button>
+          <button class="h-10 px-5  my-5 text-indigo-100 transition-colors duration-150 bg-indigo-600 rounded-lg focus:shadow-outline hover:bg-indigo-700" type="submit">Save</button>
         </form>
       </div>
     </div>
