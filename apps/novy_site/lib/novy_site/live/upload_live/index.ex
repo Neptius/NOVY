@@ -36,18 +36,23 @@ defmodule NovySite.UploadLive.Index do
       )
 
     meta = %{uploader: "S3", key: key, url: "https://#{bucket}.s3.amazonaws.com", fields: fields}
-    IO.inspect(meta)
+
     {:ok, meta, socket}
   end
 
   @impl true
   def handle_event("validate", _params, socket) do
     IO.inspect("validate")
+    #* PROCESS DE VALIDATION
     {:noreply, socket}
   end
 
   def handle_event("save", _params, socket) do
     IO.inspect("save")
+    #* SAUVEGARDE EN BASE DE DONNÉE
+
+    #* CLEAR AVATAR
+    consume_uploaded_entries(socket, :avatar, fn _meta, _entry -> :ok end)
     {:noreply, socket}
   end
 
