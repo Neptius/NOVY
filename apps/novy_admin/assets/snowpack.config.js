@@ -1,5 +1,5 @@
 module.exports = {
-    workspaceRoot: '../../..',
+    workspaceRoot: "../../..",
     mount: {
         "js": { url: "/js" },
         "css": { url: "/css" },
@@ -9,10 +9,10 @@ module.exports = {
         out: "../priv/static/"
     },
     optimize: {
-        entrypoints: ['./js/app.js'],
+        entrypoints: ["./js/app.js"],
         bundle: true,
         minify: true,
-        target: 'es2020'
+        target: "es2020"
     },
     plugins: [
         "@snowpack/plugin-postcss"
