@@ -160,15 +160,6 @@ config :novy_api, NovyApi.Endpoint,
 # configured to run both http and https servers on
 # different ports.
 
-# Configure your database
-config :novy_data, NovyData.Repo,
-  username: "postgres",
-  password: "pass",
-  database: "novy_db_dev",
-  hostname: "localhost",
-  show_sensitive_data_on_connection_error: true,
-  pool_size: 10
-
 # Do not include metadata nor timestamps in development logs
 config :logger, :console, format: "[$level] $message\n"
 
