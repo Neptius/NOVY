@@ -13,12 +13,6 @@ import Config
 config :novy_data,
   ecto_repos: [NovyData.Repo]
 
-config :novy_data, NovyData.Accounts.User,
-  database: "novy_data_user",
-  username: "user",
-  password: "pass",
-  hostname: "localhost"
-
 config :novy_admin,
   generators: [context_app: false]
 

@@ -2,6 +2,7 @@ FROM elixir:1.11.4-alpine AS build
 
 # install build dependencies
 RUN apk add --no-cache build-base git python3 yarn
+RUN curl -f https://get.pnpm.io/v6.js | node - add --global pnpm
 
 # prepare build dir
 WORKDIR /app
@@ -36,10 +37,10 @@ RUN yarn --cwd ./assets deploy
 RUN mix phx.digest
 
 WORKDIR /app/apps/novy_admin
-# RUN npm --prefix ./assets ci --progress=false --no-audit --loglevel=error
-# RUN npm run --prefix ./assets deploy
-RUN yarn --cwd ./assets install --frozen-lockfile
-RUN yarn --cwd ./assets deploy
+RUN pnpm --prefix ./assets ci --progress=false --no-audit --loglevel=error
+RUN pnpm run --prefix ./assets deploy
+# RUN yarn --cwd ./assets install --frozen-lockfile
+# RUN yarn --cwd ./assets deploy
 RUN mix phx.digest
 
 WORKDIR /app

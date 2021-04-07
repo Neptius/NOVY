@@ -19,10 +19,9 @@ config :novy_admin, NovyAdmin.Endpoint,
   check_origin: false,
   watchers: [
     node: [
-      "node_modules/webpack/bin/webpack.js",
-      "--mode",
-      "development",
-      "--watch-stdin",
+      "node_modules/snowpack/index.bin.js",
+      "build",
+      "--watch",
       cd: Path.expand("../apps/novy_admin/assets", __DIR__)
     ]
   ],
@@ -179,3 +178,5 @@ config :phoenix, :plug_init_mode, :runtime
 # Set a higher stacktrace during development. Avoid configuring such
 # in production as building large stacktraces may be expensive.
 config :phoenix, :stacktrace_depth, 20
+
+import_config "dev.secret.exs"

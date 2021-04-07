@@ -1,14 +1,10 @@
 name: Test, Build and Deploy Docker app to Lightsail
 
-on:
-  push:
-    branches:
-      - main
-
+on: [push, pull_request]
 
 env:
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  
+  MIX_ENV: test
   SECRET_KEY_BASE: ${{ secrets.SECRET_KEY_BASE }}
   DATABASE_URL: ${{ secrets.DATABASE_URL }}
   AWS_LIGHTSAIL_SERVICE_NAME: ${{ secrets.AWS_LIGHTSAIL_SERVICE_NAME }}
@@ -44,7 +40,7 @@ jobs:
         uses: actions/setup-elixir@v1
         with:
           elixir-version: "1.11.4" # Define the elixir version [required]
-          otp-version: "23.0" # Define the OTP version [required]
+          otp-version: "23.1" # Define the OTP version [required]
           experimental-otp: true
 
       - name: Restore dependencies cache
@@ -102,10 +98,10 @@ jobs:
             --label $AWS_LIGHTSAIL_SERVICE_NAME \
             --image $AWS_LIGHTSAIL_SERVICE_NAME:release
 
-      - name: Deploy on container Lightsail 
+      - name: Deploy on container Lightsail
         run: |
           aws lightsail get-container-images --service-name $AWS_LIGHTSAIL_SERVICE_NAME | jq --raw-output ".containerImages[0].image" > image.txt
-          
+
           jq --arg image $(cat image.txt) \
             --arg serviceName $AWS_LIGHTSAIL_SERVICE_NAME \
             --arg containerName $AWS_LIGHTSAIL_SERVICE_NAME \

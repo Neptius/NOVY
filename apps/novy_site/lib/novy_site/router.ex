@@ -12,11 +12,11 @@ defmodule NovySite.Router do
 
     plug :put_secure_browser_headers,
          %{
-           "content-security-policy" => "default-src *",
-           "referrer-policy" => "strict-origin-when-cross-origin",
+           #  "content-security-policy" => "default-src *",
+           # "referrer-policy" => "strict-origin-when-cross-origin",
            "strict-transport-security" => "max-age=31536000",
            "permissions-policy" => "fullscreen *"
-          }
+         }
 
     plug :fetch_current_user
   end
@@ -39,10 +39,11 @@ defmodule NovySite.Router do
     live "/", HomeLive.Index, :index
     delete "/logout", AuthController, :delete
 
+    live "/upload", UploadLive.Index, :index
+
     live "/auth_providers", AuthProviderLive.Index, :index
     live "/auth_providers/new", AuthProviderLive.Index, :new
     live "/auth_providers/:id/edit", AuthProviderLive.Index, :edit
-
     live "/auth_providers/:id", AuthProviderLive.Show, :show
     live "/auth_providers/:id/show/edit", AuthProviderLive.Show, :edit
   end

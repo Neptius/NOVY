@@ -7,6 +7,11 @@ import Config
 # remember to add this file to your .gitignore.
 
 if config_env() == :prod do
+  config :novy_data,
+    aws_access_key_id: System.get_env("AWS_ACCESS_KEY_ID") || "",
+    aws_secret_access_key: System.get_env("AWS_SECRET_ACCESS_KEY") || "",
+    aws_s3_bucket: System.get_env("AWS_S3_BUCKET") || ""
+
   database_url =
     System.get_env("DATABASE_URL") ||
       raise """
