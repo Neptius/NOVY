@@ -19,10 +19,9 @@ config :novy_admin, NovyAdmin.Endpoint,
   check_origin: false,
   watchers: [
     node: [
-      "node_modules/webpack/bin/webpack.js",
-      "--mode",
-      "development",
-      "--watch-stdin",
+      "node_modules/snowpack/index.bin.js",
+      "build",
+      "--watch",
       cd: Path.expand("../apps/novy_admin/assets", __DIR__)
     ]
   ],
