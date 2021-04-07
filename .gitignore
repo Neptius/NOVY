@@ -21,5 +21,8 @@ erl_crash.dump
 
 *.secret.exs
 
+#
+.pnpm-debug.log
+
 image.txt
 container.json

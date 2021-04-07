@@ -9,10 +9,10 @@ module.exports = {
         out: "../priv/static/"
     },
     optimize: {
-        entrypoints: ["./static/index.html"],
+        entrypoints: ['./js/app.js'],
         bundle: true,
         minify: true,
-        target: 'es2018'
+        target: 'es2020'
     },
     plugins: [
         "@snowpack/plugin-postcss"
