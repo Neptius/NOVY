@@ -2,6 +2,7 @@ FROM elixir:1.11.4-alpine AS build
 
 # install build dependencies
 RUN apk add --no-cache build-base git python3 yarn
+RUN curl -f https://get.pnpm.io/v6.js | node - add --global pnpm
 
 # prepare build dir
 WORKDIR /app
