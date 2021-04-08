@@ -2,7 +2,7 @@ FROM elixir:1.11.4-alpine AS build
 
 # install build dependencies
 RUN apk add --no-cache build-base git python3 npm
-RUN npx pnpm add -g pnpm
+RUN npm install -g pnpm
 
 # prepare build dir
 WORKDIR /app
