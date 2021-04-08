@@ -42,7 +42,7 @@ iframe[hidden=""] {
 @layer components {
   .login-background {
     @apply bg-center bg-no-repeat bg-cover;
-    background-image: url("https://novy-bucket.s3.eu-west-3.amazonaws.com/ember-1.jpg");
+    background-image: url("https://novy-bucket.s3.eu-west-3.amazonaws.com/ember.webp");
   }
 
   .nv-alert {
