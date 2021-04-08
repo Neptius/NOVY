@@ -1,8 +1,8 @@
 FROM elixir:1.11.4-alpine AS build
 
 # install build dependencies
-RUN apk add --no-cache build-base git python3 yarn npm
-RUN npm install -g pnpm
+RUN apk add --no-cache build-base git python3 npm
+RUN npx pnpm add -g pnpm
 
 # prepare build dir
 WORKDIR /app
@@ -30,10 +30,12 @@ COPY . /app/
 
 # build assets
 WORKDIR /app/apps/novy_site
+RUN pnpm --prefix ./assets install --frozen-lockfile
+RUN pnpm run --prefix ./assets deploy
 # RUN npm --prefix ./assets ci --progress=false --no-audit --loglevel=error
 # RUN npm run --prefix ./assets deploy
-RUN yarn --cwd ./assets install --frozen-lockfile
-RUN yarn --cwd ./assets deploy
+# RUN yarn --cwd ./assets install --frozen-lockfile
+# RUN yarn --cwd ./assets deploy
 RUN mix phx.digest
 
 WORKDIR /app/apps/novy_admin
