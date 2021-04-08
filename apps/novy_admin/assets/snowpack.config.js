@@ -1,7 +1,7 @@
 module.exports = {
     workspaceRoot: "../../..",
     mount: {
-        "js": { url: "/build" },
+        "js": { url: "/js" },
         "css": { url: "/css" },
         "static": { url: "/", static: true, resolve: false }
     },
@@ -9,8 +9,8 @@ module.exports = {
         out: "../priv/static/"
     },
     optimize: {
-        entrypoints: ["./build/app.js"],
-        bundle: true,
+        entrypoints: ["./js/app.js"],
+        bundle: false,
         minify: true,
         target: "es2020"
     },
