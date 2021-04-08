@@ -10,17 +10,20 @@ iframe[hidden=""] {
 @font-face {
   font-family: "Orbitron";
   src: url("/fonts/Orbitron/static/Orbitron-Regular.ttf");
+  font-display: swap;
 }
 
 @font-face {
   font-family: "Orbitron";
   src: url("/fonts/Orbitron/static/Orbitron-Bold.ttf");
   font-weight: bold;
+  font-display: swap;
 }
 
 @font-face {
   font-family: "Michroma";
   src: url("/fonts/Michroma/Michroma-Regular.ttf");
+  font-display: swap;
 }
 
 .orbitron {
@@ -39,7 +42,7 @@ iframe[hidden=""] {
 @layer components {
   .login-background {
     @apply bg-center bg-no-repeat bg-cover;
-    background-image: url("https://i.ibb.co/b2kNnRZ/ember.jpg");
+    background-image: url("https://novy-bucket.s3.eu-west-3.amazonaws.com/ember-1.jpg");
   }
 
   .nv-alert {
