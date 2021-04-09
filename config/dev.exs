@@ -18,11 +18,10 @@ config :novy_admin, NovyAdmin.Endpoint,
   code_reloader: true,
   check_origin: false,
   watchers: [
-    node: [
-      "node_modules/webpack/bin/webpack.js",
-      "--mode",
-      "development",
-      "--watch-stdin",
+    npx: [
+      "rollup",
+      "--config",
+      "--watch",
       cd: Path.expand("../apps/novy_admin/assets", __DIR__)
     ]
   ],
