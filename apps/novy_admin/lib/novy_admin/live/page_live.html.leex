@@ -1,12 +1,11 @@
 <div id="wrapper" class="flex items-stretch w-full">
-  <nav id="sidebar" class="flex-none h-screen overflow-y-auto w-64 text-white bg-gray-800 shadow-xl">
+  <nav id="sidebar" class="flex-none h-screen w-64 text-white bg-gray-800 shadow-xl">
     <div class="h-16 flex justify-center items-center bg-indigo-900">
       <h1 class="orbitron text-3xl text-center font-bold tracking-wider align-bottom">Novy</h1>
     </div>
-    <ul>
-      <template x-data="{inc: 20}" x-for="i in inc">
+    <ul class="block h-auto overflow-y-auto">
+      <template x-data="{inc: 25}" x-for="i in inc">
         <li class="hover:bg-gray-700">
-        <div></div>
           <a class="block px-5 pt-3 pb-4" href="#">
             <svg class="h-6 w-6 inline-block mr-2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" focusable="false" width="1em" height="1em" style="-ms-transform: rotate(360deg); -webkit-transform: rotate(360deg); transform: rotate(360deg);" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z" fill="white"/><rect x="0" y="0" fill="rgba(0, 0, 0, 0)" /></svg>
             <span class="tracking-wide align-bottom">Dashboard</span>
