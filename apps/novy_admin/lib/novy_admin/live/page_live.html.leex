@@ -1,4 +1,4 @@
-<div id="wrapper" class="flex h-screen items-stretch w-full">
+<div id="wrapper" x-data="{ menuMin: false }" :class="['flex h-screen items-stretch w-full', {'min': menuMin }]">
   <nav id="sidebar" class="flex-none w-64 text-white bg-gray-800 shadow-xl">
     <div class="h-16 flex justify-center items-center bg-indigo-900">
       <h1 class="orbitron text-3xl text-center font-bold tracking-wider align-bottom">Novy</h1>
@@ -24,9 +24,12 @@
         </template>
       </ul>
     </div>
-    <div class="h-16 flex justify-center items-center bg-indigo-900 cursor-pointer">
-      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <div @click="menuMin = !menuMin" class="h-16 flex justify-center items-center bg-indigo-900 cursor-pointer">
+      <svg x-show="!menuMin" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 19l-7-7 7-7m8 14l-7-7 7-7" />
+      </svg>
+      <svg x-show="menuMin" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 5l7 7-7 7M5 5l7 7-7 7" />
       </svg>
     </div>
   </nav>
