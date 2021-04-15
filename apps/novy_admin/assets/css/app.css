@@ -34,3 +34,25 @@ iframe[src="/phoenix/live_reload/frame"] {
 .michroma {
     font-family: 'Michroma', sans-serif;
 }
+
+#sidebar, #content{
+    transition: all .5s;
+}
+
+@media (max-width: 1024px) {
+    #sidebar {
+        transform: translate3d(-16rem,0,0);
+    }
+
+    #sidebar.nav-open {
+        transform: translateZ(0);
+    }
+
+    #content {
+        width: 100% !important;
+    }
+
+    #content.nav-open {
+        transform: translate3d(16rem,0,0);
+    }
+}

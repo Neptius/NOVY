@@ -6,6 +6,7 @@ specifiers:
   alpinejs: ^2.8.2
   autoprefixer: ^10.1.0
   babel-loader: ^8.0.0
+  chart.js: ^3.1.0
   copy-webpack-plugin: ^5.1.1
   css-loader: ^3.4.2
   glob: ^7.1.6
@@ -26,6 +27,7 @@ specifiers:
 dependencies:
   alpinejs: 2.8.2
   autoprefixer: 10.2.5_postcss@8.2.9
+  chart.js: 3.1.0
   nprogress: 0.2.0
   phoenix: link:../../../deps/phoenix
   phoenix_html: link:../../../deps/phoenix_html
@@ -1760,6 +1762,10 @@ packages:
     dependencies:
       ansi-styles: 4.3.0
       supports-color: 7.2.0
+    dev: false
+
+  /chart.js/3.1.0:
+    resolution: {integrity: sha512-bKJi2VbC4fqZXlLbK7LKVvmG9crjoG9anfp96utZLyIGPuCx+YN+5/HDXy98QGt3lf74T8gKUPISUZL222tDJQ==}
     dev: false
 
   /chokidar/2.1.8:
