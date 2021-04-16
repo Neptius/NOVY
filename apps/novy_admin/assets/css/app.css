@@ -35,7 +35,7 @@ iframe[src="/phoenix/live_reload/frame"] {
     font-family: 'Michroma', sans-serif;
 }
 
-#sidebar, #content{
+#sidebar, #content, #top-bar {
     transition: all .5s;
 }
 
@@ -54,5 +54,14 @@ iframe[src="/phoenix/live_reload/frame"] {
 
     #content.nav-open {
         transform: translate3d(16rem,0,0);
+    }
+
+    #top-bar {
+        @apply left-0;
+        width: 100% !important;
+    }
+
+    #top-bar.nav-open {
+        
     }
 }
