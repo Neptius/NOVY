@@ -47,6 +47,7 @@ export const chart = {
                     }
                 },
                 maintainAspectRatio: false,
+                responsive: true,
                 plugins: {
                     legend: {
                         position: "bottom",
