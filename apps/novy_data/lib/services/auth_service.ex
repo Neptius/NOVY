@@ -7,7 +7,7 @@ defmodule NovyData.AuthService do
   alias NovyData.Accounts.{AuthProvider, AuthProviderSession, AuthUser, User}
 
   @doc false
-  def init_auth(name) do
+  def init_auth(name, redirect_url) do
     with %AuthProvider{} = auth_provider <- AuthProvider.get_one_auth_provider(%{"name" => name}),
          state <- Randomizer.randomizer(32),
          {:ok, %AuthProviderSession{}} <-
@@ -15,7 +15,7 @@ defmodule NovyData.AuthService do
              state: state,
              auth_provider_id: auth_provider.id
            }),
-         {:ok, url} <- format_auth_url(auth_provider, state) do
+         {:ok, url} <- format_auth_url(auth_provider, state, redirect_url) do
       {:ok, url}
     else
       {:error, error} ->
@@ -27,11 +27,11 @@ defmodule NovyData.AuthService do
   end
 
   @doc false
-  defp format_auth_url(%{:method => "oauth2"} = auth_provider, state) do
+  defp format_auth_url(%{:method => "oauth2"} = auth_provider, state, redirect_url) do
     query =
       URI.encode_query(%{
         "client_id" => auth_provider.client_id,
-        "redirect_uri" => auth_provider.redirect_url,
+        "redirect_uri" => "#{redirect_url}#{auth_provider.redirect_url}",
         "response_type" => auth_provider.response_type,
         "state" => state,
         "scope" => auth_provider.scope,

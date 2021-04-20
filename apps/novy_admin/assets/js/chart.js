@@ -98,13 +98,16 @@ export const chart = {
             }
         });
 
-        document.getElementById('main').addEventListener("scroll", () => {
-            console.log('OK')
+        const mainbloc = document.getElementById('main')
+
+        mainbloc.addEventListener("scroll", () => {
             let opacity = 0;
-            const currentScroll = window.pageYOffset;
-            if (currentScroll <= 50) {
-                opacity = 1 - currentScroll / 50;
+            const currentScroll = mainbloc.scrollTop;
+
+            if (currentScroll <= 150) {
+                opacity = 1 - currentScroll / 150;
             }
+            console.log(opacity)
             this.el.style.opacity = opacity;
         });
     }
