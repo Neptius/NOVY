@@ -58,10 +58,10 @@
       </ul>
     </nav>
   </aside>
-  <main id="main" class="main bg-gray-800" :class="{'nav-open': sidenavOpen }">
+  <main id="main" class="main relative w-full bg-gray-800" :class="{'nav-open': sidenavOpen }">
     <!-- This example requires Tailwind CSS v2.0+ -->
-    <div class="relative bg-gradient-to-r from-indigo-900 to-blue-800 h-80 pl-2 pr-5 pb-16 pt-6">
-      <canvas id="myChart" style="min-width: 0px" phx-hook="chart"></canvas>
+    <div class="bg-gradient-to-r from-indigo-900 to-blue-800 h-80 pl-2 pr-5 pb-16 pt-6" style="width: 100%">
+      <canvas id="myChart" phx-hook="chart"></canvas>
     </div>
     <div @click="if (sidenavOpen) { sidenavOpen = false; }">
       <div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
