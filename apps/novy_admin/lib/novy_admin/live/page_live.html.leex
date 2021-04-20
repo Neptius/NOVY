@@ -31,7 +31,7 @@
       <ul>
         <template x-data="{inc: 5}" x-for="i in inc">
           <li x-data="{ sidenavOpen: false }">
-            <a @click="sidenavOpen = !sidenavOpen" class="block flex pl-5 pr-3 pt-3 pb-4 hover:bg-gray-800" href="#">
+            <a href="javascript:;"  @click="sidenavOpen = !sidenavOpen" class="block flex pl-5 pr-3 pt-3 pb-4 hover:bg-gray-800">
               <svg class="h-6 w-6 mr-2" xmlns="http://www.w3.org/2000/svg"
                                  xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" focusable="false"
                                  width="1em" height="1em"
@@ -48,7 +48,7 @@
             <ul x-show="sidenavOpen">
               <template x-data="{inc2: 2}" x-for="i in inc2">
                 <li class="hover:bg-gray-800">
-                  <a class="block px-5 pt-3 pb-4" href="#">
+                  <a href="javascript:;" class="block px-5 pt-3 pb-4">
                     <span class="ml-9 tracking-wide align-bottom">Dashboard Sub</span>
                   </a>
                 </li>

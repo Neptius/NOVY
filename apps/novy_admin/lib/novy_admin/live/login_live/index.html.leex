@@ -1,0 +1,11 @@
+<div>
+  <%= for auth_provider <- @auth_providers do %>
+    <button
+      type="button"
+      phx-click="init_auth"
+      phx-value-provider="<%= auth_provider.label %>"
+    >
+      <span><%= auth_provider.label %></span>
+    </button>
+  <% end %>
+</div>

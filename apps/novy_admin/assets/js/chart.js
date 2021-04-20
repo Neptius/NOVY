@@ -15,7 +15,7 @@ export const chart = {
         gradientFill.addColorStop(0, "rgba(128, 182, 244, 0)");
         gradientFill.addColorStop(1, "rgba(255, 255, 255, 0.24)");
 
-        var myChart = new Chart(ctx, {
+        new Chart(ctx, {
             type: 'line',
             data: {
                 labels: ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"],
@@ -96,6 +96,16 @@ export const chart = {
                     }
                 }
             }
+        });
+
+        document.getElementById('main').addEventListener("scroll", () => {
+            console.log('OK')
+            let opacity = 0;
+            const currentScroll = window.pageYOffset;
+            if (currentScroll <= 50) {
+                opacity = 1 - currentScroll / 50;
+            }
+            this.el.style.opacity = opacity;
         });
     }
 }

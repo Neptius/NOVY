@@ -48,6 +48,8 @@ defmodule NovyAdmin do
         layout: {NovyAdmin.LayoutView, "live.html"}
 
       unquote(view_helpers())
+
+      import NovyAdmin.LiveHelpers
     end
   end
 

@@ -28,7 +28,7 @@ defmodule NovySite.Router do
   scope "/", NovySite do
     pipe_through :browser
 
-    # * AUTH
+    #* AUTH
     live "/login", LoginLive.Index, :index
     get "/login_return", AuthController, :callback
   end

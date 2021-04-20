@@ -1,6 +1,8 @@
 defmodule NovyAdmin.Router do
   use NovyAdmin, :router
 
+  import NovyAdmin.UserAuth
+
   pipeline :browser do
     plug :accepts, ["html"]
     plug :fetch_session
@@ -8,6 +10,8 @@ defmodule NovyAdmin.Router do
     plug :put_root_layout, {NovyAdmin.LayoutView, :root}
     plug :protect_from_forgery
     plug :put_secure_browser_headers
+
+    plug :fetch_current_user
   end
 
   pipeline :api do
@@ -18,6 +22,9 @@ defmodule NovyAdmin.Router do
     pipe_through :browser
 
     live "/", PageLive, :index
+
+    live "/login", LoginLive.Index, :index
+    get "/login_return", AuthController, :callback
   end
 
   # Other scopes may use custom stacks.
