@@ -15,10 +15,10 @@ export const chart = {
         gradientFill.addColorStop(0, "rgba(128, 182, 244, 0)");
         gradientFill.addColorStop(1, "rgba(255, 255, 255, 0.24)");
 
-        new Chart(ctx, {
+        let chart = new Chart(ctx, {
             type: 'line',
+            labels: [],
             data: {
-                labels: ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"],
                 datasets: [{
                     label: "Data",
                     borderColor: chartColor,
@@ -33,7 +33,7 @@ export const chart = {
                     fill: true,
                     backgroundColor: gradientFill,
                     borderWidth: 2,
-                    data: [50, 150, 100, 190, 130, 90, 150, 160, 120, 140, 190, 95],
+                    data: [],
                     tension: 0.4
                 }]
             },
@@ -98,17 +98,28 @@ export const chart = {
             }
         });
 
-        const mainbloc = document.getElementById('main')
+        // const mainbloc = document.getElementById('main')
 
-        mainbloc.addEventListener("scroll", () => {
-            let opacity = 0;
-            const currentScroll = mainbloc.scrollTop;
+        // mainbloc.addEventListener("scroll", () => {
+        //     let opacity = 0;
+        //     const currentScroll = mainbloc.scrollTop;
+        //     if (currentScroll <= 120) opacity = 1 - currentScroll / 120;
+        //     this.el.style.opacity = opacity;
+        // });
 
-            if (currentScroll <= 150) {
-                opacity = 1 - currentScroll / 150;
+        setInterval(() => {
+            let datas = chart.data.datasets[0].data;
+            let labels = chart.data.labels;
+
+            labels.push("");
+            datas.push(0);
+
+            if (datas.length >= 20) {
+                labels.shift()
+                datas.shift();
             }
-            console.log(opacity)
-            this.el.style.opacity = opacity;
-        });
+
+            chart.update();
+        }, 500);
     }
 }

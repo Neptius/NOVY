@@ -1,7 +1,7 @@
-defmodule NovySite.AuthProviderLive.Show do
+defmodule NovyAdmin.AuthProviderLive.Show do
   @moduledoc false
 
-  use NovySite, :live_view
+  use NovyAdmin, :live_view
 
   alias NovyData.Accounts.AuthProvider
 

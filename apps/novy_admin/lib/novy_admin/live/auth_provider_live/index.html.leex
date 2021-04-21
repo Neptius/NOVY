@@ -1,0 +1,40 @@
+<h1>Listing Auth providers</h1>
+
+<%= if @live_action in [:new, :edit] do %>
+  <%= live_modal @socket, NovyAdmin.AuthProviderLive.FormComponent,
+    id: @auth_provider.id || :new,
+    title: @page_title,
+    action: @live_action,
+    auth_provider: @auth_provider,
+    return_to: Routes.auth_provider_index_path(@socket, :index) %>
+<% end %>
+
+<table class="min-w-full divide-y divide-gray-200">
+  <thead class="bg-gray-50">
+    <tr>
+      <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Label</th>
+      <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Method</th>
+      <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Active</th>
+      <th scope="col" class="relative px-6 py-3">
+        <span class="sr-only">Edit</span>
+      </th>
+    </tr>
+  </thead>
+  <tbody id="auth_providers" class="bg-white divide-y divide-gray-200">
+    <%= for auth_provider <- @auth_providers do %>
+      <tr id="auth_provider-<%= auth_provider.id %>">
+        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500"><%= auth_provider.label %></td>
+        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500"><%= auth_provider.method %></td>
+        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500"><%= auth_provider.active %></td>
+
+        <td>
+          <span><%= live_redirect "Show", to: Routes.auth_provider_show_path(@socket, :show, auth_provider) %></span>
+          <span><%= live_patch "Edit", to: Routes.auth_provider_index_path(@socket, :edit, auth_provider) %></span>
+          <span><%= link "Delete", to: "#", phx_click: "delete", phx_value_id: auth_provider.id, data: [confirm: "Are you sure?"] %></span>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<span><%= live_patch "New Auth provider", to: Routes.auth_provider_index_path(@socket, :new) %></span>

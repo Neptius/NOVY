@@ -181,7 +181,6 @@ defmodule NovyData.Accounts.AuthProvider do
       :user_url,
       :response_type,
       :scope,
-      :user_path,
       :user_id_path,
       :user_pseudo_path,
       :user_img_url,

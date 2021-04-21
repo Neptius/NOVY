@@ -1,7 +1,7 @@
-defmodule NovySite.AuthProviderLive.FormComponent do
+defmodule NovyAdmin.AuthProviderLive.FormComponent do
   @moduledoc false
 
-  use NovySite, :live_component
+  use NovyAdmin, :live_component
 
   alias NovyData.Accounts.AuthProvider
 

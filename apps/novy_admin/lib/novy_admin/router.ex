@@ -30,6 +30,12 @@ defmodule NovyAdmin.Router do
 
     live "/", DashboardLive.Index, :index
     delete "/logout", AuthController, :delete
+
+    live "/auth_providers", AuthProviderLive.Index, :index
+    live "/auth_providers/new", AuthProviderLive.Index, :new
+    live "/auth_providers/:id/edit", AuthProviderLive.Index, :edit
+    live "/auth_providers/:id", AuthProviderLive.Show, :show
+    live "/auth_providers/:id/show/edit", AuthProviderLive.Show, :edit
   end
 
   # Other scopes may use custom stacks.

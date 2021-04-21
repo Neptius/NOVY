@@ -1,7 +1,7 @@
 <h1>Show Auth provider</h1>
 
 <%= if @live_action in [:edit] do %>
-  <%= live_modal @socket, NovySite.AuthProviderLive.FormComponent,
+  <%= live_modal @socket, NovyAdmin.AuthProviderLive.FormComponent,
     id: @auth_provider.id,
     title: @page_title,
     action: @live_action,
