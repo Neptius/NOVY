@@ -11,7 +11,6 @@ defmodule NovyData.TestHelpers do
       client_id: "CLIENT ID",
       client_secret: "CLIENT SECRET",
       authorize_url: "AUTHORIZE URL",
-      redirect_url: "REDIRECT URL",
       token_url: "TOKEN URL",
       user_url: "USER URL",
       scope: "SCOPE",

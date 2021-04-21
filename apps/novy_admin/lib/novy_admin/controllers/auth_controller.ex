@@ -4,17 +4,15 @@ defmodule NovyAdmin.AuthController do
   alias NovyAdmin.UserAuth
 
   def callback(conn, params) do
-    IO.inspect(NovyAdmin.Endpoint.url)
-    # case AuthService.start_auth(params) do
-    #   {:ok, user_id} ->
-    #     conn
-    #     |> UserAuth.log_in_user(user_id)
+    case AuthService.start_auth(params, NovyAdmin.Endpoint.url) do
+      {:ok, user_id} ->
+        conn
+        |> UserAuth.log_in_user(user_id)
 
-    #   {:error, error} ->
-    #     conn
-    #     |> UserAuth.log_in_fail(error)
-    # end
-    conn
+      {:error, error} ->
+        conn
+        |> UserAuth.log_in_fail(error)
+    end
   end
 
   def delete(conn, _params) do

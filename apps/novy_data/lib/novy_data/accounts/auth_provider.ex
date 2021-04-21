@@ -18,7 +18,6 @@ defmodule NovyData.Accounts.AuthProvider do
     field :client_secret, :string
     field :authorize_url, :string
     field :token_url, :string
-    field :redirect_url, :string
     field :user_url, :string
     field :response_type, :string
     field :scope, :string
@@ -162,7 +161,6 @@ defmodule NovyData.Accounts.AuthProvider do
       :client_secret,
       :authorize_url,
       :token_url,
-      :redirect_url,
       :user_url,
       :response_type,
       :scope,
@@ -180,7 +178,6 @@ defmodule NovyData.Accounts.AuthProvider do
       :client_secret,
       :authorize_url,
       :token_url,
-      :redirect_url,
       :user_url,
       :response_type,
       :scope,

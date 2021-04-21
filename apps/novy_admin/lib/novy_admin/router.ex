@@ -21,10 +21,15 @@ defmodule NovyAdmin.Router do
   scope "/", NovyAdmin do
     pipe_through :browser
 
-    live "/", PageLive, :index
-
     live "/login", LoginLive.Index, :index
     get "/login_return", AuthController, :callback
+  end
+
+  scope "/", NovyAdmin do
+    pipe_through [:browser, :require_authenticated_user]
+
+    live "/", DashboardLive.Index, :index
+    delete "/logout", AuthController, :delete
   end
 
   # Other scopes may use custom stacks.
