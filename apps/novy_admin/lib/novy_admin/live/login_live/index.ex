@@ -1,6 +1,5 @@
 defmodule NovyAdmin.LoginLive.Index do
   @moduledoc false
-
   use NovyAdmin, :live_view
 
   alias NovyData.Accounts.AuthProvider
@@ -10,7 +9,7 @@ defmodule NovyAdmin.LoginLive.Index do
   def mount(_params, session, socket) do
     socket = assign_defaults(session, socket)
     auth_providers = AuthProvider.list_auth_providers()
-    {:ok, assign(socket, page_title: "Connexion", auth_providers: auth_providers)}
+    {:ok, assign(socket, page_title: "Connexion", auth_providers: auth_providers), layout: {NovyAdmin.LayoutView, "blank.html"}}
   end
 
   @impl true

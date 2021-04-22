@@ -19,7 +19,7 @@ defmodule NovyAdmin.Router do
   end
 
   scope "/", NovyAdmin do
-    pipe_through :browser
+    pipe_through [:browser]
 
     live "/login", LoginLive.Index, :index
     get "/login_return", AuthController, :callback
