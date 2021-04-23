@@ -1,13 +1,14 @@
-<aside id="sidenav" class="sidenav fixed z-50 h-full w-64 text-white bg-gray-900 "
+<aside id="sidenav" class="sidenav fixed z-50 h-full w-64 text-white bg-red-800 "
       :class="{'nav-open': sidenavOpen }">
-  <div class="h-16 flex justify-center items-center bg-indigo-900">
+  <div class="h-16 flex justify-center items-center">
     <h1 class="orbitron text-3xl text-center font-bold tracking-wider align-bottom">Novy</h1>
   </div>
+  <hr class="w-16 mx-auto">
   <nav class="mt-4 overflow-y-auto">
-    <ul>
+    <ul class="mx-2">
       <li>
-        <%= live_patch to: Routes.dashboard_index_path(@socket, :index), class: "block flex pl-5 pr-3 pt-3 pb-4 hover:bg-gray-800" do %>
-          <svg class="h-6 w-6 mr-2" xmlns="http://www.w3.org/2000/svg"
+        <%= live_patch to: Routes.dashboard_index_path(@socket, :index), class: "block flex items-center pl-5 pr-3 pt-3 pb-4 hover:bg-red-900" do %>
+          <svg class="h-4 w-4 mr-4" xmlns="http://www.w3.org/2000/svg"
                               xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" focusable="false"
                               width="1em" height="1em"
                               style="-ms-transform: rotate(360deg); -webkit-transform: rotate(360deg); transform: rotate(360deg);"
@@ -15,12 +16,12 @@
             <path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z" fill="white"/>
             <rect x="0" y="0" fill="rgba(0, 0, 0, 0)"/>
           </svg>
-          <span class="flex-grow tracking-wide align-bottom">Dashboard</span>
+          <span class="flex-grow tracking-wide align-bottom text-white font-light uppercase text-xs">Dashboard</span>
         <% end %>
       </li>
       <li>
-        <%= live_patch to: Routes.auth_provider_index_path(@socket, :index), class: "block flex pl-5 pr-3 pt-3 pb-4 hover:bg-gray-800" do %>
-          <svg class="h-6 w-6 mr-2" xmlns="http://www.w3.org/2000/svg"
+        <%= live_patch to: Routes.auth_provider_index_path(@socket, :index), class: "block flex items-center pl-5 pr-3 pt-3 pb-4 hover:bg-red-900" do %>
+          <svg class="h-4 w-4 mr-4" xmlns="http://www.w3.org/2000/svg"
                               xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" focusable="false"
                               width="1em" height="1em"
                               style="-ms-transform: rotate(360deg); -webkit-transform: rotate(360deg); transform: rotate(360deg);"
@@ -28,12 +29,12 @@
             <path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z" fill="white"/>
             <rect x="0" y="0" fill="rgba(0, 0, 0, 0)"/>
           </svg>
-          <span class="flex-grow tracking-wide align-bottom">Auth Provider</span>
+          <span class="flex-grow tracking-wide align-bottom text-white font-light uppercase text-xs">Auth Provider</span>
         <% end %>
       </li>
       <%# <template x-data="{inc: 5}" x-for="i in inc">
         <li x-data="{ sidenavOpen: false }">
-          <a href="javascript:;"  @click="sidenavOpen = !sidenavOpen" class="block flex pl-5 pr-3 pt-3 pb-4 hover:bg-gray-800">
+          <a href="javascript:;"  @click="sidenavOpen = !sidenavOpen" class="block flex items-center pl-5 pr-3 pt-3 pb-4 hover:bg-gray-800">
             <svg class="h-6 w-6 mr-2" xmlns="http://www.w3.org/2000/svg"
                               xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" focusable="false"
                               width="1em" height="1em"

@@ -3,6 +3,7 @@ lockfileVersion: 5.3
 specifiers:
   '@babel/core': ^7.0.0
   '@babel/preset-env': ^7.0.0
+  '@tailwindcss/forms': ^0.3.2
   alpinejs: ^2.8.2
   autoprefixer: ^10.1.0
   babel-loader: ^8.0.0
@@ -25,6 +26,7 @@ specifiers:
   webpack-cli: ^3.3.2
 
 dependencies:
+  '@tailwindcss/forms': 0.3.2_tailwindcss@2.1.1
   alpinejs: 2.8.2
   autoprefixer: 10.2.5_postcss@8.2.9
   chart.js: 3.1.0
@@ -1050,6 +1052,15 @@ packages:
     dependencies:
       '@nodelib/fs.scandir': 2.1.4
       fastq: 1.11.0
+    dev: false
+
+  /@tailwindcss/forms/0.3.2_tailwindcss@2.1.1:
+    resolution: {integrity: sha512-aj2/rJsGb2whAZ/BQWHWWQRSbhH0r/l1ozOByiv+ZNjBD84GMvb5dhAyfpeasFky+EJrAwX5eaqft8NQMZFWvA==}
+    peerDependencies:
+      tailwindcss: '>=2.0.0'
+    dependencies:
+      mini-svg-data-uri: 1.2.3
+      tailwindcss: 2.1.1_0bca15301caac8bc71ea0ad94045571f
     dev: false
 
   /@types/json-schema/7.0.7:
@@ -3632,6 +3643,10 @@ packages:
       webpack: 4.41.5
       webpack-sources: 1.4.3
     dev: true
+
+  /mini-svg-data-uri/1.2.3:
+    resolution: {integrity: sha512-zd6KCAyXgmq6FV1mR10oKXYtvmA9vRoB6xPSTUJTbFApCtkefDnYueVR1gkof3KcdLZo1Y8mjF2DFmQMIxsHNQ==}
+    dev: false
 
   /minimalistic-assert/1.0.1:
     resolution: {integrity: sha512-UtJcAD4yEaGtjPezWuO9wC4nwUnVH/8/Im3yEHQP4b67cXlD/Qr9hdITCU1xDbSEXg2XKNaP8jsReV7vQd00/A==}

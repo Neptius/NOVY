@@ -1,4 +1,4 @@
-<div id="wrapper" x-data="{ sidenavOpen: false }" class="wrapper grid relative h-screen w-screen overflow-none bg-gray-800">
+<div id="wrapper" x-data="{ sidenavOpen: false }" class="wrapper grid relative h-screen w-screen overflow-none bg-gray-800 border-t-2 border-red-800">
   <p class="alert alert-info" role="alert"
     phx-click="lv:clear-flash"
     phx-value-key="info"><%= live_flash(@flash, :info) %></p>
@@ -7,14 +7,8 @@
     phx-value-key="error"><%= live_flash(@flash, :error) %></p>
   <%= live_component @socket, NovyAdmin.AdminComponent.Header, assigns %>
   <%= live_component @socket, NovyAdmin.AdminComponent.Aside, assigns %>
-  <main id="main" class="main relative overflow-auto w-full bg-gray-800" :class="{'nav-open': sidenavOpen }">
-    <!-- This example requires Tailwind CSS v2.0+ -->
-    <div class="w-full bg-gradient-to-r from-indigo-900 to-blue-800 h-80 pr-3 pb-16 pt-6">
-      <canvas id="myChart" phx-hook="chart"></canvas>
-    </div>
-    <div>
-      <%= @inner_content %>
-    </div>
+  <main id="main" class="main relative overflow-auto w-full bg-gray-800 p-5" :class="{'nav-open': sidenavOpen }">
+    <%= @inner_content %>
   </main>
   <%= live_component @socket, NovyAdmin.AdminComponent.Footer, assigns %>
 </div>

@@ -8,7 +8,7 @@ defmodule NovyAdmin.AuthProviderLive.Index do
   @impl true
   def mount(_params, session, socket) do
     socket = assign_defaults(session, socket)
-    {:ok, assign(socket, :auth_providers, list_auth_providers())}
+    {:ok, assign(socket, auth_providers: list_auth_providers())}
   end
 
   @impl true
