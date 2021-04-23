@@ -1,80 +1,92 @@
-<h2><%= @title %></h2>
-
 <%= f = form_for @changeset, "#",
   id: "auth_provider-form",
   phx_target: @myself,
   phx_change: "validate",
   phx_submit: "save" %>
-
 <div class="grid grid-cols-6 gap-6">
   <div class="col-span-6 sm:col-span-3">
-    <%= label f, :label, class: "block text-sm font-medium text-gray-700" %>
+    <%= label f, :label, class: "block text-sm font-medium text-gray-100" %>
     <%= text_input f, :label, class: "mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" %>
     <%= error_tag f, :label %>
   </div>
-
   <div class="col-span-6 sm:col-span-3">
-    <%= label f, :method, class: "block text-sm font-medium text-gray-700" %>
+    <%= label f, :method, class: "block text-sm font-medium text-gray-100" %>
     <%= select f, :method, ["oauth2"], class: "mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" %>
     <%= error_tag f, :method %>
   </div>
-
   <div class="col-span-6 sm:col-span-3">
-    <%= label f, :client_id, class: "block text-sm font-medium text-gray-700" %>
+    <%= label f, :client_id, class: "block text-sm font-medium text-gray-100" %>
     <%= text_input f, :client_id, class: "mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" %>
     <%= error_tag f, :client_id %>
   </div>
-
   <div class="col-span-6 sm:col-span-3">
-    <%= label f, :client_secret, class: "block text-sm font-medium text-gray-700" %>
+    <%= label f, :client_secret, class: "block text-sm font-medium text-gray-100" %>
     <%= text_input f, :client_secret, class: "mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" %>
     <%= error_tag f, :client_secret %>
   </div>
-
-  <%= label f, :active %>
-  <%= checkbox f, :active %>
-  <%= error_tag f, :active %>
-
-  <%= label f, :authorize_url %>
-  <%= text_input f, :authorize_url %>
-  <%= error_tag f, :authorize_url %>
-
-  <%= label f, :token_url %>
-  <%= text_input f, :token_url %>
-  <%= error_tag f, :token_url %>
-
-  <%= label f, :user_url %>
-  <%= text_input f, :user_url %>
-  <%= error_tag f, :user_url %>
-
-  <%= label f, :response_type %>
-  <%= text_input f, :response_type %>
-  <%= error_tag f, :response_type %>
-
-  <%= label f, :scope %>
-  <%= text_input f, :scope %>
-  <%= error_tag f, :scope %>
-
-  <%= label f, :user_path %>
-  <%= text_input f, :user_path %>
-  <%= error_tag f, :user_path %>
-
-  <%= label f, :user_id_path %>
-  <%= text_input f, :user_id_path %>
-  <%= error_tag f, :user_id_path %>
-
-  <%= label f, :user_pseudo_path %>
-  <%= text_input f, :user_pseudo_path %>
-  <%= error_tag f, :user_pseudo_path %>
-
-  <%= label f, :user_img_url %>
-  <%= text_input f, :user_img_url %>
-  <%= error_tag f, :user_img_url %>
-
-  <%= label f, :user_img_path %>
-  <%= text_input f, :user_img_path %>
-  <%= error_tag f, :user_img_path %>
+  <div class="col-span-6 sm:col-span-3">
+    <%= label f, :authorize_url, class: "block text-sm font-medium text-gray-100" %>
+    <%= text_input f, :authorize_url, class: "mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" %>
+    <%= error_tag f, :authorize_url %>
+  </div>
+  <div class="col-span-6 sm:col-span-3">
+    <%= label f, :token_url, class: "block text-sm font-medium text-gray-100" %>
+    <%= text_input f, :token_url, class: "mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" %>
+    <%= error_tag f, :token_url %>
+  </div>
+  <div class="col-span-6 sm:col-span-3">
+    <%= label f, :user_url, class: "block text-sm font-medium text-gray-100" %>
+    <%= text_input f, :user_url, class: "mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" %>
+    <%= error_tag f, :user_url %>
+  </div>
+  <div class="col-span-6 sm:col-span-3">
+    <%= label f, :response_type, class: "block text-sm font-medium text-gray-100" %>
+    <%= text_input f, :response_type, class: "mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" %>
+    <%= error_tag f, :response_type %>
+  </div>
+  <div class="col-span-6 sm:col-span-3">
+    <%= label f, :scope, class: "block text-sm font-medium text-gray-100" %>
+    <%= text_input f, :scope, class: "mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" %>
+    <%= error_tag f, :scope %>
+  </div>
+  <div class="col-span-6 sm:col-span-3">
+    <%= label f, :user_path, class: "block text-sm font-medium text-gray-100" %>
+    <%= text_input f, :user_path, class: "mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" %>
+    <%= error_tag f, :user_path %>
+  </div>
+  <div class="col-span-6 sm:col-span-3">
+    <%= label f, :user_id_path, class: "block text-sm font-medium text-gray-100" %>
+    <%= text_input f, :user_id_path, class: "mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" %>
+    <%= error_tag f, :user_id_path %>
+  </div>
+  <div class="col-span-6 sm:col-span-3">
+    <%= label f, :user_pseudo_path, class: "block text-sm font-medium text-gray-100" %>
+    <%= text_input f, :user_pseudo_path, class: "mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" %>
+    <%= error_tag f, :user_pseudo_path %>
+  </div>
+  <div class="col-span-6 sm:col-span-3">
+    <%= label f, :user_img_url, class: "block text-sm font-medium text-gray-100" %>
+    <%= text_input f, :user_img_url, class: "mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" %>
+    <%= error_tag f, :user_img_url %>
+  </div>
+  <div class="col-span-6 sm:col-span-3">
+    <%= label f, :user_img_path, class: "block text-sm font-medium text-gray-100" %>
+    <%= text_input f, :user_img_path, class: "mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" %>
+    <%= error_tag f, :user_img_path %>
+  </div>
+  <div class="col-span-6 sm:col-span-3">
+    <%= label f, :active %>
+    <%= checkbox f, :active %>
+    <%= error_tag f, :active %>
+  </div>
 </div>
-
-<%= submit "Save", phx_disable_with: "Saving..." %>
+<div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+  <button type="button" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm">
+    Deactivate
+  </button>
+  <button type="button" class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
+    Cancel
+  </button>
+</div>
+<%#= submit "Save", phx_disable_with: "Saving..." %>
 </form>
