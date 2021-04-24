@@ -82,3 +82,8 @@ iframe[src="/phoenix/live_reload/frame"] {
         display: none !important;
     }
 }
+
+.phx-loading-show { display: none; }
+.phx-loading-hide { display: block; }
+.phx-submit-loading .phx-loading-show { display: block; }
+.phx-submit-loading .phx-loading-hide { display: none; }

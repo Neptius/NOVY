@@ -1,22 +1,20 @@
-<div class="text-white flex flex-row-reverse mb-5">
-  <div>
-    <%= live_patch to: Routes.auth_provider_index_path(@socket, :new), class: "bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-3 rounded inline-flex items-center" do %>
+<div class="text-white flex flex-row-reverse mb-3">
+  <div class="flex-1 sm:flex-initial">
+    <%= live_patch to: Routes.auth_provider_index_path(@socket, :new), class: "bg-green-500 hover:bg-green-700 text-white py-2 px-3 rounded inline-flex items-center justify-center w-full" do %>
       <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
       </svg>
     <% end %>
   </div>
 </div>
-<div class="w-full bg-gray-700 rounded-lg shadow-lg overflow-x-auto">
+<div class="w-full bg-gray-700 rounded-md shadow-lg overflow-x-auto">
   <table class="table-auto min-w-full divide-y divide-gray-200 max-w-full w-full">
     <thead>
       <tr>
         <th scope="col" class="px-6 py-4 text-left text-xs font-light text-gray-200 uppercase tracking-wider text-center">Label</th>
         <th scope="col" class="px-6 py-4 text-left text-xs font-light text-gray-200 uppercase tracking-wider text-center">Method</th>
         <th scope="col" class="px-6 py-4 text-left text-xs font-light text-gray-200 uppercase tracking-wider text-center">Active</th>
-        <th scope="col" class="relative px-6 py-4">
-          <span class="sr-only">Edit</span>
-        </th>
+        <th scope="col" class="px-6 py-4 text-left text-xs font-light text-gray-200 uppercase tracking-wider text-center">Action</th>
       </tr>
     </thead>
     <tbody id="auth_providers" class="divide-y divide-gray-200">
@@ -24,11 +22,11 @@
         <tr id="auth_provider-<%= auth_provider.id %>">
           <td class="px-6 py-4 whitespace-nowrap text-sm text-white text-center"><%= auth_provider.label %></td>
           <td class="px-6 py-4 whitespace-nowrap text-sm text-white text-center"><%= auth_provider.method %></td>
-          <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
+          <td class="px-6 py-4 whitespace-nowrap text-sm text-white text-center">
             <%= if auth_provider.active do %>
-              <span class="inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-green-100 bg-green-600 rounded-full">Oui</span>
+              <span class="inline-block w-2 h-2 mr-2 bg-green-600 rounded-full"></span>Oui
             <% else %>
-              <span class="inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-red-100 bg-red-600 rounded-full">Non</span>
+              <span class="inline-block w-2 h-2 mr-2 bg-red-600 rounded-full"></span>Non
             <% end %>
           </td>
           <td class="text-center">

@@ -18,7 +18,7 @@ defmodule NovyAdmin.AuthProviderLive.Index do
 
   defp apply_action(socket, :edit, %{"id" => id}) do
     socket
-    |> assign(:page_title, "Edit Auth provider")
+    |> assign(:page_title, "Edit Auth provider ##{id}")
     |> assign(:auth_provider, AuthProvider.get_auth_provider!(id))
   end
 

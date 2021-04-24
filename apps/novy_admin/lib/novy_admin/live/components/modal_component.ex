@@ -6,16 +6,15 @@ defmodule NovyAdmin.ModalComponent do
   @impl true
   def render(assigns) do
     ~L"""
-    <div class="fixed z-50 top-0 left-0 w-full h-full bg-indigo-800">
+    <div class="fixed z-50 top-0 left-0 flex flex justify-center w-full h-full bg-black bg-opacity-40 overflow-y-auto">
 
-      <div id="<%= @id %>" class="phx-modal max-w-screen-md w-full mx-auto"
+      <div id="<%= @id %>" class="phx-modal absolute top-0 sm:top-32 max-w-screen-md w-full mx-auto bg-gray-700 shadow-lg sm:rounded-lg"
         phx-capture-click="close"
         phx-window-keydown="close"
         phx-key="escape"
         phx-target="#<%= @id %>"
         phx-page-loading>
-          <div class="phx-modal-content">
-            <%= live_patch raw("&times;"), to: @return_to, class: "phx-modal-close" %>
+          <div class="phx-modal-content p-4">
             <%= live_component @socket, @component, @opts %>
           </div>
       </div>

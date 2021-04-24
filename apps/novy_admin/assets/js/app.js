@@ -1,15 +1,15 @@
 import "../css/app.css"
 
 import "phoenix_html"
-import {Socket} from "phoenix"
+import { Socket } from "phoenix"
 import NProgress from "nprogress"
-import {LiveSocket} from "phoenix_live_view"
+import { LiveSocket } from "phoenix_live_view"
 import 'alpinejs'
 
 import { chart } from './chart.js'
 
 let Hooks = {
-  chart
+    chart
 }
 
 let csrfToken = document.querySelector("meta[name='csrf-token']").getAttribute("content")
@@ -19,9 +19,9 @@ let liveSocket = new LiveSocket("/live", Socket, {
         _csrf_token: csrfToken
     },
     dom: {
-      onBeforeElUpdated(from, to){
-        if(from.__x){ window.Alpine.clone(from.__x, to) }
-      }
+        onBeforeElUpdated(from, to) {
+            if (from.__x) { window.Alpine.clone(from.__x, to) }
+        }
     },
 })
 
