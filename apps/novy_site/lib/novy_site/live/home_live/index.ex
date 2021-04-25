@@ -27,7 +27,6 @@ defmodule NovySite.HomeLive.Index do
     {
       :ok,
       socket
-      |> assign(:current_user, session["current_user"])
       |> assign(:users, %{})
       |> handle_joins(Presence.list(@presence))
     }

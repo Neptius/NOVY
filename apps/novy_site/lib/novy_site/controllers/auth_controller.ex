@@ -4,7 +4,7 @@ defmodule NovySite.AuthController do
   alias NovySite.UserAuth
 
   def callback(conn, params) do
-    case AuthService.start_auth(params) do
+    case AuthService.start_auth(params, NovySite.Endpoint.url()) do
       {:ok, user_id} ->
         conn
         |> UserAuth.log_in_user(user_id)

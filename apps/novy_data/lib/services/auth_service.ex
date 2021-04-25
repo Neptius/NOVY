@@ -57,7 +57,7 @@ defmodule NovyData.AuthService do
   # end
 
   @doc false
-  defp format_auth_url(_auth_provider, _state) do
+  defp format_auth_url(_auth_provider, _state, _redirect_host) do
     {:error, "Méthode Invalide"}
   end
 

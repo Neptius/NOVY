@@ -12,7 +12,6 @@ defmodule NovyAdmin.Application do
       # Start a worker by calling: NovyAdmin.Worker.start_link(arg)
       # {NovyAdmin.Worker, arg}
       {Phoenix.PubSub, name: NovyAdmin.PubSub},
-
       NovyAdmin.Presence,
       # Start the Endpoint (http/https)
       NovyAdmin.Endpoint

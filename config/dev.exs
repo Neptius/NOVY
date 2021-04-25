@@ -19,10 +19,9 @@ config :novy_admin, NovyAdmin.Endpoint,
   check_origin: false,
   watchers: [
     node: [
-      "node_modules/webpack/bin/webpack.js",
-      "--mode",
-      "development",
-      "--watch-stdin",
+      "node_modules/rollup/dist/bin/rollup",
+      "--config",
+      "--watch",
       cd: Path.expand("../apps/novy_admin/assets", __DIR__)
     ]
   ],
@@ -78,10 +77,9 @@ config :novy_site, NovySite.Endpoint,
   check_origin: false,
   watchers: [
     node: [
-      "node_modules/webpack/bin/webpack.js",
-      "--mode",
-      "development",
-      "--watch-stdin",
+      "node_modules/rollup/dist/bin/rollup",
+      "--config",
+      "--watch",
       cd: Path.expand("../apps/novy_site/assets", __DIR__)
     ]
   ],

@@ -12,7 +12,11 @@ defmodule NovySite.UploadLive.Index do
     {:ok,
      socket
      |> assign(:uploaded_files, [])
-     |> allow_upload(:avatar, accept: ~w(.png .jpeg .jpg .gif .mp4), max_entries: 3, external: &presign_upload/2)}
+     |> allow_upload(:avatar,
+       accept: ~w(.png .jpeg .jpg .gif .mp4),
+       max_entries: 3,
+       external: &presign_upload/2
+     )}
   end
 
   defp presign_upload(entry, socket) do
@@ -43,15 +47,15 @@ defmodule NovySite.UploadLive.Index do
   @impl true
   def handle_event("validate", _params, socket) do
     IO.inspect("validate")
-    #* PROCESS DE VALIDATION
+    # * PROCESS DE VALIDATION
     {:noreply, socket}
   end
 
   def handle_event("save", _params, socket) do
     IO.inspect("save")
-    #* SAUVEGARDE EN BASE DE DONNÉE
+    # * SAUVEGARDE EN BASE DE DONNÉE
 
-    #* CLEAR AVATAR
+    # * CLEAR AVATAR
     consume_uploaded_entries(socket, :avatar, fn _meta, _entry -> :ok end)
     {:noreply, socket}
   end

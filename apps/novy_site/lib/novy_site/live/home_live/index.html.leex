@@ -13,7 +13,6 @@
             <%= if @current_user do %>
               <li><%= @current_user.pseudo %></li>
               <li><%= link "Log out", to: Routes.auth_path(@socket, :delete), method: :delete %></li>
-              <li><%= link "Users", to: Routes.auth_provider_index_path(@socket, :index) %></li>
             <% end %>
           </div>
         </div>
