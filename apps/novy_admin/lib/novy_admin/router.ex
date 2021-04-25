@@ -26,7 +26,7 @@ defmodule NovyAdmin.Router do
   end
 
   scope "/", NovyAdmin do
-    pipe_through [:browser]
+    pipe_through [:browser, :require_authenticated_user]
 
     live "/", DashboardLive.Index, :index
     delete "/logout", AuthController, :delete
