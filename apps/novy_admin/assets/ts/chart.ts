@@ -3,7 +3,11 @@ Chart.register(...registerables);
 
 
 export const chart = {
+    users() {
+        return this.el.dataset.users
+    },
     mounted() {
+        console.log(this.users())
         var ctx = this.el.getContext("2d");
         var chartColor = "#FFFFFF";
 

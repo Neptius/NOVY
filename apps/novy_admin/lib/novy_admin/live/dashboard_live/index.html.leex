@@ -1,6 +1,15 @@
 <div class="w-full h-80 pb-10 pt-6">
-  <canvas id="myChart" phx-hook="chart"></canvas>
+  <canvas id="myChart" phx-hook="chart" data-users="<%= @user_count %>"></canvas>
 </div>
+  <h2>Users online:</h2>
+  <%= for {user_id, user} <- @users do %>
+    <%= if user_id == to_string(@current_user.id) do %>
+      <span class="text-xs bg-green-200 rounded px-2 py-1"><%= user.pseudo %> (me)</span>
+    <% else %>
+      <span class="text-xs bg-blue-200 rounded px-2 py-1"><%= user.pseudo %></span>
+    <% end %>
+  <% end %>
+
 <div class="md:grid md:grid-cols-3 md:gap-4 space-y-4 md:space-y-0 mt-4">
   <template x-data="{inc: 5}" x-for="i in inc">
     <div class="shadow-md rounded-md bg-gray-700">
