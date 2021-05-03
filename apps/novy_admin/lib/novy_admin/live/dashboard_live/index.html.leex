@@ -1,7 +1,7 @@
 <div class="w-full h-80 pb-10 pt-6">
-  <canvas id="myChart" phx-hook="chart" data-users="<%= @user_count %>"></canvas>
+  <canvas id="myChart" phx-hook="chart"></canvas>
 </div>
-  <h2>Users online:</h2>
+  <h2 class="text-white">Users online:</h2>
   <%= for {user_id, user} <- @users do %>
     <%= if user_id == to_string(@current_user.id) do %>
       <span class="text-xs bg-green-200 rounded px-2 py-1"><%= user.pseudo %> (me)</span>
@@ -9,10 +9,28 @@
       <span class="text-xs bg-blue-200 rounded px-2 py-1"><%= user.pseudo %></span>
     <% end %>
   <% end %>
+  <h2 class="text-white">Visitor: <%= @visitors %></h2>
 
 <div class="md:grid md:grid-cols-3 md:gap-4 space-y-4 md:space-y-0 mt-4">
+  <div class="shadow-md flex justify-item-center rounded-md bg-gray-700">
+    <div class="flex items-center space-x-4 px-5 py-4">
+      <div class="shadow-md p-3 bg-red-700 text-white rounded-md mt-1 mr-1">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+        </svg>
+      </div>
+      <div class="flex-1">
+        <p class="text-gray-400 uppercase">Visiteurs</p>
+        <div class="flex items-baseline space-x-4">
+          <h2 class="text-3xl text-white font-semibold">
+            <%= @visitors %>
+          </h2>
+        </div>
+      </div>
+    </div>
+  </div>
   <template x-data="{inc: 5}" x-for="i in inc">
-    <div class="shadow-md rounded-md bg-gray-700">
+    <div class="shadow-md flex justify-item-center rounded-md bg-gray-700">
       <div class="flex items-center space-x-4 px-5 py-4">
         <div class="shadow-md p-3 bg-red-700 text-white rounded-md mt-1 mr-1">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">

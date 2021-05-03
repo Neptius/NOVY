@@ -3,11 +3,12 @@ Chart.register(...registerables);
 
 
 export const chart = {
-    users() {
-        return this.el.dataset.users
-    },
+    guest: 0,
     mounted() {
-        console.log(this.users())
+        this.handleEvent("points", ({points}) => {
+            this.guest = points
+        })
+
         var ctx = this.el.getContext("2d");
         var chartColor = "#FFFFFF";
 
@@ -24,7 +25,7 @@ export const chart = {
             labels: [],
             data: {
                 datasets: [{
-                    label: "Data",
+                    label: "Visiteurs",
                     borderColor: chartColor,
                     pointBorderColor: chartColor,
                     pointBackgroundColor: "#1e3d60",
@@ -42,6 +43,7 @@ export const chart = {
                 }]
             },
             options: {
+                maintainAspectRatio: false,
                 layout: {
                     padding: {
                         left: 20,
@@ -50,8 +52,6 @@ export const chart = {
                         bottom: 0
                     }
                 },
-                maintainAspectRatio: false,
-                responsive: true,
                 plugins: {
                     legend: {
                         position: "bottom",
@@ -116,7 +116,7 @@ export const chart = {
             let labels = chart.data.labels;
 
             labels.push("");
-            datas.push(0);
+            datas.push(this.guest);
 
             if (datas.length >= 20) {
                 labels.shift()

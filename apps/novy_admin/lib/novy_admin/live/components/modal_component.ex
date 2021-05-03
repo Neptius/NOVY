@@ -6,9 +6,9 @@ defmodule NovyAdmin.ModalComponent do
   @impl true
   def render(assigns) do
     ~L"""
-    <div class="fixed z-50 top-0 left-0 flex flex justify-center w-full h-full bg-black bg-opacity-40 overflow-y-auto">
+    <div class="fixed z-50 top-0 left-0 w-full h-full bg-black bg-opacity-40 overflow-x-hidden overflow-y-auto">
 
-      <div id="<%= @id %>" class="phx-modal absolute top-0 sm:top-32 max-w-screen-md w-full mx-auto bg-gray-700 shadow-lg sm:rounded-lg"
+      <div id="<%= @id %>" class="phx-modal relative my-0 sm:my-16 max-w-screen-md w-full mx-auto bg-gray-700 shadow-lg sm:rounded-lg"
         phx-capture-click="close"
         phx-window-keydown="close"
         phx-key="escape"

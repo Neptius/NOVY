@@ -5,9 +5,10 @@ defmodule NovyAdmin.DashboardLive.Index do
 
   alias NovyAdmin.Presence
   alias NovyAdmin.PubSub
+  alias UUID
 
-
-  @presence "tutorial:presence"
+  @presence_user "users:online"
+  @presence_guest "users:guest"
 
   @impl true
   def mount(_params, session, socket) do
@@ -15,35 +16,28 @@ defmodule NovyAdmin.DashboardLive.Index do
 
     if connected?(socket) do
       user = socket.assigns.current_user
+
       {:ok, _} =
-        Presence.track(self(), "users:online", user.id, %{
+        Presence.track(self(), @presence_user, user.id, %{
           pseudo: user.pseudo,
           joined_at: inspect(System.system_time(:second))
         })
 
-      Phoenix.PubSub.subscribe(PubSub, "users:online")
+      Phoenix.PubSub.subscribe(PubSub, @presence_user)
 
-      {:ok, _} =
-        Presence.track(self(), "users:count", user.id, %{
-          pseudo: user.pseudo,
-          joined_at: inspect(System.system_time(:second))
-        })
+      {:ok, _} = Presence.track(self(), @presence_guest, UUID.uuid4(), %{})
 
-      Phoenix.PubSub.subscribe(PubSub, "users:count")
-
-
-
-
+      Phoenix.PubSub.subscribe(PubSub, @presence_guest)
     end
-
 
     {
       :ok,
       socket
       |> assign(:user, socket.assigns.current_user)
       |> assign(:users, %{})
-      |> assign(:user_count, 0)
-      |> handle_joins(Presence.list(@presence))
+      |> assign(:visitors, 0)
+      |> handle_joins(Presence.list(@presence_user))
+      |> handle_guest_joins(Presence.list(@presence_guest))
     }
   end
 
@@ -60,17 +54,29 @@ defmodule NovyAdmin.DashboardLive.Index do
 
   # * Presence
   @impl true
-  def handle_info(%Phoenix.Socket.Broadcast{event: "presence_diff", payload: diff}, socket) do
-    IO.inspect("handle_info")
-    IO.inspect(diff.leaves)
-    IO.inspect(diff.joins)
+  def handle_info(
+        %Phoenix.Socket.Broadcast{event: "presence_diff", payload: diff, topic: @presence_user},
+        socket
+      ) do
     {
       :noreply,
       socket
       |> handle_leaves(diff.leaves)
       |> handle_joins(diff.joins)
+    }
+  end
 
-      #|> push_event("points", %{points: new_points})}
+  @impl true
+  def handle_info(
+        %Phoenix.Socket.Broadcast{event: "presence_diff", payload: diff, topic: @presence_guest},
+        socket
+      ) do
+    {
+      :noreply,
+      socket
+      |> handle_guest_leaves(diff.leaves)
+      |> handle_guest_joins(diff.joins)
+      |> push_event("points", %{points: socket.assigns.visitors + map_size(diff.joins) - map_size(diff.leaves)})
     }
   end
 
@@ -84,5 +90,13 @@ defmodule NovyAdmin.DashboardLive.Index do
     Enum.reduce(leaves, socket, fn {user, _}, socket ->
       assign(socket, :users, Map.delete(socket.assigns.users, user))
     end)
+  end
+
+  defp handle_guest_joins(socket, joins) do
+    assign(socket, :visitors, socket.assigns.visitors + map_size(joins))
+  end
+
+  defp handle_guest_leaves(socket, leaves) do
+    assign(socket, :visitors, socket.assigns.visitors - map_size(leaves))
   end
 end
