@@ -50,6 +50,7 @@ defmodule NovySite.MixProject do
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"},
       {:elixir_uuid, "~> 1.2"},
+      {:novy_admin, in_umbrella: true},
       {:novy_data, in_umbrella: true}
     ]
   end
