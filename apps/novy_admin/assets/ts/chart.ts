@@ -71,7 +71,9 @@ export const chart = {
                 },
                 scales: {
                     y: {
+                        beginAtZero: true,
                         ticks: {
+                            precision: 0,
                             color: "rgba(255,255,255,0.4)",
                             fontStyle: "bold",
                             beginAtZero: true,
@@ -124,6 +126,6 @@ export const chart = {
             }
 
             chart.update();
-        }, 500);
+        }, 1000);
     }
 }

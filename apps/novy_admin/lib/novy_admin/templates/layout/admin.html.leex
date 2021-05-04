@@ -7,7 +7,7 @@
     phx-value-key="error"><%= live_flash(@flash, :error) %></p>
   <%= live_component @socket, NovyAdmin.AdminComponent.Header, assigns %>
   <%= live_component @socket, NovyAdmin.AdminComponent.Aside, assigns %>
-  <main id="main" class="main relative overflow-auto w-full bg-gray-800 p-5" :class="{'nav-open': sidenavOpen }">
+  <main id="main" class="main relative overflow-auto w-full bg-gray-800 py-5 pr-5 pl-5 lg:pl-0" :class="{'nav-open': sidenavOpen }">
     <%= @inner_content %>
   </main>
   <%= live_component @socket, NovyAdmin.AdminComponent.Footer, assigns %>

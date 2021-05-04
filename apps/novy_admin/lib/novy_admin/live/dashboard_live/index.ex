@@ -5,7 +5,6 @@ defmodule NovyAdmin.DashboardLive.Index do
 
   alias NovyAdmin.Presence
   alias NovyAdmin.PubSub
-  alias UUID
 
   @presence_user "users:online"
   @presence_guest "users:guest"
@@ -24,9 +23,6 @@ defmodule NovyAdmin.DashboardLive.Index do
         })
 
       Phoenix.PubSub.subscribe(PubSub, @presence_user)
-
-      {:ok, _} = Presence.track(self(), @presence_guest, UUID.uuid4(), %{})
-
       Phoenix.PubSub.subscribe(PubSub, @presence_guest)
     end
 
@@ -38,6 +34,7 @@ defmodule NovyAdmin.DashboardLive.Index do
       |> assign(:visitors, 0)
       |> handle_joins(Presence.list(@presence_user))
       |> handle_guest_joins(Presence.list(@presence_guest))
+      |> push_event("points", %{points: 0 + map_size(Presence.list(@presence_guest))})
     }
   end
 
@@ -76,7 +73,9 @@ defmodule NovyAdmin.DashboardLive.Index do
       socket
       |> handle_guest_leaves(diff.leaves)
       |> handle_guest_joins(diff.joins)
-      |> push_event("points", %{points: socket.assigns.visitors + map_size(diff.joins) - map_size(diff.leaves)})
+      |> push_event("points", %{
+        points: socket.assigns.visitors + map_size(diff.joins) - map_size(diff.leaves)
+      })
     }
   end
 

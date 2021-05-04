@@ -1,16 +1,15 @@
 <div class="w-full h-80 pb-10 pt-6">
-  <canvas id="myChart" phx-hook="chart"></canvas>
+  <canvas id="myChart" class="-ml-6" phx-hook="chart" phx-update="ignore"></canvas>
 </div>
-  <h2 class="text-white">Users online:</h2>
-  <%= for {user_id, user} <- @users do %>
-    <%= if user_id == to_string(@current_user.id) do %>
-      <span class="text-xs bg-green-200 rounded px-2 py-1"><%= user.pseudo %> (me)</span>
-    <% else %>
-      <span class="text-xs bg-blue-200 rounded px-2 py-1"><%= user.pseudo %></span>
-    <% end %>
+<h2 class="text-white">Users online:</h2>
+<%= for {user_id, user} <- @users do %>
+  <%= if user_id == to_string(@current_user.id) do %>
+    <span class="text-xs bg-green-200 rounded px-2 py-1"><%= user.pseudo %> (me)</span>
+  <% else %>
+    <span class="text-xs bg-blue-200 rounded px-2 py-1"><%= user.pseudo %></span>
   <% end %>
-  <h2 class="text-white">Visitor: <%= @visitors %></h2>
-
+<% end %>
+<h2 class="text-white">Visitor: <%= @visitors %></h2>
 <div class="md:grid md:grid-cols-3 md:gap-4 space-y-4 md:space-y-0 mt-4">
   <div class="shadow-md flex justify-item-center rounded-md bg-gray-700">
     <div class="flex items-center space-x-4 px-5 py-4">
@@ -38,7 +37,7 @@
           </svg>
         </div>
         <div class="flex-1">
-          <p class="text-gray-400 uppercase">Nombre d'utilisateur</p>
+          <p class="text-gray-400 uppercase">Utilisateur</p>
           <div class="flex items-baseline space-x-4">
             <h2 class="text-3xl text-white font-semibold">
               999 999
