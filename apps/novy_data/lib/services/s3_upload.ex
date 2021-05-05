@@ -13,17 +13,20 @@ defmodule NovyData.S3Upload do
   Returns a map of form fields to be used on the client via the JavaScript `FormData` API.
 
   ## Options
+
     * `:key` - The required key of the object to be uploaded.
     * `:max_file_size` - The required maximum allowed file size in bytes.
     * `:content_type` - The required MIME type of the file to be uploaded.
-    * `:expires_in` - The required expiration time in milliseconds from now
-      before the signed upload expires.
+    * `:expires_in` - The required expiration time in milliseconds from now before the signed upload expires.
+
   ## Examples
+
       config = %{
         region: "us-east-1",
         access_key_id: System.fetch_env!("AWS_ACCESS_KEY_ID"),
         secret_access_key: System.fetch_env!("AWS_SECRET_ACCESS_KEY")
       }
+
       {:ok, fields} =
         SimpleS3Upload.sign_form_upload(config, "my-bucket",
           key: "public/my-file-name",

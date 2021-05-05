@@ -15,7 +15,8 @@ defmodule NovySite.MixProject do
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
       deps: deps(),
-      test_coverage: [tool: ExCoveralls]
+      test_coverage: [tool: ExCoveralls],
+      name: "Novy Site"
     ]
   end
 
