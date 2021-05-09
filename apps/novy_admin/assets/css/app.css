@@ -5,85 +5,111 @@
 @tailwind utilities;
 
 iframe[src="/phoenix/live_reload/frame"] {
-    display: none;
+  display: none;
 }
 
 @font-face {
-    font-family: "Orbitron";
-    src: url("/fonts/Orbitron/static/Orbitron-Regular.ttf");
-    font-display: swap;
+  font-family: "Orbitron";
+  src: url("/fonts/Orbitron/static/Orbitron-Regular.ttf");
+  font-display: swap;
 }
 
 @font-face {
-    font-family: "Orbitron";
-    src: url("/fonts/Orbitron/static/Orbitron-Bold.ttf");
-    font-weight: bold;
-    font-display: swap;
+  font-family: "Orbitron";
+  src: url("/fonts/Orbitron/static/Orbitron-Bold.ttf");
+  font-weight: bold;
+  font-display: swap;
 }
 
 @font-face {
-    font-family: "Michroma";
-    src: url("/fonts/Michroma/Michroma-Regular.ttf");
-    font-display: swap;
+  font-family: "Michroma";
+  src: url("/fonts/Michroma/Michroma-Regular.ttf");
+  font-display: swap;
 }
 
 .orbitron {
-    font-family: 'Orbitron', sans-serif;
+  font-family: "Orbitron", sans-serif;
 }
 
 .michroma {
-    font-family: 'Michroma', sans-serif;
+  font-family: "Michroma", sans-serif;
 }
 
 .wrapper {
-    grid-template-columns: 1fr;
-    grid-template-rows: 64px 1fr 64px;
-    grid-template-areas: 'header' 'main' 'footer';
+  grid-template-columns: 1fr;
+  grid-template-rows: 64px 1fr 64px;
+  grid-template-areas: "header" "main" "footer";
 }
 
 .header {
-    grid-area: header;
+  grid-area: header;
 }
 
 .sidenav {
-    grid-area: sidenav;
-    transform: translateX(-256px);
-    @apply transition duration-500 ease-in-out;
+  grid-area: sidenav;
+  transform: translateX(-256px);
+  @apply transition duration-500 ease-in-out;
 }
 
 .sidenav-backdrop.nav-open {
-    display: block;
+  display: block;
 }
 
 .sidenav.nav-open {
-    transform: translateX(0);
+  transform: translateX(0);
 }
 
 .main {
-    grid-area: main;
+  grid-area: main;
 }
 
 .footer {
-    grid-area: footer;
+  grid-area: footer;
 }
 
 @media (min-width: 1024px) {
-    /* Show the sidenav */
-    .wrapper {
-        grid-template-columns: 256px 1fr;
-        grid-template-areas: "sidenav header" "sidenav main" "sidenav footer";
-    }
-    .sidenav {
-        position: relative;
-        transform: translateX(0);
-        transition: none !important;
-    }
-    .sidenav-backdrop.nav-open {
-        display: none !important;
-    }
+  /* Show the sidenav */
+  .wrapper {
+    grid-template-columns: 256px 1fr;
+    grid-template-areas: "sidenav header" "sidenav main" "sidenav footer";
+  }
+  .sidenav {
+    position: relative;
+    transform: translateX(0);
+    transition: none !important;
+  }
+  .sidenav-backdrop.nav-open {
+    display: none !important;
+  }
 }
 
-.phx-loading-show { display: none; }
-.phx-loading-hide { display: block; }
-.phx-submit-loading .phx-loading-show { display: block; }
-.phx-submit-loading .phx-loading-hide { display: none; }
+.phx-loading-show {
+  display: none;
+}
+.phx-loading-hide {
+  display: block;
+}
+.phx-submit-loading .phx-loading-show {
+  display: block;
+}
+.phx-submit-loading .phx-loading-hide {
+  display: none;
+}
+
+@layer components {
+  .nv-alert {
+    @apply fixed md:top-2 w-full md:w-auto md:left-1/2 md:transform md:-translate-x-1/2;
+  }
+
+  .nv-alert > .nv-alert-content {
+    @apply p-2 bg-indigo-800 items-center text-indigo-100 leading-none md:rounded-full flex md:inline-flex;
+  }
+
+  .nv-alert > .nv-alert-content > .nv-alert-badge {
+    @apply flex rounded-full bg-indigo-500 uppercase px-2 py-1 text-xs font-bold mr-3;
+  }
+
+  .nv-alert > .nv-alert-content > .nv-alert-text {
+    @apply font-semibold mr-2 text-left flex-auto;
+  }
+}
