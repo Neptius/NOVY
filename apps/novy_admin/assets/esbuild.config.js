@@ -2,7 +2,8 @@ const path = require("path");
 const esbuild = require('esbuild')
 const fs = require('fs-extra');
 const autoprefixer = require("autoprefixer");
-const postCssPlugin = require("@deanc/esbuild-plugin-postcss");
+// const postCssPlugin = require("@deanc/esbuild-plugin-postcss");
+const postCssPlugin = require("esbuild-plugin-postcss2").default;
 const tailwindcss = require("tailwindcss");
 
 const outdir = "./dist/"
@@ -35,6 +36,12 @@ esbuild.build({
     },
     external: ['*.ttf'],
     plugins: [
-        startPlugin
+        startPlugin,
+        postCssPlugin({
+            plugins: [
+                autoprefixer,
+                tailwindcss
+            ]
+        })
     ]
 }).catch((e) => console.error(e.message));

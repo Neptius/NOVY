@@ -10,6 +10,7 @@ specifiers:
   alpinejs: ^2.8.2
   autoprefixer: ^10.1.0
   chart.js: ^3.1.0
+  esbuild: ^0.11.20
   esbuild-plugin-postcss2: ^0.0.9
   fs-extra: ^10.0.0
   nprogress: ^0.2.0
@@ -40,10 +41,11 @@ dependencies:
 
 devDependencies:
   '@chialab/esbuild-plugin-postcss': 0.5.7
-  '@deanc/esbuild-plugin-postcss': 1.0.1
+  '@deanc/esbuild-plugin-postcss': 1.0.1_esbuild@0.11.20
   '@rollup/plugin-commonjs': 18.0.0_rollup@2.45.2
   '@rollup/plugin-node-resolve': 11.2.1_rollup@2.45.2
   '@rollup/plugin-typescript': 8.2.1_d21869dc49fccc93d6599238c3a50ee6
+  esbuild: 0.11.20
   esbuild-plugin-postcss2: 0.0.9
   fs-extra: 10.0.0
   postcss: 8.2.12
@@ -108,13 +110,14 @@ packages:
       - postcss
     dev: true
 
-  /@deanc/esbuild-plugin-postcss/1.0.1:
+  /@deanc/esbuild-plugin-postcss/1.0.1_esbuild@0.11.20:
     resolution: {integrity: sha512-FsncwD6VaagW92dFLHTcigotIQy2f1fTI2iaGiNgE/qRjd0ymZYEv7nrQWuDTtiwAcveigmWhKjdtHsY6aBt+A==}
     peerDependencies:
       esbuild: ^0.8.32
     dependencies:
       autoprefixer: 10.2.5_postcss@8.2.14
       css-tree: 1.1.3
+      esbuild: 0.11.20
       fs-extra: 9.1.0
       postcss: 8.2.14
       tmp: 0.2.1
@@ -1002,6 +1005,12 @@ packages:
       sass: 1.32.12
       stylus: 0.54.8
       tmp: 0.2.1
+    dev: true
+
+  /esbuild/0.11.20:
+    resolution: {integrity: sha512-QOZrVpN/Yz74xfat0H6euSgn3RnwLevY1mJTEXneukz1ln9qB+ieaerRMzSeETpz/UJWsBMzRVR/andBht5WKw==}
+    hasBin: true
+    requiresBuild: true
     dev: true
 
   /escalade/3.1.1:
