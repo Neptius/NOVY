@@ -43,7 +43,12 @@ module.exports = {
     metafile: false,
     minify: false,
     sourcemap: 'both',
-    watch: true,
+    watch: {
+        onRebuild(error, result) {
+            if (error) console.error('watch build failed:', error)
+            else console.log('watch build succeeded:', result)
+        },
+    },
     color: true,
     format: 'iife',
     outdir,
