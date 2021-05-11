@@ -1,0 +1,131 @@
+<div class="w-full h-80 pb-10 pt-6">
+  <canvas id="myChart" class="-ml-6" phx-hook="chart" phx-update="ignore"></canvas>
+</div>
+<h2 class="text-white">Users online:</h2>
+<%= for {user_id, user} <- @users do %>
+  <%= if user_id == to_string(@current_user.id) do %>
+    <span class="text-xs bg-green-200 rounded px-2 py-1"><%= user.pseudo %> (me)</span>
+  <% else %>
+    <span class="text-xs bg-blue-200 rounded px-2 py-1"><%= user.pseudo %></span>
+  <% end %>
+<% end %>
+<h2 class="text-white">Visitor: <%= @visitors %></h2>
+<div class="md:grid md:grid-cols-3 md:gap-4 space-y-4 md:space-y-0 mt-4">
+  <div class="shadow-md flex justify-item-center rounded-md bg-gray-700">
+    <div class="flex items-center space-x-4 px-5 py-4">
+      <div class="shadow-md p-3 bg-red-700 text-white rounded-md mt-1 mr-1">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+        </svg>
+      </div>
+      <div class="flex-1">
+        <p class="text-gray-400 uppercase">Visiteurs</p>
+        <div class="flex items-baseline space-x-4">
+          <h2 class="text-3xl text-white font-semibold">
+            <%= @visitors %>
+          </h2>
+        </div>
+      </div>
+    </div>
+  </div>
+  <template x-data="{inc: 5}" x-for="i in inc">
+    <div class="shadow-md flex justify-item-center rounded-md bg-gray-700">
+      <div class="flex items-center space-x-4 px-5 py-4">
+        <div class="shadow-md p-3 bg-red-700 text-white rounded-md mt-1 mr-1">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+          </svg>
+        </div>
+        <div class="flex-1">
+          <p class="text-gray-400 uppercase">Utilisateur</p>
+          <div class="flex items-baseline space-x-4">
+            <h2 class="text-3xl text-white font-semibold">
+              999 999
+            </h2>
+          </div>
+        </div>
+      </div>
+    </div>
+  </template>
+</div>
+<div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8 text-white">
+  <!-- Replace with your content -->
+  <div class="container">
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tempus turpis et felis sodales
+    condimentum. Donec efficitur odio eget posuere gravida. Etiam ut felis dui. Suspendisse pretium
+    non ipsum et posuere. Curabitur in mi vestibulum, semper nunc ac, sagittis erat. Vivamus in
+    consectetur justo. Integer malesuada blandit posuere. Nullam posuere facilisis felis vel
+    pretium. In ut facilisis quam, eleifend vulputate arcu. Lorem ipsum dolor sit amet, consectetur
+    adipiscing elit. Cras sit amet accumsan arcu. Curabitur magna dui, semper id odio eget,
+    consequat mollis nulla. Maecenas finibus lorem non suscipit pellentesque. Vestibulum ornare quam
+    nulla, non accumsan purus ornare ac.
+    Proin vestibulum nisl id magna mattis condimentum. Lorem ipsum dolor sit amet, consectetur
+    adipiscing elit. Sed luctus erat porttitor felis vulputate imperdiet non ac tortor. Aenean non
+    nunc sed dui egestas tristique eu eu augue. Vestibulum ullamcorper lacus ex, ut finibus neque
+    viverra quis. Vivamus vel felis ut magna vulputate dictum vitae eget turpis. In hac habitasse
+    platea dictumst. Nulla turpis ipsum, tincidunt vitae massa quis, dapibus tincidunt ligula. Donec
+    suscipit tempor leo, non lacinia dolor gravida quis. Phasellus a ultricies turpis, eu cursus mi.
+    Fusce sapien dolor, suscipit vitae ex suscipit, blandit volutpat velit. Nullam ut pulvinar nibh.
+    Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
+    Maecenas quis sem interdum, volutpat purus a, scelerisque nibh. Maecenas ac gravida lectus.
+    Morbi ultricies, odio ac condimentum dapibus, nisl lorem maximus velit, ut viverra odio felis
+    non enim. Etiam et tempus massa, in finibus urna. Vestibulum quis sapien nunc. Mauris finibus
+    quam quis urna elementum, in efficitur quam interdum. Sed malesuada purus nisi, porttitor
+    vehicula nisl condimentum non. Pellentesque bibendum laoreet velit. Nulla a gravida turpis. Duis
+    venenatis mi libero, ac elementum odio sollicitudin ac.
+    Aliquam pulvinar massa non sem euismod efficitur. Maecenas facilisis convallis tortor eu
+    pulvinar. Mauris porttitor, erat vitae imperdiet bibendum, felis arcu rutrum nibh, vitae
+    tincidunt nisl turpis quis nulla. Nulla molestie commodo nunc vitae sodales. Maecenas justo
+    lorem, vestibulum id risus et, fringilla condimentum felis. Donec sed urna porttitor mi
+    vestibulum egestas sit amet in justo. Morbi et felis egestas, posuere metus a, suscipit lorem.
+    Proin sem diam, ornare vel leo vel, semper placerat orci. Maecenas nec nunc enim. Phasellus
+    dictum auctor erat quis interdum. Sed sit amet enim varius, convallis nisi ut, dignissim mauris.
+    Sed gravida urna diam, quis mattis lorem rutrum eget. Mauris at nibh mi. Cras consequat iaculis
+    ante sed faucibus. Morbi dictum convallis eleifend.
+    Etiam vestibulum gravida augue facilisis facilisis. Vivamus nisi mi, maximus non nisl quis,
+    pretium interdum leo. Morbi posuere purus libero, vitae sodales dui congue eu. Nulla hendrerit
+    dictum iaculis. Pellentesque sem leo, imperdiet id dignissim in, aliquet sed turpis. In dapibus
+    in nisl eu tempus. Curabitur lacinia ut lacus eu mollis. Integer eu diam id ligula tincidunt
+    aliquam non et mi. Duis urna nibh, ullamcorper ut convallis sit amet, tempor eu erat. Proin
+    elementum egestas urna id commodo. Vestibulum ac fringilla tortor. Nullam pharetra enim
+    fringilla, placerat sapien eget, iaculis turpis. Quisque magna massa, dignissim sit amet libero
+    ac, cursus laoreet ligula.
+    Nullam pulvinar nec nunc et vulputate. Pellentesque ut urna aliquet, congue quam id, venenatis
+    dolor. Vivamus consequat sem gravida, semper lectus et, lacinia metus. Integer non nunc enim.
+    Duis elementum finibus mi sit amet tempor. Interdum et malesuada fames ac ante ipsum primis in
+    faucibus. Aliquam feugiat, nibh eget sodales posuere, nisl turpis rutrum ligula, sed interdum
+    quam eros vitae dolor. Vestibulum blandit mi massa, id porttitor enim bibendum non. Curabitur eu
+    dolor vitae metus condimentum auctor.
+    Nullam in mi luctus, mattis magna quis, hendrerit diam. Class aptent taciti sociosqu ad litora
+    torquent per conubia nostra, per inceptos himenaeos. Nunc dapibus varius libero, in auctor urna
+    pharetra vitae. Fusce tincidunt lectus libero, semper condimentum enim lacinia eget. Vivamus ut
+    felis hendrerit, imperdiet elit ut, viverra turpis. Nam tempus vel enim vitae auctor. Morbi
+    efficitur, tellus et ornare bibendum, lectus ligula iaculis nibh, sit amet posuere nibh nisi at
+    massa. Nam venenatis bibendum urna. Cras erat metus, aliquam id dolor a, iaculis consequat
+    metus.
+    Duis sapien tortor, ultrices a viverra vitae, tincidunt eget nulla. Nunc quis sodales mauris.
+    Phasellus dolor libero, luctus tristique tellus in, consectetur commodo lectus. Duis accumsan
+    ultricies odio, vitae molestie justo scelerisque blandit. Mauris a auctor erat. Etiam sit amet
+    fringilla erat. Quisque tempus, risus vitae faucibus vulputate, libero quam ornare nisl, sit
+    amet euismod diam ex in tellus. Fusce eu mi ut ligula elementum placerat. Morbi bibendum velit
+    et justo pretium, eu pharetra nulla auctor. Proin condimentum lacus quis tellus finibus dictum.
+    Duis feugiat non est in interdum. Praesent pellentesque ex quis placerat bibendum. Aenean vitae
+    ante ac elit ornare elementum. Mauris aliquet tortor et turpis lacinia scelerisque. Fusce sed
+    dapibus risus, at condimentum risus.
+    Phasellus quis urna vitae sapien posuere tincidunt. Proin sollicitudin, neque ut finibus dictum,
+    lacus quam porttitor mi, sed bibendum mi nulla eget sapien. Duis commodo ex odio, ullamcorper
+    mollis felis laoreet non. Maecenas semper dapibus nulla, non tincidunt lectus scelerisque sit
+    amet. Quisque dictum eros diam, eu sagittis libero sollicitudin vehicula. Morbi vitae
+    scelerisque felis, euismod sodales nulla. Donec nibh turpis, fringilla a magna at, dapibus
+    semper arcu. Pellentesque suscipit efficitur elit, sit amet interdum velit tincidunt non. Nunc
+    dignissim nunc odio, ac efficitur lectus semper in. Praesent vitae massa nec augue suscipit
+    ornare vitae sed dolor.
+    Vestibulum pulvinar, turpis quis luctus blandit, ex lorem faucibus arcu, sed mattis ante nisi
+    placerat ligula. Praesent luctus eros tortor, sit amet suscipit dui porta sodales. Cras
+    tristique volutpat faucibus. Sed a mollis ex. Donec fermentum dignissim rutrum. Morbi non
+    sollicitudin nisi. Mauris eget nunc urna. Vestibulum at tellus nec nisl cursus varius quis vitae
+    nibh. Aenean sit amet metus at turpis vehicula dignissim. Mauris in accumsan est, et aliquam
+    augue. Vestibulum eu velit in urna tincidunt pharetra.
+    <!-- /End replace -->
+  </div>
+</div>

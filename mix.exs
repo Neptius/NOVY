@@ -24,7 +24,8 @@ defmodule Novy.Umbrella.MixProject do
             novy_admin: :permanent
           ]
         ]
-      ]
+      ],
+      name: "Novy"
     ]
   end
 
@@ -43,7 +44,8 @@ defmodule Novy.Umbrella.MixProject do
   defp deps do
     [
       {:excoveralls, "~> 0.10", only: :test},
-      {:credo, "~> 1.5", only: [:dev, :test], runtime: false}
+      {:credo, "~> 1.5", only: [:dev, :test], runtime: false},
+      {:ex_doc, "~> 0.24", only: :dev, runtime: false}
     ]
   end
 

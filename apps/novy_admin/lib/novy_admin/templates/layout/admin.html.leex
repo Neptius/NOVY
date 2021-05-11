@@ -1,0 +1,25 @@
+<div id="wrapper" x-data="{ sidenavOpen: false }" class="wrapper grid relative h-screen w-screen overflow-none bg-gray-800 border-t-2 border-red-600">
+  <p class="alert alert-info" role="alert"
+    phx-click="lv:clear-flash"
+    phx-value-key="info"><%= live_flash(@flash, :info) %></p>
+  <p class="alert alert-danger" role="alert"
+    phx-click="lv:clear-flash"
+    phx-value-key="error"><%= live_flash(@flash, :error) %></p>
+
+  <%= if @static_changed? do %>
+    <div class="nv-alert">
+      <div class="nv-alert-content">
+        <span class="nv-alert-badge">Info</span>
+        <span class="nv-alert-text">The app has been updated. Click here to <a href="#" onclick="window.location.reload()">reload</a>.</span>
+        <svg class="fill-current opacity-75 h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"/></svg>
+      </div>
+    </div>
+  <% end %>
+
+  <%= live_component @socket, NovyAdmin.AdminComponent.Header, assigns %>
+  <%= live_component @socket, NovyAdmin.AdminComponent.Aside, assigns %>
+  <main id="main" class="main relative overflow-auto w-full bg-gray-800 p-5" :class="{'nav-open': sidenavOpen }">
+    <%= @inner_content %>
+  </main>
+  <%= live_component @socket, NovyAdmin.AdminComponent.Footer, assigns %>
+</div>

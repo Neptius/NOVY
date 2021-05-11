@@ -19,9 +19,7 @@ config :novy_admin, NovyAdmin.Endpoint,
   check_origin: false,
   watchers: [
     node: [
-      "node_modules/snowpack/index.bin.js",
-      "build",
-      "--watch",
+      "./esbuild.dev.js",
       cd: Path.expand("../apps/novy_admin/assets", __DIR__)
     ]
   ],
@@ -77,10 +75,7 @@ config :novy_site, NovySite.Endpoint,
   check_origin: false,
   watchers: [
     node: [
-      "node_modules/webpack/bin/webpack.js",
-      "--mode",
-      "development",
-      "--watch-stdin",
+      "./esbuild.dev.js",
       cd: Path.expand("../apps/novy_site/assets", __DIR__)
     ]
   ],
@@ -159,15 +154,6 @@ config :novy_api, NovyApi.Endpoint,
 # If desired, both `http:` and `https:` keys can be
 # configured to run both http and https servers on
 # different ports.
-
-# Configure your database
-config :novy_data, NovyData.Repo,
-  username: "postgres",
-  password: "pass",
-  database: "novy_db_dev",
-  hostname: "localhost",
-  show_sensitive_data_on_connection_error: true,
-  pool_size: 10
 
 # Do not include metadata nor timestamps in development logs
 config :logger, :console, format: "[$level] $message\n"

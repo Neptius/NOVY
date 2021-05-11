@@ -45,9 +45,11 @@ defmodule NovyAdmin do
   def live_view do
     quote do
       use Phoenix.LiveView,
-        layout: {NovyAdmin.LayoutView, "live.html"}
+        layout: {NovyAdmin.LayoutView, "admin.html"}
 
       unquote(view_helpers())
+
+      import NovyAdmin.LiveHelpers
     end
   end
 

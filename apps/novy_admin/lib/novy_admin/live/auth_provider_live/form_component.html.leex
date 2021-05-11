@@ -1,0 +1,115 @@
+<div class="flex justify-between">
+  <div>
+    <h1 class="text-white uppercase"><%= @title %></h1>
+  </div>
+  <%= live_patch to: @return_to, class: "phx-modal-close text-white" do %>
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+    </svg>
+  <% end %>
+</div>
+<%= f = form_for @changeset, "#",
+  id: "auth_provider-form",
+  class: "my-4",
+  phx_target: @myself,
+  phx_change: "validate",
+  phx_submit: "save" %>
+<div class="grid grid-cols-6 gap-6">
+  <div class="col-span-6 sm:col-span-3">
+    <%= label f, :label, class: "block text-sm font-medium text-gray-100" %>
+    <%= text_input f, :label, class: "mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" %>
+    <%= error_tag f, :label %>
+  </div>
+  <div class="col-span-6 sm:col-span-3">
+    <%= label f, :method, class: "block text-sm font-medium text-gray-100" %>
+    <%= select f, :method, ["oauth2"], class: "mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" %>
+    <%= error_tag f, :method %>
+  </div>
+  <div class="col-span-6 sm:col-span-6">
+    <%= label f, :active, class: "block text-sm font-medium text-gray-100" %>
+    <%= checkbox f, :active %>
+    <%= error_tag f, :active %>
+  </div>
+  <div class="col-span-6 sm:col-span-3">
+    <%= label f, :client_id, class: "block text-sm font-medium text-gray-100" %>
+    <%= text_input f, :client_id, class: "mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" %>
+    <%= error_tag f, :client_id %>
+  </div>
+  <div class="col-span-6 sm:col-span-3">
+    <%= label f, :client_secret, class: "block text-sm font-medium text-gray-100" %>
+    <%= text_input f, :client_secret, class: "mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" %>
+    <%= error_tag f, :client_secret %>
+  </div>
+  <div class="col-span-6 sm:col-span-3">
+    <%= label f, :authorize_url, class: "block text-sm font-medium text-gray-100" %>
+    <%= text_input f, :authorize_url, class: "mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" %>
+    <%= error_tag f, :authorize_url %>
+  </div>
+  <div class="col-span-6 sm:col-span-3">
+    <%= label f, :token_url, class: "block text-sm font-medium text-gray-100" %>
+    <%= text_input f, :token_url, class: "mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" %>
+    <%= error_tag f, :token_url %>
+  </div>
+  <div class="col-span-6 sm:col-span-3">
+    <%= label f, :user_url, class: "block text-sm font-medium text-gray-100" %>
+    <%= text_input f, :user_url, class: "mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" %>
+    <%= error_tag f, :user_url %>
+  </div>
+  <div class="col-span-6 sm:col-span-3">
+    <%= label f, :response_type, class: "block text-sm font-medium text-gray-100" %>
+    <%= text_input f, :response_type, class: "mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" %>
+    <%= error_tag f, :response_type %>
+  </div>
+  <div class="col-span-6 sm:col-span-3">
+    <%= label f, :scope, class: "block text-sm font-medium text-gray-100" %>
+    <%= text_input f, :scope, class: "mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" %>
+    <%= error_tag f, :scope %>
+  </div>
+  <div class="col-span-6 sm:col-span-3">
+    <%= label f, :user_path, class: "block text-sm font-medium text-gray-100" %>
+    <%= text_input f, :user_path, class: "mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" %>
+    <%= error_tag f, :user_path %>
+  </div>
+  <div class="col-span-6 sm:col-span-3">
+    <%= label f, :user_id_path, class: "block text-sm font-medium text-gray-100" %>
+    <%= text_input f, :user_id_path, class: "mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" %>
+    <%= error_tag f, :user_id_path %>
+  </div>
+  <div class="col-span-6 sm:col-span-3">
+    <%= label f, :user_pseudo_path, class: "block text-sm font-medium text-gray-100" %>
+    <%= text_input f, :user_pseudo_path, class: "mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" %>
+    <%= error_tag f, :user_pseudo_path %>
+  </div>
+  <div class="col-span-6 sm:col-span-3">
+    <%= label f, :user_img_url, class: "block text-sm font-medium text-gray-100" %>
+    <%= text_input f, :user_img_url, class: "mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" %>
+    <%= error_tag f, :user_img_url %>
+  </div>
+  <div class="col-span-6 sm:col-span-3">
+    <%= label f, :user_img_path, class: "block text-sm font-medium text-gray-100" %>
+    <%= text_input f, :user_img_path, class: "mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" %>
+    <%= error_tag f, :user_img_path %>
+  </div>
+</div>
+<div class="flex flex-col space-y-6 sm:space-y-0 sm:flex-row-reverse sm:flex-row sm:space-x-6 sm:space-x-reverse mt-6">
+  <div class="flex-1">
+    <div class="phx-loading-hide">
+      <%= submit class: "block bg-green-500 hover:bg-green-700 text-white text-center font-bold py-2 px-4 w-full rounded" do %>
+        Save
+      <% end %>
+    </div>
+    <div class="phx-loading-show">
+      <%= submit class: "block bg-green-700 text-white text-center font-bold py-2 px-4 w-full rounded cursor-wait inline-flex items-center justify-center", disabled: true do %>
+        <svg class="animate-spin h-6 w-6 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+          <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+          <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+        </svg>
+      <% end %>
+    </div>
+  </div>
+  <div class="flex-1">
+    <%= live_patch "Retour", to: @return_to, class: "phx-modal-close block bg-red-500 hover:bg-red-700 text-white text-center font-bold py-2 px-4 w-full rounded" %>
+  </div>
+</div>
+</form>
+<%#= submit "Save", phx_disable_with: "Saving...", class: "block bg-green-500 hover:bg-green-700 text-white text-center font-bold py-2 px-4 w-full rounded" %>

@@ -13,7 +13,6 @@ defmodule NovyData.Accounts.AuthProviderTest do
       client_id: "CLIENT ID",
       client_secret: "CLIENT SECRET",
       authorize_url: "AUTHORIZE URL",
-      redirect_url: "REDIRECT URL",
       token_url: "TOKEN URL",
       user_url: "USER URL",
       scope: "SCOPE",
@@ -54,7 +53,6 @@ defmodule NovyData.Accounts.AuthProviderTest do
       assert auth_provider.client_id == "CLIENT ID"
       assert auth_provider.client_secret == "CLIENT SECRET"
       assert auth_provider.authorize_url == "AUTHORIZE URL"
-      assert auth_provider.redirect_url == "REDIRECT URL"
       assert auth_provider.token_url == "TOKEN URL"
       assert auth_provider.user_url == "USER URL"
       assert auth_provider.scope == "SCOPE"

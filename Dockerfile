@@ -1,8 +1,8 @@
 FROM elixir:1.11.4-alpine AS build
 
 # install build dependencies
-RUN apk add --no-cache build-base git python3 yarn
-RUN curl -f https://get.pnpm.io/v6.js | node - add --global pnpm
+RUN apk add --no-cache build-base git python3 npm
+RUN npm install -g pnpm
 
 # prepare build dir
 WORKDIR /app
@@ -30,15 +30,19 @@ COPY . /app/
 
 # build assets
 WORKDIR /app/apps/novy_site
+RUN pnpm --prefix ./assets install --frozen-lockfile
+RUN pnpm run --prefix ./assets deploy
 # RUN npm --prefix ./assets ci --progress=false --no-audit --loglevel=error
 # RUN npm run --prefix ./assets deploy
-RUN yarn --cwd ./assets install --frozen-lockfile
-RUN yarn --cwd ./assets deploy
+# RUN yarn --cwd ./assets install --frozen-lockfile
+# RUN yarn --cwd ./assets deploy
 RUN mix phx.digest
 
 WORKDIR /app/apps/novy_admin
-RUN pnpm --prefix ./assets ci --progress=false --no-audit --loglevel=error
+RUN pnpm --prefix ./assets install --frozen-lockfile
 RUN pnpm run --prefix ./assets deploy
+# RUN npm --prefix ./assets ci --progress=false --no-audit --loglevel=error
+# RUN npm run --prefix ./assets deploy
 # RUN yarn --cwd ./assets install --frozen-lockfile
 # RUN yarn --cwd ./assets deploy
 RUN mix phx.digest
@@ -52,7 +56,7 @@ RUN mix do compile, release
 
 # prepare release image
 # FROM alpine AS app
-FROM nginx:alpine AS app
+FROM nginx:stable-alpine AS app
 RUN apk add --no-cache openssl ncurses-libs
 
 WORKDIR /app

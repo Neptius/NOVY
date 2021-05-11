@@ -31,4 +31,7 @@
   <% end %>
 
   <%= @inner_content %>
+
+  <%= live_component @socket, NovySite.DefaultComponent.TrackUser, assigns %>
+
 </main>

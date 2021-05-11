@@ -9,11 +9,12 @@ defmodule NovyAdmin.Application do
     children = [
       # Start the Telemetry supervisor
       NovyAdmin.Telemetry,
-      # Start the Endpoint (http/https)
-      NovyAdmin.Endpoint,
       # Start a worker by calling: NovyAdmin.Worker.start_link(arg)
       # {NovyAdmin.Worker, arg}
-      {Phoenix.PubSub, name: NovyAdmin.PubSub}
+      {Phoenix.PubSub, name: NovyAdmin.PubSub},
+      NovyAdmin.Presence,
+      # Start the Endpoint (http/https)
+      NovyAdmin.Endpoint
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

@@ -1,0 +1,64 @@
+<div class="text-white flex flex-row-reverse mb-3">
+  <div class="flex-1 sm:flex-initial">
+    <%= live_patch to: Routes.auth_provider_index_path(@socket, :new), class: "bg-green-500 hover:bg-green-700 text-white py-2 px-3 rounded inline-flex items-center justify-center w-full" do %>
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+      </svg>
+    <% end %>
+  </div>
+</div>
+<div class="w-full bg-gray-700 rounded-md shadow-lg overflow-x-auto">
+  <table class="table-auto min-w-full divide-y divide-gray-200 max-w-full w-full">
+    <thead>
+      <tr>
+        <th scope="col" class="px-6 py-4 text-left text-xs font-light text-gray-200 uppercase tracking-wider text-center">Label</th>
+        <th scope="col" class="px-6 py-4 text-left text-xs font-light text-gray-200 uppercase tracking-wider text-center">Method</th>
+        <th scope="col" class="px-6 py-4 text-left text-xs font-light text-gray-200 uppercase tracking-wider text-center">Active</th>
+        <th scope="col" class="px-6 py-4 text-left text-xs font-light text-gray-200 uppercase tracking-wider text-center">Action</th>
+      </tr>
+    </thead>
+    <tbody id="auth_providers" class="divide-y divide-gray-200">
+      <%= for auth_provider <- @auth_providers do %>
+        <tr id="auth_provider-<%= auth_provider.id %>">
+          <td class="px-6 py-4 whitespace-nowrap text-sm text-white text-center"><%= auth_provider.label %></td>
+          <td class="px-6 py-4 whitespace-nowrap text-sm text-white text-center"><%= auth_provider.method %></td>
+          <td class="px-6 py-4 whitespace-nowrap text-sm text-white text-center">
+            <%= if auth_provider.active do %>
+              <span class="inline-block w-2 h-2 mr-2 bg-green-600 rounded-full"></span>Oui
+            <% else %>
+              <span class="inline-block w-2 h-2 mr-2 bg-red-600 rounded-full"></span>Non
+            <% end %>
+          </td>
+          <td class="text-center">
+            <div class="inline-flex">
+              <%= live_redirect to: Routes.auth_provider_show_path(@socket, :show, auth_provider), class: "hover:text-blue-400 text-white px-2" do %>
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                </svg>
+              <% end %>
+              <%= live_patch to: Routes.auth_provider_index_path(@socket, :edit, auth_provider), class: "hover:text-yellow-400 text-white px-2" do %>
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                </svg>
+              <% end %>
+              <%= link to: "#", phx_click: "delete", phx_value_id: auth_provider.id, data: [confirm: "Are you sure?"], class: "hover:text-red-400 text-white px-2" do %>
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                </svg>
+              <% end %>
+            </div>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <%= if @live_action in [:new, :edit] do %>
+    <%= live_modal @socket, NovyAdmin.AuthProviderLive.FormComponent,
+        id: @auth_provider.id || :new,
+        title: @page_title,
+        action: @live_action,
+        auth_provider: @auth_provider,
+        return_to: Routes.auth_provider_index_path(@socket, :index) %>
+  <% end %>
+  <div>

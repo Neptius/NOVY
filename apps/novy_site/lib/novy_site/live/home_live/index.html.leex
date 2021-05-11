@@ -12,8 +12,8 @@
             <%= live_patch "Connexion", to: Routes.login_index_path(@socket, :index) %>
             <%= if @current_user do %>
               <li><%= @current_user.pseudo %></li>
+              <li><%= live_patch "Upload", to: Routes.upload_index_path(@socket, :index) %></li>
               <li><%= link "Log out", to: Routes.auth_path(@socket, :delete), method: :delete %></li>
-              <li><%= link "Users", to: Routes.auth_provider_index_path(@socket, :index) %></li>
             <% end %>
           </div>
         </div>
