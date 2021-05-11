@@ -56,7 +56,7 @@ RUN mix do compile, release
 
 # prepare release image
 # FROM alpine AS app
-FROM nginx:alpine AS app
+FROM nginx:stable-alpine AS app
 RUN apk add --no-cache openssl ncurses-libs
 
 WORKDIR /app
