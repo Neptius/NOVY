@@ -27,3 +27,5 @@ erl_crash.dump
 image.txt
 container.json
 xref_graph.dot
+
+dist/
