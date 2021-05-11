@@ -26,7 +26,7 @@ const fileStructPlugin = {
                 //* Move in respective directories
                 await fs.move(outdir + "app.js", outdir + "js/app.js", { overwrite: true });
                 await fs.move(outdir + "app.css", outdir + "css/app.css", { overwrite: true });
-                if (await fs.exists(outdir + "app.js.map")) {
+                if (await fs.access(outdir + "app.js.map")) {
                     await fs.move(outdir + "app.js.map", outdir + "js/app.js.map", { overwrite: true });
                 }
             } catch (err) {

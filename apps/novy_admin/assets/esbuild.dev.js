@@ -4,7 +4,8 @@ const options = require('./esbuild.common')
 
 async function main() {
     try {
-        await esbuild.build(options)
+        let result = await esbuild.build(options)
+        result.stop()
     } catch (e) {
         console.error(e.message)
     }
