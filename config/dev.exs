@@ -19,7 +19,7 @@ config :novy_admin, NovyAdmin.Endpoint,
   check_origin: false,
   watchers: [
     node: [
-      "./esbuild.config.js",
+      "./esbuild.dev.js",
       cd: Path.expand("../apps/novy_admin/assets", __DIR__)
     ]
   ],

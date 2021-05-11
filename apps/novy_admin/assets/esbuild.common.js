@@ -6,7 +6,7 @@ const tailwindcss = require("tailwindcss");
 
 const outdir = "../priv/static/"
 
-const customPlugin = {
+const fileStructPlugin = {
     name: "Custom Process",
     setup(build) {
         build.onStart(async() => {
@@ -35,40 +35,27 @@ const customPlugin = {
     }
 }
 
-
-
-async function main() {
-    const result = await esbuild.build({
-        entryPoints: ['ts/app.ts'],
-        platform: 'browser',
-        watch: true,
-        bundle: true,
-        metafile: true,
-        color: true,
-        format: 'iife',
-        outdir,
-        loader: {
-            ".ttf": "file"
-        },
-        external: ['*.ttf'],
-        plugins: [
-            customPlugin,
-            postCssPlugin({
-                plugins: [
-                    autoprefixer,
-                    tailwindcss
-                ]
-            })
-        ]
-    })
-
-    await fs.writeFile(outdir + 'meta.json',
-        JSON.stringify(result.metafile))
+module.exports = {
+    entryPoints: ['ts/app.ts'],
+    platform: 'browser',
+    bundle: true,
+    metafile: false,
+    minify: false,
+    watch: true,
+    color: true,
+    format: 'iife',
+    outdir,
+    loader: {
+        ".ttf": "file"
+    },
+    external: ['*.ttf'],
+    plugins: [
+        fileStructPlugin,
+        postCssPlugin({
+            plugins: [
+                autoprefixer,
+                tailwindcss
+            ]
+        })
+    ]
 }
-
-main()
-
-// .catch((e) => console.error(e.message));
-
-// fs.writeFileSync('meta.json',
-//     JSON.stringify(result.metafile))
