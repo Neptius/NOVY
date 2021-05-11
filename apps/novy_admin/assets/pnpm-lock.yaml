@@ -14,7 +14,6 @@ specifiers:
   phoenix_live_view: file:../../../deps/phoenix_live_view
   postcss: ^8.2.12
   tailwindcss: ^2.1.2
-  tslib: ^2.2.0
   typescript: ^4.2.4
 
 dependencies:
@@ -33,7 +32,6 @@ devDependencies:
   esbuild-plugin-postcss2: 0.0.9
   fs-extra: 10.0.0
   postcss: 8.2.12
-  tslib: 2.2.0
   typescript: 4.2.4
 
 packages:
@@ -1313,10 +1311,6 @@ packages:
 
   /tslib/1.14.1:
     resolution: {integrity: sha512-Xni35NKzjgMrwevysHTCArtLDpPvye8zV/0E4EyYn43P7/7qvQwPh9BGkHewbMulVntbigmcT7rdX3BNo9wRJg==}
-    dev: true
-
-  /tslib/2.2.0:
-    resolution: {integrity: sha512-gS9GVHRU+RGn5KQM2rllAlR3dU6m7AcpJKdtH8gFvQiC4Otgk98XnmMU+nZenHt/+VhnBPWwgrJsyrdcw6i23w==}
     dev: true
 
   /typescript/4.2.4:

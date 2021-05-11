@@ -1,4 +1,3 @@
-const esbuild = require('esbuild')
 const fs = require('fs-extra');
 const autoprefixer = require("autoprefixer");
 const postCssPlugin = require("esbuild-plugin-postcss2").default;
@@ -25,9 +24,11 @@ const fileStructPlugin = {
         build.onEnd(async(result) => {
             try {
                 //* Move in respective directories
-                await fs.move(outdir + "app.js", outdir + "js/app.js");
-                await fs.move(outdir + "app.css", outdir + "css/app.css");
-                // console.log(`build ended with ${result.errors.length} errors`)
+                await fs.move(outdir + "app.js", outdir + "js/app.js", { overwrite: true });
+                await fs.move(outdir + "app.css", outdir + "css/app.css", { overwrite: true });
+                if (await fs.exists(outdir + "app.js.map")) {
+                    await fs.move(outdir + "app.js.map", outdir + "js/app.js.map", { overwrite: true });
+                }
             } catch (err) {
                 console.error(err)
             }
@@ -41,6 +42,7 @@ module.exports = {
     bundle: true,
     metafile: false,
     minify: false,
+    sourcemap: 'both',
     watch: true,
     color: true,
     format: 'iife',

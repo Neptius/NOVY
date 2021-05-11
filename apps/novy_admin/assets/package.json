@@ -22,7 +22,6 @@
         "esbuild-plugin-postcss2": "^0.0.9",
         "fs-extra": "^10.0.0",
         "postcss": "^8.2.12",
-        "tslib": "^2.2.0",
         "typescript": "^4.2.4"
     }
 }
