@@ -75,9 +75,7 @@ config :novy_site, NovySite.Endpoint,
   check_origin: false,
   watchers: [
     node: [
-      "node_modules/rollup/dist/bin/rollup",
-      "--config",
-      "--watch",
+      "./esbuild.dev.js",
       cd: Path.expand("../apps/novy_site/assets", __DIR__)
     ]
   ],
