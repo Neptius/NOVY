@@ -8,7 +8,7 @@
               Novy
             </h1>
           </div>
-          <div class="p-3 h-full rounded-b-xl bg-gray-800 text-white">
+          <div class="p-3 h-full rounded-b-xl bg-gray-800  text-white">
             <%= live_patch "Connexion", to: Routes.login_index_path(@socket, :index) %>
             <%= if @current_user do %>
               <li><%= @current_user.pseudo %></li>
