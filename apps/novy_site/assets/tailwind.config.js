@@ -6,7 +6,7 @@ module.exports = {
             "../**/*.html.leex",
             "../**/views/**/*.ex",
             "../**/live/**/*.ex",
-            "./js/**/*.js",
+            "./ts/**/*.ts",
         ],
         options: {
             whitelist: []

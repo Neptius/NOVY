@@ -8,6 +8,8 @@ import 'alpinejs'
 
 import { chart } from './chart'
 
+console.log("OK?")
+
 let Hooks = {
     chart
 }

@@ -2,7 +2,6 @@ const fs = require('fs-extra');
 const autoprefixer = require("autoprefixer");
 const postCssPlugin = require("esbuild-plugin-postcss2").default;
 const tailwindcss = require("tailwindcss");
-const { exists } = require('fs-extra');
 
 const outdir = "../priv/static/"
 
@@ -22,7 +21,7 @@ const fileStructPlugin = {
         })
 
 
-        build.onEnd(async(result) => {
+        build.onEnd(async() => {
             try {
                 //* Move in respective directories
                 await fs.move(outdir + "app.js", outdir + "js/app.js", { overwrite: true });
@@ -47,17 +46,19 @@ module.exports = {
     color: true,
     format: 'iife',
     outdir,
+    watch: true,
+    logLevel: 'info',
     loader: {
         ".ttf": "file"
     },
     external: ['*.ttf'],
     plugins: [
-        fileStructPlugin,
         postCssPlugin({
             plugins: [
                 autoprefixer,
                 tailwindcss
             ]
-        })
+        }),
+        fileStructPlugin
     ]
 }
