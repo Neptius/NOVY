@@ -32,12 +32,12 @@ window.addEventListener("phx:page-loading-stop", info => NProgress.done())
 // connect if there are any LiveViews on the page
 liveSocket.connect()
 
-declare global {
-    interface Window {
-        liveSocket: any;
-        Alpine: any;
-    }
-}
+// declare global {
+//     interface Window {
+//         liveSocket: any;
+//         Alpine: any;
+//     }
+// }
 
 // expose liveSocket on window for web console debug logs and latency simulation:
 // >> liveSocket.enableDebug()

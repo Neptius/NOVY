@@ -1,11 +1,9 @@
 {
     "compilerOptions": {
-        "module": "commonjs",
+        "module": "esnext",
         "target": "esnext",
-        "strictFunctionTypes": true,
-        "sourceMap": true,
-        "isolatedModules": true,
-        "esModuleInterop": true
+        "noImplicitAny": true,
+        "allowJs": true
     },
     "exclude": [
         "node_modules",
