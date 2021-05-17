@@ -11,7 +11,7 @@ const fileStructPlugin = {
         build.onStart(async() => {
             try {
                 //* Clear Output
-                await fs.rm(outdir, { recursive: true, force: true })
+                // await fs.rm(outdir, { recursive: true, force: true })
 
                 //* Copy Static
                 await fs.copy("./static/", outdir, { overwrite: true });
@@ -46,7 +46,12 @@ module.exports = {
     color: true,
     format: 'iife',
     outdir,
-    watch: true,
+    watch: {
+        onRebuild(error, result) {
+            if (error) console.error('watch build failed:', error)
+            else console.log('watch build succeeded:', result)
+        },
+    },
     logLevel: 'info',
     loader: {
         ".ttf": "file"
