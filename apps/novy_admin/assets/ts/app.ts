@@ -6,7 +6,7 @@ import NProgress from "nprogress"
 import { LiveSocket } from "phoenix_live_view"
 import 'alpinejs'
 
-import { chart } from './chart'
+import { chart } from './chart.ts'
 
 let Hooks = {
     chart

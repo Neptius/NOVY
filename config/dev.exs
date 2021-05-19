@@ -78,7 +78,10 @@ config :novy_site, NovySite.Endpoint,
   check_origin: false,
   watchers: [
     node: [
-      "./esbuild.dev.js",
+      "node_modules/webpack/bin/webpack.js",
+      "--mode",
+      "development",
+      "--watch-stdin",
       cd: Path.expand("../apps/novy_site/assets", __DIR__)
     ]
   ],

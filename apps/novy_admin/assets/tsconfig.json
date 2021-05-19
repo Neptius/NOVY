@@ -2,8 +2,10 @@
     "compilerOptions": {
         "module": "esnext",
         "target": "esnext",
-        "noImplicitAny": true,
-        "allowJs": true
+        "moduleResolution": "node",
+        "allowJs": true,
+        "strict": true,
+        "esModuleInterop": true
     },
     "exclude": [
         "node_modules",
