@@ -1,7 +1,7 @@
 let Uploaders = {}
 
 Uploaders.S3 = function(entries, onViewError){
-  entries.forEach(entry => {
+  entries.forEach((entry) => {
     let formData = new FormData()
     let {url, fields} = entry.meta
     Object.entries(fields).forEach(([key, val]) => formData.append(key, val))

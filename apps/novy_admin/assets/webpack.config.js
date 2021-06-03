@@ -17,7 +17,7 @@ module.exports = (env, options) => {
             ]
         },
         entry: {
-            'app': glob.sync('./vendor/**/*.ts').concat(['./ts/app.ts'])
+            'app': glob.sync('./vendor/**/*.js').concat(['./js/app.js'])
         },
         output: {
             filename: '[name].js',
@@ -27,10 +27,10 @@ module.exports = (env, options) => {
         devtool: devMode ? 'eval-cheap-module-source-map' : undefined,
         module: {
             rules: [{
-                    test: /\.(js|ts)$/,
+                    test: /\.js$/,
                     exclude: /node_modules/,
                     use: {
-                        loader: 'ts-loader',
+                        loader: 'babel-loader'
                     }
                 },
                 {
@@ -38,7 +38,7 @@ module.exports = (env, options) => {
                     use: [
                         MiniCssExtractPlugin.loader,
                         'css-loader',
-                        'postcss-loader',
+                        'postcss-loader'
                     ],
                 }
             ]
