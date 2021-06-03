@@ -10,6 +10,7 @@ specifiers:
   chart.js: ^3.1.0
   copy-webpack-plugin: ^5.1.1
   css-loader: ^3.4.2
+  glob: ^7.1.7
   hard-source-webpack-plugin: ^0.13.1
   mini-css-extract-plugin: ^0.9.0
   nprogress: ^0.2.0
@@ -41,6 +42,7 @@ devDependencies:
   babel-loader: 8.2.2_f77f7df0bceb8d5a400a144a9626578d
   copy-webpack-plugin: 5.1.2_webpack@4.41.5
   css-loader: 3.6.0_webpack@4.41.5
+  glob: 7.1.7
   hard-source-webpack-plugin: 0.13.1_webpack@4.41.5
   mini-css-extract-plugin: 0.9.0_webpack@4.41.5
   optimize-css-assets-webpack-plugin: 5.0.6_webpack@4.41.5
