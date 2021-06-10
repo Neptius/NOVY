@@ -3,8 +3,8 @@
     "description": " ",
     "license": "MIT",
     "scripts": {
-        "deploy": "node ./esbuild.prod.js",
-        "watch": "node ./esbuild.dev.js"
+        "deploy": "webpack --mode production",
+        "watch": "webpack --mode development --watch"
     },
     "dependencies": {
         "@tailwindcss/forms": "^0.3.2",

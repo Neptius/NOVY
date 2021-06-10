@@ -100,11 +100,11 @@ iframe[src="/phoenix/live_reload/frame"] {
   }
 
   .nv-alert > .nv-alert-content {
-    @apply p-2 bg-indigo-800 items-center text-indigo-100 leading-none md:rounded-full flex md:inline-flex;
+    @apply p-2 bg-red-800 items-center text-red-100 leading-none md:rounded-full flex md:inline-flex;
   }
 
   .nv-alert > .nv-alert-content > .nv-alert-badge {
-    @apply flex rounded-full bg-indigo-500 uppercase px-2 py-1 text-xs font-bold mr-3;
+    @apply flex rounded-full bg-red-500 uppercase px-2 py-1 text-xs font-bold mr-3;
   }
 
   .nv-alert > .nv-alert-content > .nv-alert-text {
