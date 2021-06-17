@@ -1,0 +1,31 @@
+<%= if @live_action in [:edit] do %>
+  <%= live_modal @socket, NovyAdmin.UserLive.FormComponent,
+    id: @user.id,
+    title: @page_title,
+    action: @live_action,
+    user: @user,
+    return_to: Routes.user_show_path(@socket, :show, @user) %>
+<% end %>
+
+<div class="text-white flex flex-row-reverse mb-5">
+  <div class="inline-flex">
+    <%= live_patch to: Routes.user_show_path(@socket, :edit, @user), class: "bg-yellow-500 hover:bg-yellow-600 text-gray-800 py-2 px-4 rounded-l" do %>
+      Edit
+    <% end %>
+    <%= live_redirect to: Routes.user_index_path(@socket, :index), class: "bg-red-500 hover:bg-red-600 text-gray-800 py-2 px-4 rounded-r" do %>
+      Back
+    <% end %>
+  </div>
+</div>
+
+<ul class="text-white">
+
+  <li>
+    <strong>Pseudo:</strong>
+    <%= @user.pseudo %>
+  </li>
+
+</ul>
+
+<span><%= live_patch "Edit", to: Routes.user_show_path(@socket, :edit, @user), class: "button" %></span>
+<span><%= live_redirect "Back", to: Routes.user_index_path(@socket, :index) %></span>

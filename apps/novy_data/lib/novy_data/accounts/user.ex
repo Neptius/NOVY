@@ -20,11 +20,27 @@ defmodule NovyData.Accounts.User do
 
   def get_user!(id), do: Repo.get!(User, id)
 
+  def list_users do
+    User
+    |> Repo.all()
+  end
+
+  def change_user(%User{} = user, attrs \\ %{}) do
+    User.changeset(user, attrs)
+  end
+
   def create_user_with_auth_user(attrs, %AuthUser{} = auth_user) do
     %User{}
     |> User.changeset(attrs)
     |> put_assoc(:auth_users, [auth_user])
     |> Repo.insert()
+  end
+
+
+  def update_user(%User{} = user, attrs) do
+    user
+    |> User.changeset(attrs)
+    |> Repo.update()
   end
 
   @doc false
