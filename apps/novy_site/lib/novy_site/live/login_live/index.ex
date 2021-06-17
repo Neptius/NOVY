@@ -20,8 +20,11 @@ defmodule NovySite.LoginLive.Index do
         %{:assigns => %{:redirect_host => redirect_host}} = socket
       ) do
     case AuthService.init_auth(provider, redirect_host) do
-      {:ok, url} -> {:noreply, redirect(socket, external: url)}
-      {:error, _} -> {:noreply, socket}
+      {:ok, url} ->
+        {:noreply, redirect(socket, external: url)}
+
+      {:error, _} ->
+        {:noreply, socket}
     end
   end
 

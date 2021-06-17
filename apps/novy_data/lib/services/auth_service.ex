@@ -67,6 +67,7 @@ defmodule NovyData.AuthService do
 
   @doc false
   def start_auth(%{"state" => _state, "provider" => _provider} = params, redirect_host) do
+    IO.inspect(params)
     with {:ok, %AuthProviderSession{} = auth_provider_session} <- verify_state(params),
          %AuthProvider{} = auth_provider <-
            AuthProvider.get_auth_provider(auth_provider_session.auth_provider_id),
@@ -167,10 +168,14 @@ defmodule NovyData.AuthService do
   #   end
 
   @doc false
-  defp fetch_user_data(%AuthProvider{:method => "oauth2", :user_url => url}, %{
+  defp fetch_user_data(%AuthProvider{:method => "oauth2", :user_url => url, :client_id => client_id}, %{
          "access_token" => token
        }) do
-    headers = [Authorization: "Bearer #{token}", Accept: "Application/json; Charset=utf-8"]
+    headers = [
+      Authorization: "Bearer #{token}",
+      Accept: "Application/json; Charset=utf-8",
+      "Client-ID": client_id
+    ]
     options = [ssl: [{:versions, [:"tlsv1.2"]}], recv_timeout: 500]
 
     with {:ok, %HTTPoison.Response{status_code: 200, body: body}} <-

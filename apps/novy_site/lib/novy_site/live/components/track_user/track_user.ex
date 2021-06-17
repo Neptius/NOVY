@@ -19,6 +19,7 @@ defmodule NovySite.DefaultComponent.TrackUser do
     if connected?(socket) do
       {:ok, _} = Presence.track(self(), @presence_guest, UUID.uuid4(), %{})
     end
+
     {:ok, socket}
   end
 end
