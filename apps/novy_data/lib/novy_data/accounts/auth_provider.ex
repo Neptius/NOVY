@@ -58,7 +58,6 @@ defmodule NovyData.Accounts.AuthProvider do
     |> Repo.all()
   end
 
-
   @doc """
   Returns the list of auth providers.
   ## Examples
@@ -146,7 +145,6 @@ defmodule NovyData.Accounts.AuthProvider do
     |> order_by(^filter_order_by(params["order_by"]))
     |> where(^filter_where(params))
   end
-
 
   def filter_order_by("label_asc"), do: [asc: :label]
   def filter_order_by("label_desc"), do: [desc: :label]
