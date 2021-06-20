@@ -30,7 +30,8 @@ defmodule NovySite.Router do
 
     # * AUTH
     live "/login", LoginLive.Index, :index
-    get "/login_return", AuthController, :callback
+    get "/login_return", AuthController, :login_callback
+    get "/link_return", AuthController, :link_callback
   end
 
   scope "/", NovySite do

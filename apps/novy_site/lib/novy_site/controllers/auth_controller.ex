@@ -3,7 +3,7 @@ defmodule NovySite.AuthController do
   alias NovyData.AuthService
   alias NovySite.UserAuth
 
-  def callback(conn, params) do
+  def login_callback(conn, params) do
     case AuthService.start_auth(params, NovySite.Endpoint.url()) do
       {:ok, user_id} ->
         conn
@@ -13,6 +13,11 @@ defmodule NovySite.AuthController do
         conn
         |> UserAuth.log_in_fail(error)
     end
+  end
+
+  def link_callback(conn, params) do
+    current_user = conn.assigns[:current_user]
+    AuthService.start_link(params, NovySite.Endpoint.url(), current_user.id)
   end
 
   def delete(conn, _params) do

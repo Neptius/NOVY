@@ -142,11 +142,11 @@ defmodule NovyData.Accounts.AuthProvider do
 
   def get_auth_provider_with_auth_users_by_user_id(user_id) do
     AuthProvider
-    |> join(:left, [ap], auth_user in assoc(ap, :auth_users))
     |> join(:left, [ap], au in AuthUser,
       on: au.auth_provider_id == ap.id and au.user_id == ^user_id
     )
     |> preload([_, au], auth_users: au)
+    |> order_by([asc: :label])
     |> Repo.all()
   end
 

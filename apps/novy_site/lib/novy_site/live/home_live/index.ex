@@ -22,7 +22,7 @@ defmodule NovySite.HomeLive.Index do
         %{"provider" => provider},
         %{:assigns => %{:redirect_host => redirect_host}} = socket
       ) do
-    case AuthService.init_auth_link(provider, redirect_host, socket.assigns.current_user.id) do
+    case AuthService.init_link(provider, redirect_host, socket.assigns.current_user.id) do
       {:ok, url} ->
         {:noreply, redirect(socket, external: url)}
 

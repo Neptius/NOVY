@@ -20,12 +20,25 @@ defmodule NovyData.Accounts.AuthProviderSession do
     timestamps()
   end
 
-  def get_one_auth_provider_session_by_state_and_provider(state, provider) do
+  def get_one_auth_provider_login_state(state, provider) do
     AuthProviderSession
     |> join(:inner, [aps], auth_provider in assoc(aps, :auth_provider))
     |> where([aps, ap], ap.label == ^provider)
     |> where([aps, ap], aps.state == ^state)
     |> where([aps, ap], aps.verify == false)
+    |> where([aps, ap], aps.type == "login")
+    |> preload([_, ap], auth_provider: ap)
+    |> Repo.one()
+  end
+
+  def get_one_auth_provider_link_state(state, provider, user_id) do
+    AuthProviderSession
+    |> join(:inner, [aps], auth_provider in assoc(aps, :auth_provider))
+    |> where([aps, ap], ap.label == ^provider)
+    |> where([aps, ap], aps.state == ^state)
+    |> where([aps, ap], aps.verify == false)
+    |> where([aps, ap], aps.type == "link")
+    |> where([aps, ap], aps.user_id == ^user_id)
     |> preload([_, ap], auth_provider: ap)
     |> Repo.one()
   end
@@ -45,7 +58,7 @@ defmodule NovyData.Accounts.AuthProviderSession do
   @doc false
   def changeset(auth_provider_session, attrs) do
     auth_provider_session
-    |> cast(attrs, [:state, :verify, :auth_provider_id])
-    |> validate_required([:state, :verify, :auth_provider_id])
+    |> cast(attrs, [:state, :verify, :type, :user_id, :auth_provider_id])
+    |> validate_required([:state, :verify, :type, :auth_provider_id])
   end
 end
