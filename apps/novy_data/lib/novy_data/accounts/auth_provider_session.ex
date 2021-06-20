@@ -12,7 +12,9 @@ defmodule NovyData.Accounts.AuthProviderSession do
   schema "auth_provider_sessions" do
     field :state, :string
     field :verify, :boolean, default: false
+    field :type, :string
 
+    belongs_to :user, User
     belongs_to :auth_provider, AuthProvider
 
     timestamps()

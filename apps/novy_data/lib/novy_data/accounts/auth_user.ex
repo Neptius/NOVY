@@ -21,14 +21,6 @@ defmodule NovyData.Accounts.AuthUser do
     timestamps()
   end
 
-  def get_auth_users_with_auth_providers_by_user_id(user_id) do
-    AuthUser
-    |> where([au], au.user_id == ^user_id)
-    |> join(:inner, [au], auth_provider in assoc(au, :auth_provider))
-    |> preload([_, ap], auth_provider: ap)
-    |> Repo.all()
-  end
-
   def get_exist_auth_user(label, auth_provider_user_id) do
     AuthUser
     |> join(:inner, [au], auth_provider in assoc(au, :auth_provider))

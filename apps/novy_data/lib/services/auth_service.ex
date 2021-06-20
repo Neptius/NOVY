@@ -14,7 +14,31 @@ defmodule NovyData.AuthService do
          {:ok, %AuthProviderSession{}} <-
            AuthProviderSession.create_auth_provider_session(%{
              state: state,
-             auth_provider_id: auth_provider.id
+             auth_provider_id: auth_provider.id,
+             type: "login"
+           }),
+         {:ok, url} <- format_auth_url(auth_provider, state, redirect_host) do
+      {:ok, url}
+    else
+      {:error, error} ->
+        {:error, error}
+
+      _ ->
+        {:error, "Provider invalide ou non configuré"}
+    end
+  end
+
+  @doc false
+  def init_auth_link(label, redirect_host, user_id) do
+    with %AuthProvider{} = auth_provider <-
+           AuthProvider.get_one_auth_provider(%{"label" => label}),
+         state <- Randomizer.randomizer(32),
+         {:ok, %AuthProviderSession{}} <-
+           AuthProviderSession.create_auth_provider_session(%{
+             state: state,
+             auth_provider_id: auth_provider.id,
+             type: "link",
+             user_id: user_id
            }),
          {:ok, url} <- format_auth_url(auth_provider, state, redirect_host) do
       {:ok, url}

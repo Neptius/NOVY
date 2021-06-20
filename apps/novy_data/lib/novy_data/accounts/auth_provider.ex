@@ -140,6 +140,16 @@ defmodule NovyData.Accounts.AuthProvider do
     AuthProvider.changeset(auth_provider, attrs)
   end
 
+  def get_auth_provider_with_auth_users_by_user_id(user_id) do
+    AuthProvider
+    |> join(:left, [ap], auth_user in assoc(ap, :auth_users))
+    |> join(:left, [ap], au in AuthUser,
+      on: au.auth_provider_id == ap.id and au.user_id == ^user_id
+    )
+    |> preload([_, au], auth_users: au)
+    |> Repo.all()
+  end
+
   def filter(params) do
     AuthProvider
     |> order_by(^filter_order_by(params["order_by"]))
