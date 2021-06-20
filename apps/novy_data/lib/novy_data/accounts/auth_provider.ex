@@ -43,12 +43,8 @@ defmodule NovyData.Accounts.AuthProvider do
       ** (Ecto.NoResultsError)
   """
   def get_one_auth_provider(params) do
-    IO.inspect(params)
-    toto =
-      filter(params)
-      |> Repo.one()
-    IO.inspect(toto)
-    toto
+    filter(params)
+    |> Repo.one()
   end
 
   @doc """
@@ -59,6 +55,18 @@ defmodule NovyData.Accounts.AuthProvider do
   """
   def list_auth_providers do
     AuthProvider
+    |> Repo.all()
+  end
+
+
+  @doc """
+  Returns the list of auth providers.
+  ## Examples
+      iex> list_auth_providers()
+      [%AuthProvider{}, ...]
+  """
+  def list_auth_providers(params) do
+    filter(params)
     |> Repo.all()
   end
 
@@ -139,13 +147,17 @@ defmodule NovyData.Accounts.AuthProvider do
     |> where(^filter_where(params))
   end
 
+
+  def filter_order_by("label_asc"), do: [asc: :label]
+  def filter_order_by("label_desc"), do: [desc: :label]
+
   def filter_order_by(_),
     do: []
 
   # 3. Change the authors clause inside reduce
   def filter_where(params) do
     Enum.reduce(params, dynamic(true), fn
-      {"name", value}, dynamic ->
+      {"label", value}, dynamic ->
         dynamic([p], ^dynamic and p.label == ^value)
 
       {_, _}, dynamic ->

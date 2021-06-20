@@ -84,7 +84,7 @@ defmodule NovyAdmin.UserAuth do
 
     conn
     |> renew_session()
-    |> put_flash(:info, "Déconnexion réussie.")
+    |> put_flash(:info, "Déconnexion.")
     |> redirect(to: "/login")
   end
 

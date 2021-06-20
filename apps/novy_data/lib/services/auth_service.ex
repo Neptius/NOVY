@@ -7,8 +7,8 @@ defmodule NovyData.AuthService do
   alias NovyData.Accounts.{AuthProvider, AuthProviderSession, AuthUser, User}
 
   @doc false
-  def init_auth(name, redirect_host) do
-    with %AuthProvider{} = auth_provider <- AuthProvider.get_one_auth_provider(%{"name" => name}),
+  def init_auth(label, redirect_host) do
+    with %AuthProvider{} = auth_provider <- AuthProvider.get_one_auth_provider(%{"label" => label}),
          state <- Randomizer.randomizer(32),
          {:ok, %AuthProviderSession{}} <-
            AuthProviderSession.create_auth_provider_session(%{

@@ -43,6 +43,6 @@ defmodule NovyAdmin.AuthProviderLive.Index do
   end
 
   defp list_auth_providers do
-    AuthProvider.list_auth_providers()
+    AuthProvider.list_auth_providers(%{"order_by" => "label_asc"})
   end
 end
