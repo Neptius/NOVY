@@ -30,6 +30,12 @@ defmodule NovyData.Accounts.AuthUser do
     |> Repo.one()
   end
 
+  def create_auth_user(attrs) do
+    %AuthUser{}
+    |> AuthUser.changeset(attrs)
+    |> Repo.insert()
+  end
+
   def update_auth_user(%AuthUser{} = auth_user, attrs) do
     auth_user
     |> AuthUser.changeset(attrs)
@@ -43,13 +49,17 @@ defmodule NovyData.Accounts.AuthUser do
       :auth_provider_user_id,
       :auth_provider_user_pseudo,
       :auth_provider_user_img,
-      :user_data
+      :auth_provider_id,
+      :user_data,
+      :user_id
     ])
     |> validate_required([
       :auth_provider_user_id,
       :auth_provider_user_pseudo,
       :auth_provider_user_img,
-      :user_data
+      :auth_provider_id,
+      :user_data,
+      :user_id
     ])
   end
 end

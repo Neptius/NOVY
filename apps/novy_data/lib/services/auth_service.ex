@@ -137,7 +137,7 @@ defmodule NovyData.AuthService do
          {:ok, user_data} <- format_user_data(user_raw_data, auth_provider),
          exist_auth_user <-
            AuthUser.get_exist_auth_user(auth_provider.label, user_data["auth_provider_user_id"]),
-         {:ok, user_id} <- create_or_update_auth_user(exist_auth_user, user_data, auth_provider) do
+         {:ok, user_id} <- create_or_update_auth_user(exist_auth_user, user_data, auth_provider, user_id) do
       {:ok, user_id}
     else
       {:error, error} ->
@@ -370,6 +370,44 @@ defmodule NovyData.AuthService do
 
   @doc false
   defp create_or_update_auth_user(exist_auth_user, auth_user_format_data, _auth_provider) do
+    params = %{
+      :user_data => auth_user_format_data["user_data"],
+      :auth_provider_user_pseudo => auth_user_format_data["auth_provider_user_pseudo"],
+      :auth_provider_user_img => auth_user_format_data["auth_provider_user_img"]
+    }
+
+    case AuthUser.update_auth_user(exist_auth_user, params) do
+      {:ok, auth_user} ->
+        {:ok, auth_user.user_id}
+
+      {:error, error} ->
+        {:error, error}
+    end
+  end
+
+
+
+  defp create_or_update_auth_user(nil, auth_user_format_data, auth_provider, user_id) do
+    auth_user_changeset = %{
+      :auth_provider_user_id => auth_user_format_data["auth_provider_user_id"],
+      :auth_provider_user_pseudo => auth_user_format_data["auth_provider_user_pseudo"],
+      :auth_provider_user_img => auth_user_format_data["auth_provider_user_img"],
+      :user_data => auth_user_format_data["user_data"],
+      :auth_provider_id => auth_provider.id,
+      :user_id => user_id
+    }
+
+    case AuthUser.create_auth_user(auth_user_changeset) do
+      {:ok, auth_user} ->
+        {:ok, auth_user.user_id}
+
+      {:error, error} ->
+        {:error, error}
+    end
+  end
+
+  @doc false
+  defp create_or_update_auth_user(exist_auth_user, auth_user_format_data, _auth_provider, _user_id) do
     params = %{
       :user_data => auth_user_format_data["user_data"],
       :auth_provider_user_pseudo => auth_user_format_data["auth_provider_user_pseudo"],

@@ -7,7 +7,7 @@ defmodule NovyData.Accounts.AuthProviderSession do
   import Ecto.Query
 
   alias NovyData.Repo
-  alias NovyData.Accounts.{AuthProvider, AuthProviderSession}
+  alias NovyData.Accounts.{User, AuthProvider, AuthProviderSession}
 
   schema "auth_provider_sessions" do
     field :state, :string

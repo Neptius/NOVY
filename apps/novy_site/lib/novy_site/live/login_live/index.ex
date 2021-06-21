@@ -9,6 +9,10 @@ defmodule NovySite.LoginLive.Index do
   @impl true
   def mount(_params, session, socket) do
     socket = assign_defaults(session, socket)
+
+    IO.inspect("-----------------")
+    IO.inspect(socket.assigns.current_user)
+
     auth_providers = AuthProvider.list_auth_providers(%{"order_by" => "label_asc"})
     {:ok, assign(socket, page_title: "Connexion", auth_providers: auth_providers)}
   end
