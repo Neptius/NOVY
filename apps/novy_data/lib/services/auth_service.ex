@@ -63,9 +63,6 @@ defmodule NovyData.AuthService do
     {:error, "Méthode Invalide"}
   end
 
-
-
-
   @doc false
   def init_link(label, redirect_host, user_id) do
     with %AuthProvider{} = auth_provider <-
@@ -104,8 +101,6 @@ defmodule NovyData.AuthService do
     {:ok, "#{auth_provider.authorize_url}?" <> query}
   end
 
-
-
   def start_auth(%{"error" => _state}) do
     {:error, "Erreur lors de l'authentification"}
   end
@@ -133,7 +128,8 @@ defmodule NovyData.AuthService do
 
   @doc false
   def start_link(%{"state" => _state, "provider" => _provider} = params, redirect_host, user_id) do
-    with {:ok, %AuthProviderSession{} = auth_provider_session} <- verify_link_state(params, user_id),
+    with {:ok, %AuthProviderSession{} = auth_provider_session} <-
+           verify_link_state(params, user_id),
          %AuthProvider{} = auth_provider <-
            AuthProvider.get_auth_provider(auth_provider_session.auth_provider_id),
          {:ok, authorization_params} <- verify_auth_user(auth_provider, params, redirect_host),

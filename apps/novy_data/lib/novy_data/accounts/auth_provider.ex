@@ -146,7 +146,7 @@ defmodule NovyData.Accounts.AuthProvider do
       on: au.auth_provider_id == ap.id and au.user_id == ^user_id
     )
     |> preload([_, au], auth_users: au)
-    |> order_by([asc: :label])
+    |> order_by(asc: :label)
     |> Repo.all()
   end
 
