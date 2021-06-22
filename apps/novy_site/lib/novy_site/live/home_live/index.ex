@@ -10,8 +10,6 @@ defmodule NovySite.HomeLive.Index do
   def mount(_params, session, socket) do
     socket = assign_defaults(session, socket)
 
-    IO.inspect(socket.assigns.current_user)
-
     auth_providers =
       AuthProvider.get_auth_provider_with_auth_users_by_user_id(socket.assigns.current_user.id)
 

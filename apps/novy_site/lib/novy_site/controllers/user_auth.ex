@@ -55,10 +55,17 @@ defmodule NovySite.UserAuth do
   defp signed_in_path(_conn), do: "/"
 
   def fetch_current_user(conn, _opts) do
-    #! REQUEST PROVIDER FOR VERIFY
+    #TODO  REQUEST PROVIDER FOR VERIFY ???
     {user_token, conn} = ensure_user_token(conn)
     user = user_token && Accounts.get_user_by_session_token(user_token)
-    assign(conn, :current_user, user)
+    if user_token && user == nil do
+      conn
+      |> renew_session()
+      |> assign(:current_user, nil)
+
+    else
+      assign(conn, :current_user, user)
+    end
   end
 
   defp ensure_user_token(conn) do

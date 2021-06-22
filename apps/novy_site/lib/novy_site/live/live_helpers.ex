@@ -5,8 +5,6 @@ defmodule NovySite.LiveHelpers do
 
   alias NovyData.Accounts
 
-  alias NovyAdmin.Router.Helpers, as: Routes
-
   def assign_defaults(%{"user_token" => user_token}, socket) do
     socket =
       socket
@@ -16,7 +14,7 @@ defmodule NovySite.LiveHelpers do
     if socket.assigns.current_user do
       socket
     else
-      redirect(socket, to: Routes.auth_path(socket, :delete))
+      redirect(socket, to: "/login")
     end
   end
 
