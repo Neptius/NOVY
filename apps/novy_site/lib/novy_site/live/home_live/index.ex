@@ -37,4 +37,16 @@ defmodule NovySite.HomeLive.Index do
     redirect_host = "#{uri.scheme}://#{uri.authority}"
     {:noreply, assign(socket, redirect_host: redirect_host)}
   end
+
+
+  @impl true
+  def handle_event("unlink_auth", %{"provider" => _provider}, socket) do
+    {:noreply, socket}
+  end
+
+  @impl true
+  def handle_event("delete_user", _params, socket) do
+    IO.inspect("YESS")
+    {:noreply, socket}
+  end
 end
