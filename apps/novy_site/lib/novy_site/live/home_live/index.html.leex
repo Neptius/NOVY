@@ -13,8 +13,25 @@
             <%= if @current_user do %>
               <li><%= @current_user.pseudo %> <%= @current_user.id %></li>
               <li><%= live_patch "Upload", to: Routes.upload_index_path(@socket, :index) %></li>
-              <li><%= link "Déconnexion", to: Routes.auth_path(@socket, :delete), method: :delete %></li>
+              <li><%= link "Déconnexion", to: Routes.auth_path(@socket, :logout), method: :delete,  data: [confirm: "Really?"] %></li>
             <% end %>
+
+
+                <%= f = form_for @changeset, "#",
+                  id: "user-form",
+                  phx_target: @myself,
+                  phx_change: "validate",
+                  phx_submit: "save" %>
+
+                  <div class="mt-1 flex rounded-md shadow-sm mb-2">
+                    <%= text_input f, :pseudo, class: "focus:ring-indigo-500 focus:border-indigo-500 h-12 flex-1 block w-full rounded-l-lg sm:text-sm border-gray-300" %>
+                    <button class="bg-green-500 hover:bg-green-700 text-white text-center h-12 rounded-r-lg font-bold px-4">
+                      <span class="iconify h-6 w-6" data-icon="ic:baseline-save-alt" data-inline="false"></span>
+                    </button>
+                  <div>
+
+                  <%= error_tag f, :pseudo %>
+                </form>
 
             <div>
               <%= for auth_provider <- @auth_providers do %>
@@ -33,31 +50,27 @@
 
                       <div class="flex">
                         <div>
-                          <svg class="h-6 w-6 my-3 mx-2 cursor-pointer" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-                          </svg>
+                          <span class="iconify h-6 w-6 my-3 mx-2 cursor-pointer" class="iconify" data-icon="ci:refresh" data-inline="false"></span>
                         </div>
                         <div>
-                          <svg class="h-6 w-6 my-3 mx-2 cursor-pointer" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                          </svg>
+                          <span class="iconify h-6 w-6 my-3 mx-2 mr-3 cursor-pointer" class="iconify" data-icon="ci:unlink" data-inline="false"></span>
                         </div>
                       </div>
                     </div>
                   <% end %>
                 <% else %>
-                  <div phx-click="init_auth_link" phx-value-provider="<%= auth_provider.label %>" class="flex items-center justify-center cursor-pointer mb-2 rounded-lg shadow-lg bg-<%= auth_provider.label %>-default hover:bg-<%= auth_provider.label %>-dark">
+                  <div phx-click="init_auth_link" phx-value-provider="<%= auth_provider.label %>" class="flex items-center justify-center cursor-pointer h-12 mb-2 rounded-lg shadow-lg bg-<%= auth_provider.label %>-default hover:bg-<%= auth_provider.label %>-dark">
                     <span class="iconify h-6 w-6 m-3 block" data-icon="simple-icons:<%= auth_provider.label %>" data-inline="false"></span>
                     <p class="font-bold text-center overflow-ellipsis overflow-hidden">Liéer à <%= auth_provider.label %></p>
                   </div>
                 <% end %>
               <% end %>
-              <div phx-click="delete_user" data-confirm="Are you sure?" class="flex items-center justify-center cursor-pointer rounded-lg shadow-lg bg-red-600 hover:bg-red-700">
+              <%= link to: Routes.auth_path(@socket, :delete), method: :delete, data: [confirm: "Êtes-vous sûr? Toutes vos donnez seront supprimées."], class: "flex items-center justify-center cursor-pointer rounded-lg h-12 shadow-lg bg-red-600 hover:bg-red-700" do %>
                 <svg class="h-6 w-6 m-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
                 </svg>
                 <p class="font-bold text-center">Supprimer mon compte</p>
-              </div>
+              <% end %>
             </div>
           </div>
         </div>

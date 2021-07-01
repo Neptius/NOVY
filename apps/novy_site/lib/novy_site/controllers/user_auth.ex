@@ -55,7 +55,7 @@ defmodule NovySite.UserAuth do
   defp signed_in_path(_conn), do: "/"
 
   def fetch_current_user(conn, _opts) do
-    #TODO  REQUEST PROVIDER FOR VERIFY ???
+    #?  REQUEST PROVIDER FOR VERIFY ???
     {user_token, conn} = ensure_user_token(conn)
     user = user_token && Accounts.get_user_by_session_token(user_token)
     if user_token && user == nil do
@@ -124,5 +124,20 @@ defmodule NovySite.UserAuth do
     |> put_flash(:error, error)
     |> redirect(to: "/login")
     |> halt()
+  end
+
+
+  def delete_user(conn) do
+    current_user = conn.assigns[:current_user]
+    current_user && Accounts.delete_user(current_user)
+
+    if live_socket_id = get_session(conn, :live_socket_id) do
+      NovySite.Endpoint.broadcast(live_socket_id, "disconnect", %{})
+    end
+
+    conn
+    |> renew_session()
+    |> put_flash(:info, "Votre compte a bien été supprimé.")
+    |> redirect(to: "/login")
   end
 end

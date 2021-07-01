@@ -28,9 +28,13 @@ defmodule NovySite.AuthController do
     end
   end
 
-  def delete(conn, _params) do
-    IO.inspect("logout")
+  def logout(conn, _params) do
     conn
     |> UserAuth.log_out_user()
+  end
+
+  def delete(conn, _params) do
+    conn
+    |> UserAuth.delete_user()
   end
 end

@@ -38,7 +38,8 @@ defmodule NovySite.Router do
     pipe_through [:browser, :require_authenticated_user]
 
     live "/", HomeLive.Index, :index
-    delete "/logout", AuthController, :delete
+    delete "/logout", AuthController, :logout
+    delete "/delete", AuthController, :delete
 
     live "/upload", UploadLive.Index, :index
   end

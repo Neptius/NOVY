@@ -110,7 +110,7 @@ defmodule NovyData.AuthService do
     with {:ok, %AuthProviderSession{} = auth_provider_session} <- verify_login_state(params),
          %AuthProvider{} = auth_provider <-
            AuthProvider.get_auth_provider(auth_provider_session.auth_provider_id),
-         {:ok, authorization_params} <- verify_auth_user(auth_provider, params, redirect_host),
+         {:ok, authorization_params} <- verify_auth_user(auth_provider, params, redirect_host, "login_return"),
          {:ok, user_raw_data} <- fetch_user_data(auth_provider, authorization_params),
          {:ok, user_data} <- format_user_data(user_raw_data, auth_provider),
          exist_auth_user <-
@@ -132,7 +132,7 @@ defmodule NovyData.AuthService do
            verify_link_state(params, user_id),
          %AuthProvider{} = auth_provider <-
            AuthProvider.get_auth_provider(auth_provider_session.auth_provider_id),
-         {:ok, authorization_params} <- verify_auth_user(auth_provider, params, redirect_host),
+         {:ok, authorization_params} <- verify_auth_user(auth_provider, params, redirect_host, "link_return"),
          {:ok, user_raw_data} <- fetch_user_data(auth_provider, authorization_params),
          {:ok, user_data} <- format_user_data(user_raw_data, auth_provider),
          exist_auth_user <-
@@ -195,7 +195,8 @@ defmodule NovyData.AuthService do
   defp verify_auth_user(
          %AuthProvider{:method => "oauth2"} = auth_provider,
          %{"code" => code},
-         redirect_host
+         redirect_host,
+         return_type
        ) do
     request_body =
       URI.encode_query(%{
@@ -203,7 +204,7 @@ defmodule NovyData.AuthService do
         "client_secret" => auth_provider.client_secret,
         "grant_type" => "authorization_code",
         "code" => code,
-        "redirect_uri" => "#{redirect_host}/login_return?provider=#{auth_provider.label}",
+        "redirect_uri" => "#{redirect_host}/#{return_type}?provider=#{auth_provider.label}",
         "scope" => auth_provider.scope
       })
 
@@ -216,8 +217,8 @@ defmodule NovyData.AuthService do
          {:ok, decoded} <- Jason.decode(body) do
       {:ok, decoded}
     else
-      _ ->
-        {:error, "Error: verify_auth_user"}
+      res ->
+        {:error, res }
     end
   end
 

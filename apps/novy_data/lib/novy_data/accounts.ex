@@ -1,7 +1,7 @@
 defmodule NovyData.Accounts do
   @moduledoc false
 
-  alias NovyData.Accounts.UserToken
+  alias NovyData.Accounts.{ User, UserToken }
   alias NovyData.Repo
 
   @doc """
@@ -27,5 +27,9 @@ defmodule NovyData.Accounts do
   def delete_session_token(token) do
     Repo.delete_all(UserToken.token_and_context_query(token, "session"))
     :ok
+  end
+
+  def delete_user(%User{} = user) do
+    Repo.delete(user)
   end
 end

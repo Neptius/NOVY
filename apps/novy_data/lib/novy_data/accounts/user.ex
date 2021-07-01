@@ -6,12 +6,14 @@ defmodule NovyData.Accounts.User do
   import Ecto.Changeset
 
   alias NovyData.Repo
-  alias NovyData.Accounts.{AuthUser, User}
+  alias NovyData.Accounts.{AuthUser, User, UserToken, AuthProviderSession}
 
   schema "users" do
     field :pseudo, :string
 
-    has_many :auth_users, AuthUser
+    has_many :auth_users, AuthUser, on_delete: :delete_all
+    has_many :user_tokens, UserToken, on_delete: :delete_all
+    has_many :auth_provider_sessions, AuthProviderSession, on_delete: :delete_all
 
     timestamps()
   end
