@@ -9,6 +9,7 @@ defmodule NovySite.LoginLive.Index do
   @impl true
   def mount(_params, session, socket) do
     socket = assign_defaults(session, socket)
+
     if socket.assigns.current_user do
       {:ok, redirect(socket, to: Routes.home_index_path(socket, :index))}
     else

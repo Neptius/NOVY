@@ -16,23 +16,6 @@
               <li><%= link "Déconnexion", to: Routes.auth_path(@socket, :logout), method: :delete,  data: [confirm: "Really?"] %></li>
             <% end %>
 
-
-                <%= f = form_for @changeset, "#",
-                  id: "user-form",
-                  phx_target: @myself,
-                  phx_change: "validate",
-                  phx_submit: "save" %>
-
-                  <div class="mt-1 flex rounded-md shadow-sm mb-2">
-                    <%= text_input f, :pseudo, class: "focus:ring-indigo-500 focus:border-indigo-500 h-12 flex-1 block w-full rounded-l-lg sm:text-sm border-gray-300" %>
-                    <button class="bg-green-500 hover:bg-green-700 text-white text-center h-12 rounded-r-lg font-bold px-4">
-                      <span class="iconify h-6 w-6" data-icon="ic:baseline-save-alt" data-inline="false"></span>
-                    </button>
-                  <div>
-
-                  <%= error_tag f, :pseudo %>
-                </form>
-
             <div>
               <%= for auth_provider <- @auth_providers do %>
                 <%= if (length auth_provider.auth_users) > 0 do %>

@@ -3,6 +3,7 @@ defmodule Novy.Umbrella.MixProject do
 
   def project do
     [
+      name: "Novy",
       apps_path: "apps",
       version: "0.1.0",
       start_permanent: Mix.env() == :prod,
@@ -24,8 +25,7 @@ defmodule Novy.Umbrella.MixProject do
             novy_admin: :permanent
           ]
         ]
-      ],
-      name: "Novy"
+      ]
     ]
   end
 
@@ -45,7 +45,8 @@ defmodule Novy.Umbrella.MixProject do
     [
       {:excoveralls, "~> 0.10", only: :test},
       {:credo, "~> 1.5", only: [:dev, :test], runtime: false},
-      {:ex_doc, "~> 0.24", only: :dev, runtime: false}
+      {:ex_doc, "~> 0.24", only: [:dev, :test], runtime: false},
+      {:dialyxir, "~> 1.1", only: [:dev, :test], runtime: false}
     ]
   end
 

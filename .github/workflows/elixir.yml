@@ -11,8 +11,8 @@ env:
   AWS_REGION: ${{ secrets.AWS_REGION }}
 
 jobs:
-  test:
-    name: Test
+  elixir_ci:
+    name: Elixir CI 🧪
     runs-on: ubuntu-latest
 
     services:
@@ -35,26 +35,58 @@ jobs:
           --health-retries 5
 
     steps:
-      - uses: actions/checkout@v2
-      - name: Set up Elixir
-        uses: actions/setup-elixir@v1
-        with:
-          elixir-version: "1.11.4" # Define the elixir version [required]
-          otp-version: "23.1" # Define the OTP version [required]
-          experimental-otp: true
+      - name: Checkout repository 🛎️
+        uses: actions/checkout@v2
+        
 
-      - name: Restore dependencies cache
+      - name: Install Erlang/OTP + Elixir 🏗️
+        id: setup-beam
+        uses: erlef/setup-beam@v1
+        with:
+          otp-version: '24.0' # version range or exact (required)
+          elixir-version: '1.12.2' # version range or exact (required)
+          # install-hex: true (default)
+          # install-rebar: true (default)
+        # outputs: ${steps.setup-beam.outputs.(opt, elixir, rebar3)-version} (exact version installed)  
+
+      - name: Restore dependency/build cache 🗃️
         uses: actions/cache@v2
         with:
-          path: deps
-          key: ${{ runner.os }}-mix-${{ hashFiles('**/mix.lock') }}
-          restore-keys: ${{ runner.os }}-mix-
+          path: |
+            deps
+            _build
+          # cache key is hierarchical: OS, otp-version, elixir-version, mix.lock
+          key: ${{ runner.os }}-mix-${{ steps.setup-beam.outputs.otp-version }}-${{ steps.setup-beam.outputs.elixir-version }}-${{ hashFiles('**/mix.lock') }}
+          # restore keys are tried on cache misses, and only match the key prefix
+          restore-keys: |
+            ${{ runner.os }}-mix-${{ steps.setup-beam.outputs.otp-version }}-${{ steps.setup-beam.outputs.elixir-version }}-
+            ${{ runner.os }}-mix-${{ steps.setup-beam.outputs.otp-version }}-
+            ${{ runner.os }}-mix-
 
-      - name: Install dependencies
-        run: MIX_ENV=test mix deps.get
+      - name: Dependencies 🔗
+        run: |
+          mix deps.get
+          mix deps.compile
+
+      - name: Code 🔧
+        run: |
+          mix format --check-formatted
+          mix compile --warnings-as-errors
+          mix credo --strict
+          mix dialyzer
+          mix docs
 
       - name: Run tests
-        run: MIX_ENV=test mix coveralls.github --umbrella
+        run: |
+          mix coveralls.github --umbrella
+          
+      - name: Artifacts 📚
+        uses: actions/upload-artifact@v2
+        with:
+          name: doc-cover
+          path: |
+            doc
+            cover
 
   deploy:
     if: ${{ github.ref == 'refs/heads/main' }}

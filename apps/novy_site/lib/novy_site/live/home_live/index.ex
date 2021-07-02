@@ -39,7 +39,6 @@ defmodule NovySite.HomeLive.Index do
     {:noreply, assign(socket, redirect_host: redirect_host)}
   end
 
-
   @impl true
   def handle_event("unlink_auth", %{"provider" => _provider}, socket) do
     {:noreply, socket}

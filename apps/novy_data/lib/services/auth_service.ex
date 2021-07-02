@@ -110,7 +110,8 @@ defmodule NovyData.AuthService do
     with {:ok, %AuthProviderSession{} = auth_provider_session} <- verify_login_state(params),
          %AuthProvider{} = auth_provider <-
            AuthProvider.get_auth_provider(auth_provider_session.auth_provider_id),
-         {:ok, authorization_params} <- verify_auth_user(auth_provider, params, redirect_host, "login_return"),
+         {:ok, authorization_params} <-
+           verify_auth_user(auth_provider, params, redirect_host, "login_return"),
          {:ok, user_raw_data} <- fetch_user_data(auth_provider, authorization_params),
          {:ok, user_data} <- format_user_data(user_raw_data, auth_provider),
          exist_auth_user <-
@@ -132,12 +133,14 @@ defmodule NovyData.AuthService do
            verify_link_state(params, user_id),
          %AuthProvider{} = auth_provider <-
            AuthProvider.get_auth_provider(auth_provider_session.auth_provider_id),
-         {:ok, authorization_params} <- verify_auth_user(auth_provider, params, redirect_host, "link_return"),
+         {:ok, authorization_params} <-
+           verify_auth_user(auth_provider, params, redirect_host, "link_return"),
          {:ok, user_raw_data} <- fetch_user_data(auth_provider, authorization_params),
          {:ok, user_data} <- format_user_data(user_raw_data, auth_provider),
          exist_auth_user <-
            AuthUser.get_exist_auth_user(auth_provider.label, user_data["auth_provider_user_id"]),
-         {:ok, user_id} <- create_or_update_auth_user(exist_auth_user, user_data, auth_provider, user_id) do
+         {:ok, user_id} <-
+           create_or_update_auth_user(exist_auth_user, user_data, auth_provider, user_id) do
       {:ok, user_id}
     else
       {:error, error} ->
@@ -218,7 +221,7 @@ defmodule NovyData.AuthService do
       {:ok, decoded}
     else
       res ->
-        {:error, res }
+        {:error, res}
     end
   end
 
@@ -386,8 +389,6 @@ defmodule NovyData.AuthService do
     end
   end
 
-
-
   defp create_or_update_auth_user(nil, auth_user_format_data, auth_provider, user_id) do
     auth_user_changeset = %{
       :auth_provider_user_id => auth_user_format_data["auth_provider_user_id"],
@@ -408,7 +409,12 @@ defmodule NovyData.AuthService do
   end
 
   @doc false
-  defp create_or_update_auth_user(exist_auth_user, auth_user_format_data, _auth_provider, _user_id) do
+  defp create_or_update_auth_user(
+         exist_auth_user,
+         auth_user_format_data,
+         _auth_provider,
+         _user_id
+       ) do
     params = %{
       :user_data => auth_user_format_data["user_data"],
       :auth_provider_user_pseudo => auth_user_format_data["auth_provider_user_pseudo"],

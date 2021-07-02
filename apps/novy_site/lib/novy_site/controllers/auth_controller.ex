@@ -17,6 +17,7 @@ defmodule NovySite.AuthController do
 
   def link_callback(conn, params) do
     current_user = conn.assigns[:current_user]
+
     case AuthService.start_link(params, NovySite.Endpoint.url(), current_user.id) do
       {:ok, user_id} ->
         conn

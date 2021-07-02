@@ -1,7 +1,7 @@
 defmodule NovyData.Accounts do
   @moduledoc false
 
-  alias NovyData.Accounts.{ User, UserToken }
+  alias NovyData.Accounts.{User, UserToken}
   alias NovyData.Repo
 
   @doc """
