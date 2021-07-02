@@ -25,6 +25,9 @@ defmodule Novy.Umbrella.MixProject do
             novy_admin: :permanent
           ]
         ]
+      ],
+      dialyzer: [
+        plt_add_apps: [:ex_unit]
       ]
     ]
   end
