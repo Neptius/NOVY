@@ -12,7 +12,7 @@ env:
 
 jobs:
   test:
-    name: Test
+    name: Continuous Integration 🧪
     runs-on: ubuntu-latest
 
     services:
@@ -47,24 +47,40 @@ jobs:
           # install-rebar: true (default)
         # outputs: ${steps.setup-beam.outputs.(opt, elixir, rebar3)-version} (exact version installed)        
 
-
-      - name: Restore dependencies cache
+      - name: Restore dependency/build cache 🗃️
         uses: actions/cache@v2
         with:
-          path: deps
-          key: ${{ runner.os }}-mix-${{ hashFiles('**/mix.lock') }}
-          restore-keys: ${{ runner.os }}-mix-
+          path: |
+            deps
+            _build
+          # cache key is hierarchical: OS, otp-version, elixir-version, mix.lock
+          key: ${{ runner.os }}-mix-${{ steps.setup-beam.outputs.otp-version }}-${{ steps.setup-beam.outputs.elixir-version }}-${{ hashFiles('**/mix.lock') }}
+          # restore keys are tried on cache misses, and only match the key prefix
+          restore-keys: |
+            ${{ runner.os }}-mix-${{ steps.setup-beam.outputs.otp-version }}-${{ steps.setup-beam.outputs.elixir-version }}-
+            ${{ runner.os }}-mix-${{ steps.setup-beam.outputs.otp-version }}-
+            ${{ runner.os }}-mix-
+          
+      - name: Dependencies 🔗
+        run: |
+          mix deps.get
+          mix deps.compile
 
-      - name: Install dependencies
-        run: MIX_ENV=test mix deps.get
+      - name: Code 🔧
+        run: |
+          mix format --check-formatted
+          mix compile --warnings-as-errors
+          mix credo --strict
+          mix dialyzer --format short
+          mix docs
 
-      - name: Run tests
+      - name: Test 🦺
         run: MIX_ENV=test mix coveralls.github --umbrella
 
   deploy:
     if: ${{ github.ref == 'refs/heads/main' }}
     needs: test
-    name: Build and Deploy
+    name: Continuous Deployment 🚀
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
