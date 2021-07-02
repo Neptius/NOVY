@@ -54,7 +54,7 @@
     </tbody>
   </table>
   <%= if @live_action in [:new, :edit] do %>
-    <%= live_modal @socket, NovyAdmin.AuthProviderLive.FormComponent,
+    <%= live_modal NovyAdmin.AuthProviderLive.FormComponent,
         id: @auth_provider.id || :new,
         title: @page_title,
         action: @live_action,

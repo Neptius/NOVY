@@ -29,7 +29,7 @@ defmodule NovyAdmin.UserLive.Index do
   end
 
   @impl true
-  def handle_event("delete", %{"id" => id}, socket) do
+  def handle_event("delete", _params, socket) do
     # user = User.get_user!(id)
     # {:ok, _} = User.delete_user(user)
 
