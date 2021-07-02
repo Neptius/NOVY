@@ -6,7 +6,7 @@ defmodule NovyData.Accounts.User do
   import Ecto.Changeset
 
   alias NovyData.Repo
-  alias NovyData.Accounts.{AuthUser, User, UserToken, AuthProviderSession}
+  alias NovyData.Accounts.{AuthProviderSession, AuthUser, User, UserToken}
 
   schema "users" do
     field :pseudo, :string

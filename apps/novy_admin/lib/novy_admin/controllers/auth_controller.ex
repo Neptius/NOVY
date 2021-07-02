@@ -1,7 +1,7 @@
 defmodule NovyAdmin.AuthController do
   use NovyAdmin, :controller
-  alias NovyData.AuthService
   alias NovyAdmin.UserAuth
+  alias NovyData.AuthService
 
   def callback(conn, params) do
     case AuthService.start_auth(params, NovyAdmin.Endpoint.url()) do
