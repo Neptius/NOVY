@@ -1,4 +1,4 @@
-name: Test, Build and Deploy Docker app to Lightsail
+name: Elixir CI Workflow 🧪
 
 on:
   [ push, pull_request ]
@@ -76,8 +76,8 @@ jobs:
           mix credo --strict
           mix dialyzer
           mix docs
-
-      - name: Run tests
+          
+      - name: Test 🦺
         run: |
           mix coveralls.github --umbrella
           

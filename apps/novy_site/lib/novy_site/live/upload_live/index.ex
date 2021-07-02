@@ -20,7 +20,7 @@ defmodule NovySite.UploadLive.Index do
   end
 
   defp presign_upload(entry, socket) do
-    IO.inspect("presign_upload")
+    # IO.inspect("presign_upload")
     uploads = socket.assigns.uploads
     bucket = Application.fetch_env!(:novy_data, :aws_s3_bucket)
     key = "public/#{entry.client_name}"
@@ -51,13 +51,13 @@ defmodule NovySite.UploadLive.Index do
 
   @impl true
   def handle_event("validate", _params, socket) do
-    IO.inspect("validate")
+    # IO.inspect("validate")
     # * PROCESS DE VALIDATION
     {:noreply, socket}
   end
 
   def handle_event("save", _params, socket) do
-    IO.inspect("save")
+    # IO.inspect("save")
     # * SAUVEGARDE EN BASE DE DONNÉE
 
     # * CLEAR AVATAR
@@ -66,7 +66,7 @@ defmodule NovySite.UploadLive.Index do
   end
 
   def handle_event("cancel", %{"ref" => ref}, socket) do
-    IO.inspect("cancel:#{ref}")
+    # IO.inspect("cancel:#{ref}")
     {:noreply, cancel_upload(socket, :avatar, ref)}
   end
 end

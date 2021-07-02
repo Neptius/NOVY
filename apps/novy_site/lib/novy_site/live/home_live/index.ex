@@ -45,12 +45,6 @@ defmodule NovySite.HomeLive.Index do
   end
 
   @impl true
-  def handle_event("delete_user", _params, socket) do
-    IO.inspect("YESS")
-    {:noreply, socket}
-  end
-
-  @impl true
   def update(%{user: user} = assigns, socket) do
     changeset = User.change_user(user)
 
