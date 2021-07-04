@@ -1,4 +1,4 @@
-FROM elixir:1.12.1-alpine AS build
+FROM elixir:1.12.0-alpine AS build
 
 # install build dependencies
 RUN apk add --no-cache build-base git python3 npm
@@ -50,7 +50,9 @@ RUN mix phx.digest
 WORKDIR /app
 # uncomment COPY if rel/ exists
 # COPY rel rel
-RUN mix do compile, release
+RUN mix docs
+RUN mix compile
+RUN mix release
 
 ########################################################################
 
@@ -67,10 +69,11 @@ USER nobody:nobody
 
 COPY --from=build --chown=nobody:nobody /app/_build/prod/rel/novy ./
 COPY --from=build --chown=nobody:nobody /app/entrypoint.sh ./
+COPY --from=build --chown=nobody:nobody /app/doc ./
 
 ENV HOME=/app
 
-COPY nginx/nginx.conf /etc/nginx/nginx.conf
+COPY ./nginx.conf /etc/nginx/nginx.conf
 
 EXPOSE 8080
 

@@ -48,7 +48,7 @@ defmodule Novy.Umbrella.MixProject do
     [
       {:excoveralls, "~> 0.10", only: :test},
       {:credo, "~> 1.5", only: [:dev, :test], runtime: false},
-      {:ex_doc, "~> 0.24", only: [:dev, :test], runtime: false},
+      {:ex_doc, "~> 0.24", runtime: false},
       {:dialyxir, "~> 1.1", only: [:dev, :test], runtime: false}
     ]
   end
