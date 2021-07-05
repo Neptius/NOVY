@@ -1,4 +1,4 @@
-FROM elixir:1.12.0-alpine AS build
+FROM elixir:1.12.2-alpine AS build
 
 # install build dependencies
 RUN apk add --no-cache build-base git python3 npm
@@ -32,19 +32,11 @@ COPY . /app/
 WORKDIR /app/apps/novy_site
 RUN pnpm --prefix ./assets install --frozen-lockfile
 RUN pnpm run --prefix ./assets deploy
-# RUN npm --prefix ./assets ci --progress=false --no-audit --loglevel=error
-# RUN npm run --prefix ./assets deploy
-# RUN yarn --cwd ./assets install --frozen-lockfile
-# RUN yarn --cwd ./assets deploy
 RUN mix phx.digest
 
 WORKDIR /app/apps/novy_admin
 RUN pnpm --prefix ./assets install --frozen-lockfile
 RUN pnpm run --prefix ./assets deploy
-# RUN npm --prefix ./assets ci --progress=false --no-audit --loglevel=error
-# RUN npm run --prefix ./assets deploy
-# RUN yarn --cwd ./assets install --frozen-lockfile
-# RUN yarn --cwd ./assets deploy
 RUN mix phx.digest
 
 WORKDIR /app
@@ -59,7 +51,7 @@ RUN mix release
 # prepare release image
 # FROM alpine AS app
 FROM nginx:stable-alpine AS app
-RUN apk add --no-cache openssl ncurses-libs
+RUN apk add --no-cache openssl ncurses-libs libstdc++
 
 WORKDIR /app
 
@@ -69,7 +61,7 @@ USER nobody:nobody
 
 COPY --from=build --chown=nobody:nobody /app/_build/prod/rel/novy ./
 COPY --from=build --chown=nobody:nobody /app/entrypoint.sh ./
-COPY --from=build --chown=nobody:nobody /app/doc ./
+COPY --from=build --chown=nobody:nobody /app/doc ./doc/
 
 ENV HOME=/app
 
