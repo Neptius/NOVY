@@ -77,13 +77,6 @@ jobs:
       - name: Test 🦺
         run: |
           mix coveralls.github --umbrella
-      
-      - name: Artifacts 📚
-        uses: actions/upload-artifact@v2
-        with:
-          name: doc
-          path: |
-            doc
 
   deploy:
     if: ${{ github.ref == 'refs/heads/main' }}
