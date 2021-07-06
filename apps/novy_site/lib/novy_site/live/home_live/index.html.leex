@@ -2,21 +2,21 @@
   <div class="login-background">
     <div class="flex flex-row">
       <div class="min-h-screen flex content-center justify-center items-center">
-        <div class="w-96 h-96 mx-24 shadow-lg flex flex-col justify-center text-center">
-          <div class="w-full flex flex-col rounded-t-xl bg-gray-700 justify-center h-60">
+        <div class="w-96 mx-24 shadow-lg flex flex-col justify-center text-center">
+          <div class="w-full flex flex-col rounded-t-xl bg-gray-700 justify-center h-24">
             <h1 class="orbitron text-4xl text-white font-bold">
               Novy
             </h1>
           </div>
-          <div class="p-3 h-full rounded-b-xl bg-gray-800  text-white">
+          <div class="p-4 h-full rounded-b-xl bg-gray-800  text-white">
             <h3 class="text-2xl">Profile</h3>
             <%= if @current_user do %>
               <li><%= @current_user.pseudo %> <%= @current_user.id %></li>
-              <li><%= live_patch "Upload", to: Routes.upload_index_path(@socket, :index) %></li>
-              <li><%= link "Déconnexion", to: Routes.auth_path(@socket, :logout), method: :delete,  data: [confirm: "Really?"] %></li>
+
             <% end %>
 
             <div>
+
               <%= for auth_provider <- @auth_providers do %>
                 <%= if (length auth_provider.auth_users) > 0 do %>
                   <%= for auth_user <- auth_provider.auth_users do %>
@@ -48,12 +48,22 @@
                   </div>
                 <% end %>
               <% end %>
+
+
+              <%= link to: Routes.auth_path(@socket, :logout), method: :delete,  data: [confirm: "Really?"], class: "flex items-center justify-center cursor-pointer rounded-lg h-12 shadow-lg bg-red-600 hover:bg-red-700" do %>
+                <p class="font-bold text-center">Déconnexion</p>
+              <% end %>
+
+              <div class="my-2 w-full h-px bg-gray-600"></div>
+
+
               <%= link to: Routes.auth_path(@socket, :delete), method: :delete, data: [confirm: "Êtes-vous sûr? Toutes vos donnez seront supprimées."], class: "flex items-center justify-center cursor-pointer rounded-lg h-12 shadow-lg bg-red-600 hover:bg-red-700" do %>
                 <svg class="h-6 w-6 m-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
                 </svg>
                 <p class="font-bold text-center">Supprimer mon compte</p>
               <% end %>
+
             </div>
           </div>
         </div>

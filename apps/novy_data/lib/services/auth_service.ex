@@ -116,8 +116,8 @@ defmodule NovyData.AuthService do
          {:ok, user_data} <- format_user_data(user_raw_data, auth_provider),
          exist_auth_user <-
            AuthUser.get_exist_auth_user(auth_provider.label, user_data["auth_provider_user_id"]),
-         {:ok, user_id} <- create_or_update_auth_user(exist_auth_user, user_data, auth_provider) do
-      {:ok, user_id}
+         {:ok, user_id, auth_user_id} <- create_or_update_auth_user(exist_auth_user, user_data, auth_provider) do
+      {:ok, user_id, auth_user_id}
     else
       {:error, error} ->
         {:error, error}
@@ -139,9 +139,9 @@ defmodule NovyData.AuthService do
          {:ok, user_data} <- format_user_data(user_raw_data, auth_provider),
          exist_auth_user <-
            AuthUser.get_exist_auth_user(auth_provider.label, user_data["auth_provider_user_id"]),
-         {:ok, user_id} <-
+         {:ok, user_id, auth_user_id} <-
            create_or_update_auth_user(exist_auth_user, user_data, auth_provider, user_id) do
-      {:ok, user_id}
+      {:ok, user_id, auth_user_id}
     else
       {:error, error} ->
         {:error, error}
@@ -365,7 +365,8 @@ defmodule NovyData.AuthService do
 
     case User.create_user_with_auth_user(user_changeset, auth_user_changeset) do
       {:ok, user} ->
-        {:ok, user.id}
+        [auth_user] = user.auth_users
+        {:ok, user.id, auth_user.id}
 
       {:error, error} ->
         {:error, error}
@@ -382,7 +383,7 @@ defmodule NovyData.AuthService do
 
     case AuthUser.update_auth_user(exist_auth_user, params) do
       {:ok, auth_user} ->
-        {:ok, auth_user.user_id}
+        {:ok, auth_user.user_id, auth_user.id}
 
       {:error, error} ->
         {:error, error}
@@ -401,7 +402,7 @@ defmodule NovyData.AuthService do
 
     case AuthUser.create_auth_user(auth_user_changeset) do
       {:ok, auth_user} ->
-        {:ok, auth_user.user_id}
+        {:ok, auth_user.user_id, auth_user.id}
 
       {:error, error} ->
         {:error, error}
@@ -423,7 +424,7 @@ defmodule NovyData.AuthService do
 
     case AuthUser.update_auth_user(exist_auth_user, params) do
       {:ok, auth_user} ->
-        {:ok, auth_user.user_id}
+        {:ok, auth_user.user_id, auth_user.id}
 
       {:error, error} ->
         {:error, error}
